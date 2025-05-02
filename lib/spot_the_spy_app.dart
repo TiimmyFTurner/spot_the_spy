@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spot_the_spy/infrastructure/router/router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 class SpotTheSpyApp extends ConsumerWidget {
   const SpotTheSpyApp({super.key});
@@ -13,7 +16,7 @@ class SpotTheSpyApp extends ConsumerWidget {
      */
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig:AppRouter.router,
+      routerConfig: AppRouter.router,
       title: 'Spot the Spy',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
@@ -28,18 +31,11 @@ class SpotTheSpyApp extends ConsumerWidget {
         useMaterial3: true,
         // TODO: fontFamily: font
       ),
-      /**TODO:
-       *       themeMode: ref.watch(themeModeSettingProvider),
-       *   supportedLocales: L10n.all,
-       *   locale: locale != L10n.system ? locale : null,
-       *   localizationsDelegates: const [
-       *   AppLocalizations.delegate,
-       *   GlobalCupertinoLocalizations.delegate,
-       *   GlobalMaterialLocalizations.delegate,
-       *   GlobalWidgetsLocalizations.delegate,
-       *  ],
-       *
-       * **/
+
+      // themeMode: ref.watch(themeModeSettingProvider),
+      supportedLocales: AppLocalizations.supportedLocales,
+      // locale: locale != L10n.system ? locale : null,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
     );
   }
 }
