@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spot_the_spy/infrastructure/router/router.dart';
 
 class SpotTheSpyApp extends ConsumerWidget {
   const SpotTheSpyApp({super.key});
@@ -12,7 +13,7 @@ class SpotTheSpyApp extends ConsumerWidget {
      */
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      //TODO: routerConfig:AppRouter.router,
+      routerConfig:AppRouter.router,
       title: 'Spot the Spy',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
