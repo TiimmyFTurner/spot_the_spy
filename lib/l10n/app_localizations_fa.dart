@@ -8,5 +8,12 @@ import 'app_localizations.dart';
 class AppLocalizationsFa extends AppLocalizations {
   AppLocalizationsFa([String locale = 'fa']) : super(locale);
 
+  @override
+  String get newGame => 'بازی جدید';
 
+  @override
+  String get howToPlay => 'روش بازی';
+
+  @override
+  String get settings => 'تنظیمات';
 }

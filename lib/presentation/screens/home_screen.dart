@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spot_the_spy/l10n/app_localizations.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Container(
+  Widget build(BuildContext context, WidgetRef ref) {
+    AppLocalizations appL10n = AppLocalizations.of(context)!;
+    return Container(
     decoration: const BoxDecoration(
       image: DecorationImage(
         image: AssetImage("assets/images/wp.png"),
@@ -33,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {},
-                  child: Text('New Game', style: TextStyle(fontSize: 24)),
+                  child: Text(appL10n.newGame, style: TextStyle(fontSize: 24)),
                 ),
               ),
               const SizedBox(height: 8),
@@ -50,7 +53,7 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {},
-                  child: Text('How to play', style: TextStyle(fontSize: 24)),
+                  child: Text(appL10n.howToPlay, style: TextStyle(fontSize: 24)),
                 ),
               ),
               const SizedBox(height: 8),
@@ -67,7 +70,7 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () {},
-                  child: Text('Settings', style: TextStyle(fontSize: 24)),
+                  child: Text(appL10n.settings, style: TextStyle(fontSize: 24)),
                 ),
               ),
               const SizedBox(height: 50),
@@ -77,4 +80,5 @@ class HomeScreen extends ConsumerWidget {
       ),
     ),
   );
+  }
 }

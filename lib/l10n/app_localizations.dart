@@ -95,6 +95,23 @@ abstract class AppLocalizations {
     Locale('fa')
   ];
 
+  /// No description provided for @newGame.
+  ///
+  /// In en, this message translates to:
+  /// **'New Game'**
+  String get newGame;
+
+  /// No description provided for @howToPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'How To Play'**
+  String get howToPlay;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
