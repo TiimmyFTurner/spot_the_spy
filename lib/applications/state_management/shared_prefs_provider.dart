@@ -3,4 +3,4 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 
 final sharedPreferencesProvider =
-Provider<SharedPreferencesAsync>((ref) => throw UnimplementedError());
+Provider<SharedPreferences>((ref) => throw UnimplementedError());

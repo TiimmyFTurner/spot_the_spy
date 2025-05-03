@@ -6,7 +6,7 @@ import 'package:spot_the_spy/spot_the_spy_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final prefs = SharedPreferencesAsync();
+  final prefs = await SharedPreferences.getInstance();
   return runApp(
     ProviderScope(
       overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
