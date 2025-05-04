@@ -7,33 +7,6 @@ import 'package:spot_the_spy/l10n/app_localizations.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  Future<bool?> _showBackDialog(context) {
-    return showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Are you sure?'),
-          content: const Text('Are you sure you want to leave this page?'),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-              child: const Text('Nevermind'),
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-            ),
-            TextButton(
-              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-              child: const Text('Leave'),
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AppLocalizations appL10n = AppLocalizations.of(context)!;
@@ -85,7 +58,7 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => context.goNamed(Routes.howToPlay),
                     child: Text(
                       appL10n.howToPlay,
                       style: TextStyle(fontSize: 24),
