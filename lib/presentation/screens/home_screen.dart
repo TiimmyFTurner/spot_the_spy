@@ -58,7 +58,7 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    onPressed: () => context.goNamed(Routes.howToPlay),
+                    onPressed: () => context.pushNamed(Routes.howToPlay),
                     child: Text(
                       appL10n.howToPlay,
                       style: TextStyle(fontSize: 24),
@@ -78,7 +78,7 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => context.pushNamed(Routes.settings),
                     child: Text(
                       appL10n.settings,
                       style: TextStyle(fontSize: 24),

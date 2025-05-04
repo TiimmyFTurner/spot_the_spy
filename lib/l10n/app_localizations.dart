@@ -154,6 +154,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next: Set Game Rules'**
   String get goToGameConfig;
+
+  /// No description provided for @themeMode.
+  ///
+  /// In en, this message translates to:
+  /// **'{theme_mode, select, dark{Dark} light{Light} system{System Default}  other{Theme Mode}}'**
+  String themeMode(String theme_mode);
+
+  /// No description provided for @chooseTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Theme'**
+  String get chooseTheme;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @languageMode.
+  ///
+  /// In en, this message translates to:
+  /// **'{language, select, en{English} fa{فارسی} system{System Default}  other{Language}}'**
+  String languageMode(String language);
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

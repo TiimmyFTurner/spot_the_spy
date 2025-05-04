@@ -19,5 +19,11 @@
   "back": "Back",
   "playerName": "Player Name",
   "playerCountError": "You need at least 3 players to start the game.",
-  "goToGameConfig": "Next: Set Game Rules"
+  "goToGameConfig": "Next: Set Game Rules",
+  "themeMode": "{theme_mode, select, dark{Dark} light{Light} system{System Default}  other{Theme Mode}}",
+  "chooseTheme": "Choose Theme",
+  "confirm": "Confirm",
+  "languageMode": "{language, select, en{English} fa{فارسی} system{System Default}  other{Language}}",
+  "cancel": "Cancel",
+  "language": "Language"
 }

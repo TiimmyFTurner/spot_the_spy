@@ -19,5 +19,11 @@
   "back": "برگشت",
   "playerName": "نام بازیکن",
   "playerCountError": "این بازی حداقل به ۳ بازیکن نیاز دارد.",
-  "goToGameConfig": "مرحله بعد: تنظیم قوانین بازی"
+  "goToGameConfig": "مرحله بعد: تنظیم قوانین بازی",
+  "themeMode": "{theme_mode, select, dark{تاریک} light{روشن} system{پیش فرض سیستم}  other{حالت تم}}",
+  "chooseTheme": "انتخاب تم",
+  "confirm": "ثبت",
+  "languageMode": "{language, select, en{English} fa{فارسی} system{پیش فرض سیستم}  other{زبان}}",
+  "cancel": "انصراف",
+  "language": "زبان"
 }

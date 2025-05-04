@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spot_the_spy/applications/state_management/settings_provider.dart';
 import 'package:spot_the_spy/infrastructure/router/router.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
+import 'package:spot_the_spy/l10n/l10n.dart';
 
 
 
@@ -10,10 +12,10 @@ class SpotTheSpyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    /** TODO
-     * Locale locale = ref.watch(localeSettingProvider);
-     * String? font = locale == L10n.fa ? 'Koodak' : null;
-     */
+
+      Locale locale = ref.watch(localeSettingProvider);
+      String? font = locale == L10n.fa ? 'Koodak' : null;
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
@@ -32,9 +34,9 @@ class SpotTheSpyApp extends ConsumerWidget {
         // TODO: fontFamily: font
       ),
 
-      // themeMode: ref.watch(themeModeSettingProvider),
+      themeMode: ref.watch(themeModeSettingProvider),
       supportedLocales: AppLocalizations.supportedLocales,
-      // locale: locale != L10n.system ? locale : null,
+      locale: locale != L10n.system ? locale : null,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
     );
   }

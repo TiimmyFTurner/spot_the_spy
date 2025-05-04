@@ -42,4 +42,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get goToGameConfig => 'Next: Set Game Rules';
+
+  @override
+  String themeMode(String theme_mode) {
+    String _temp0 = intl.Intl.selectLogic(
+      theme_mode,
+      {
+        'dark': 'Dark',
+        'light': 'Light',
+        'system': 'System Default',
+        'other': 'Theme Mode',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get chooseTheme => 'Choose Theme';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String languageMode(String language) {
+    String _temp0 = intl.Intl.selectLogic(
+      language,
+      {
+        'en': 'English',
+        'fa': 'فارسی',
+        'system': 'System Default',
+        'other': 'Language',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get language => 'Language';
 }

@@ -42,4 +42,44 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get goToGameConfig => 'مرحله بعد: تنظیم قوانین بازی';
+
+  @override
+  String themeMode(String theme_mode) {
+    String _temp0 = intl.Intl.selectLogic(
+      theme_mode,
+      {
+        'dark': 'تاریک',
+        'light': 'روشن',
+        'system': 'پیش فرض سیستم',
+        'other': 'حالت تم',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get chooseTheme => 'انتخاب تم';
+
+  @override
+  String get confirm => 'ثبت';
+
+  @override
+  String languageMode(String language) {
+    String _temp0 = intl.Intl.selectLogic(
+      language,
+      {
+        'en': 'English',
+        'fa': 'فارسی',
+        'system': 'پیش فرض سیستم',
+        'other': 'زبان',
+      },
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get cancel => 'انصراف';
+
+  @override
+  String get language => 'زبان';
 }
