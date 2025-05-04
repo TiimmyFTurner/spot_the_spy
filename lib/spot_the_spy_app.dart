@@ -21,13 +21,13 @@ class SpotTheSpyApp extends ConsumerWidget {
       routerConfig: AppRouter.router,
       title: 'Spot the Spy',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pinkAccent),
         useMaterial3: true,
         // TODO: fontFamily: font
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.pink,
+          seedColor: Colors.pinkAccent,
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
