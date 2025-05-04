@@ -158,12 +158,10 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
             ),
           ),
           Expanded(
-            child: Center(
-              child: Text(
-                player,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 16),
-              ),
+            child: Text(
+              player,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 16),
             ),
           ),
           IconButton(
