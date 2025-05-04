@@ -1,5 +1,23 @@
 {
   "newGame": "New Game",
   "howToPlay": "How To Play",
-  "settings": "Settings"
+  "settings": "Settings",
+  "addPlayers": "Add Players ({value})",
+  "@addPlayers": {
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "decimalPattern",
+        "optionalParameters": {
+          "decimalDigits": 2
+        }
+      }
+    }
+  },
+  "help": "Help",
+  "addPlayersHelpMessage": "On this page, you can add as many players as you like.",
+  "back": "Back",
+  "playerName": "Player Name",
+  "playerCountError": "You need at least 3 players to start the game.",
+  "goToGameConfig": "Next: Set Game Rules"
 }

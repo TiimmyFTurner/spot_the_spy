@@ -112,6 +112,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
+
+  /// No description provided for @addPlayers.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Players ({value})'**
+  String addPlayers(int value);
+
+  /// No description provided for @help.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
+  /// No description provided for @addPlayersHelpMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'On this page, you can add as many players as you like.'**
+  String get addPlayersHelpMessage;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @playerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Player Name'**
+  String get playerName;
+
+  /// No description provided for @playerCountError.
+  ///
+  /// In en, this message translates to:
+  /// **'You need at least 3 players to start the game.'**
+  String get playerCountError;
+
+  /// No description provided for @goToGameConfig.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: Set Game Rules'**
+  String get goToGameConfig;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

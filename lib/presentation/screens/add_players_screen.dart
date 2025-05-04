@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
+import 'package:spot_the_spy/l10n/app_localizations.dart';
 
 class AddPlayersScreen extends ConsumerStatefulWidget {
   const AddPlayersScreen({super.key});
@@ -33,7 +34,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
       canPop: false,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("انتخاب بازیکن ها (${players.length})"),
+          title: Text(AppLocalizations.of(context)!.addPlayers(players.length)),
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.home),
@@ -47,16 +48,16 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text("راهنما"),
-                      content: const Text(
-                        'در این قسمت شما میتوانید به هر تعدادی میخواهید بازیکن اضافه کنید',
+                      title: Text(AppLocalizations.of(context)!.help),
+                      content: Text(
+                        AppLocalizations.of(context)!.addPlayersHelpMessage,
                       ),
                       actions: <Widget>[
                         TextButton(
                           style: TextButton.styleFrom(
                             textStyle: Theme.of(context).textTheme.labelLarge,
                           ),
-                          child: const Text("بازگشت"),
+                          child: Text(AppLocalizations.of(context)!.back),
                           onPressed: () {
                             context.pop();
                           },
@@ -91,7 +92,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                 onSubmitted: _addPlayer,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  labelText: 'نام بازیکن',
+                  labelText: AppLocalizations.of(context)!.playerName,
                   contentPadding: const EdgeInsets.symmetric(
                     vertical: 15,
                     horizontal: 20,
@@ -108,33 +109,30 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
               child: SizedBox(
                 height: 70,
                 width: MediaQuery.of(context).size.width,
-                child: Hero(
-                  tag: "play",
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 16,
+                  ),
+                  child: FilledButton(
+                    child: Text(
+                      AppLocalizations.of(context)!.goToGameConfig,
+                      style: TextStyle(fontSize: 20),
                     ),
-                    child: FilledButton(
-                      child: const Text(
-                        "انتخاب نقش",
-                        style: TextStyle(fontSize: 22),
-                      ),
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        if (players.length > 2) {
-                          //TODO: context.push(Routes.setRolesRoutePath);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                "حداقل تعداد بازیکنان باید سه نفر باشد",
-                              ),
+                    onPressed: () {
+                      HapticFeedback.lightImpact();
+                      if (players.length > 2) {
+                        //TODO: context.push(Routes.setRolesRoutePath);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              AppLocalizations.of(context)!.playerCountError,
                             ),
-                          );
-                        }
-                      },
-                    ),
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
@@ -161,7 +159,11 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
           ),
           Expanded(
             child: Center(
-              child: Text(player, overflow: TextOverflow.ellipsis),
+              child: Text(
+                player,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 16),
+              ),
             ),
           ),
           IconButton(
@@ -170,9 +172,8 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
               color: Theme.of(context).colorScheme.error,
             ),
             onPressed:
-                () => ref
-                    .read(playerNamesProvider.notifier)
-                    .removePlayer(player),
+                () =>
+                    ref.read(playerNamesProvider.notifier).removePlayer(player),
           ),
         ],
       ),

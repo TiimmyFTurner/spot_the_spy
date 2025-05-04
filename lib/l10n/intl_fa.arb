@@ -1,5 +1,23 @@
 {
   "newGame": "بازی جدید",
   "howToPlay": "روش بازی",
-  "settings": "تنظیمات"
+  "settings": "تنظیمات",
+  "addPlayers": "اضافه کردن بازیکن ({value})",
+  "@addPlayers": {
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "decimalPattern",
+        "optionalParameters": {
+          "decimalDigits": 2
+        }
+      }
+    }
+  },
+  "help": "راهنما",
+  "addPlayersHelpMessage": "در این صفحه میتوانید هر تعداد بازیکن که میخواهید اضافه کنید.",
+  "back": "برگشت",
+  "playerName": "نام بازیکن",
+  "playerCountError": "این بازی حداقل به ۳ بازیکن نیاز دارد.",
+  "goToGameConfig": "مرحله بعد: تنظیم قوانین بازی"
 }
