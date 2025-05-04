@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/presentation/screens/add_players_screen.dart';
+import 'package:spot_the_spy/presentation/screens/game_config_screen.dart';
+import 'package:spot_the_spy/presentation/screens/game_play_screen.dart';
 import 'package:spot_the_spy/presentation/screens/home_screen.dart';
+import 'package:spot_the_spy/presentation/screens/how_to_play_screen.dart';
+import 'package:spot_the_spy/presentation/screens/score_board_screen.dart';
+import 'package:spot_the_spy/presentation/screens/settings_screen.dart';
+import 'package:spot_the_spy/presentation/screens/show_roles_screen.dart';
+import 'package:spot_the_spy/presentation/screens/slide_to_start_screen.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -21,6 +28,55 @@ class AppRouter {
         path: Routes.addPlayersPath,
         builder: (BuildContext context, GoRouterState state) {
           return const AddPlayersScreen();
+        },
+      ),
+      GoRoute(
+        name: Routes.settings,
+        path: Routes.settingsPath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const SettingsScreen();
+        },
+      ),
+      GoRoute(
+        name: Routes.howToPlay,
+        path: Routes.howToPlayPath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const HowToPlayScreen();
+        },
+      ),
+      GoRoute(
+        name: Routes.gameConfig,
+        path: Routes.gameConfigPath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const GameConfigScreen();
+        },
+      ),
+      GoRoute(
+        name: Routes.showRoles,
+        path: Routes.showRolesPath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const ShowRolesScreen();
+        },
+      ),
+      GoRoute(
+        name: Routes.slideToStart,
+        path: Routes.slideToStartPath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const SlideToStartScreen();
+        },
+      ),
+      GoRoute(
+        name: Routes.gamePlay,
+        path: Routes.gamePlayPath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const GamePlayScreen();
+        },
+      ),
+      GoRoute(
+        name: Routes.scoreBoard,
+        path: Routes.scoreBoardPath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const ScoreBoardScreen();
         },
       ),
     ],
