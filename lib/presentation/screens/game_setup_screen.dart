@@ -19,11 +19,6 @@ class GameSetupScreen extends ConsumerStatefulWidget {
 
 class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     Locale locale = Localizations.localeOf(context);
     List<String> categories =
@@ -61,7 +56,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
@@ -87,6 +82,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                   ),
                   SizedBox(width: 15),
                   Expanded(
+                    flex: 2,
                     child: DropdownButtonFormField<int>(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
@@ -114,7 +110,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
               Row(
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: DropdownButtonFormField<int>(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
@@ -139,8 +135,8 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                     ),
                   ),
                   SizedBox(width: 15),
-
                   Expanded(
+                    flex: 2,
                     child: DropdownButtonFormField<int>(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
@@ -164,7 +160,6 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                   ),
                 ],
               ),
-
               Expanded(child: Container()),
               SizedBox(
                 height: 70,
