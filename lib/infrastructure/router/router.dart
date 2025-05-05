@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/presentation/screens/add_players_screen.dart';
-import 'package:spot_the_spy/presentation/screens/game_config_screen.dart';
+import 'package:spot_the_spy/presentation/screens/game_setup_screen.dart';
 import 'package:spot_the_spy/presentation/screens/game_play_screen.dart';
 import 'package:spot_the_spy/presentation/screens/home_screen.dart';
 import 'package:spot_the_spy/presentation/screens/how_to_play_screen.dart';
@@ -45,10 +45,10 @@ class AppRouter {
         },
       ),
       GoRoute(
-        name: Routes.gameConfig,
-        path: Routes.gameConfigPath,
+        name: Routes.gameSetup,
+        path: Routes.gameSetupPath,
         builder: (BuildContext context, GoRouterState state) {
-          return const GameConfigScreen();
+          return const GameSetupScreen();
         },
       ),
       GoRoute(

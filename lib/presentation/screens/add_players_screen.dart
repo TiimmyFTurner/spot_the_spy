@@ -116,7 +116,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                   onPressed: () {
                     HapticFeedback.lightImpact();
                     if (players.length > 2) {
-                      context.pushNamed(Routes.gameConfig);
+                      context.pushNamed(Routes.gameSetup);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
