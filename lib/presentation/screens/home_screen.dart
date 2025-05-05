@@ -38,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
                       ),
                     ),
                     onPressed:
-                        () => context.pushReplacementNamed(Routes.addPlayers),
+                        () => context.pushNamed(Routes.addPlayers),
                     child: Text(
                       appL10n.newGame,
                       style: TextStyle(fontSize: 24),

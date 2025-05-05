@@ -30,115 +30,108 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
   @override
   Widget build(BuildContext context) {
     List players = ref.watch(playerNamesProvider);
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.addPlayers(players.length)),
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () => context.pushReplacementNamed(Routes.home),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.help_outline),
-              onPressed: () {
-                showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(AppLocalizations.of(context)!.help),
-                      content: Text(
-                        AppLocalizations.of(context)!.addPlayersHelpMessage,
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          child: Text(AppLocalizations.of(context)!.back),
-                          onPressed: () {
-                            context.pop();
-                          },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.addPlayers(players.length)),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(AppLocalizations.of(context)!.help),
+                    content: Text(
+                      AppLocalizations.of(context)!.addPlayersHelpMessage,
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: Theme.of(context).textTheme.labelLarge,
                         ),
-                      ],
-                    );
-                  },
-                );
+                        child: Text(AppLocalizations.of(context)!.back),
+                        onPressed: () {
+                          context.pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              shrinkWrap: true,
+              itemCount: players.length + 1,
+              itemBuilder: (BuildContext context, int index) {
+                return index < players.length
+                    ? listItemPlayer(players[index])
+                    : const SizedBox(height: 8);
               },
             ),
-          ],
-        ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                shrinkWrap: true,
-                itemCount: players.length + 1,
-                itemBuilder: (BuildContext context, int index) {
-                  return index < players.length
-                      ? listItemPlayer(players[index])
-                      : const SizedBox(height: 8);
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                controller: _controller,
-                onChanged: (String value) => _name = value,
-                onSubmitted: _addPlayer,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: AppLocalizations.of(context)!.playerName,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 20,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.add),
-                    onPressed: _addPlayer,
-                  ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              controller: _controller,
+              onChanged: (String value) => _name = value,
+              onSubmitted: _addPlayer,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: AppLocalizations.of(context)!.playerName,
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 20,
+                ),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: _addPlayer,
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            SafeArea(
-              child: SizedBox(
-                height: 70,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
+          ),
+          const SizedBox(height: 8),
+          SafeArea(
+            child: SizedBox(
+              height: 70,
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 16,
+                ),
+                child: FilledButton(
+                  child: Text(
+                    AppLocalizations.of(context)!.goToGameConfig,
+                    style: TextStyle(fontSize: 20),
                   ),
-                  child: FilledButton(
-                    child: Text(
-                      AppLocalizations.of(context)!.goToGameConfig,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {
-                      HapticFeedback.lightImpact();
-                      if (players.length > 2) {
-                        //TODO: context.push(Routes.setRolesRoutePath);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              AppLocalizations.of(context)!.playerCountError,
-                            ),
+                  onPressed: () {
+                    HapticFeedback.lightImpact();
+                    if (players.length > 2) {
+                      context.pushNamed(Routes.gameConfig);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            AppLocalizations.of(context)!.playerCountError,
                           ),
-                        );
-                      }
-                    },
-                  ),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
