@@ -6,7 +6,7 @@ part 'game_config_provider.g.dart';
 @Riverpod(keepAlive: true)
 class Category extends _$Category {
   @override
-  String build() => 'Place';
+  String build() => '';
 
   void set(String value) => state = value;
 }
@@ -15,7 +15,7 @@ class Category extends _$Category {
 @Riverpod(keepAlive: true)
 class Time extends _$Time {
   @override
-  int build() => 5;
+  int build() => 3;
 
   void set(int value) => state = value;
 }

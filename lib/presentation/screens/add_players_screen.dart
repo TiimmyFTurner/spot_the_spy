@@ -110,7 +110,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                 ),
                 child: FilledButton(
                   child: Text(
-                    AppLocalizations.of(context)!.goToGameConfig,
+                    AppLocalizations.of(context)!.goToGameSetup,
                     style: TextStyle(fontSize: 20),
                   ),
                   onPressed: () {

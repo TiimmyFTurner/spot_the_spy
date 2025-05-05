@@ -19,11 +19,19 @@
   "back": "Back",
   "playerName": "Player Name",
   "playerCountError": "You need at least 3 players to start the game.",
-  "goToGameConfig": "Next: Set Game Rules",
+  "goToGameSetup": "Next: Set Game Rules",
   "themeMode": "{theme_mode, select, dark{Dark} light{Light} system{System Default}  other{Theme Mode}}",
   "chooseTheme": "Choose Theme",
   "confirm": "Confirm",
   "languageMode": "{language, select, en{English} fa{فارسی} system{System Default}  other{Language}}",
   "cancel": "Cancel",
-  "language": "Language"
+  "language": "Language",
+  "goToRoleReveal": "Next: Reveal Roles",
+  "roleReveal": "Reveal Roles",
+  "gameSetup": "Game Setup",
+  "category" : "Category",
+  "time" : "Round Time",
+  "roundCount": "Number of Rounds",
+  "spyCount": "Number of Spies",
+  "minute": "Minute"
 }

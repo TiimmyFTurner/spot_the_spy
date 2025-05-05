@@ -41,7 +41,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playerCountError => 'You need at least 3 players to start the game.';
 
   @override
-  String get goToGameConfig => 'Next: Set Game Rules';
+  String get goToGameSetup => 'Next: Set Game Rules';
 
   @override
   String themeMode(String theme_mode) {
@@ -82,4 +82,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language => 'Language';
+
+  @override
+  String get goToRoleReveal => 'Next: Reveal Roles';
+
+  @override
+  String get roleReveal => 'Reveal Roles';
+
+  @override
+  String get gameSetup => 'Game Setup';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get time => 'Round Time';
+
+  @override
+  String get roundCount => 'Number of Rounds';
+
+  @override
+  String get spyCount => 'Number of Spies';
+
+  @override
+  String get minute => 'Minute';
 }

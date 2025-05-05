@@ -41,7 +41,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get playerCountError => 'این بازی حداقل به ۳ بازیکن نیاز دارد.';
 
   @override
-  String get goToGameConfig => 'مرحله بعد: تنظیم قوانین بازی';
+  String get goToGameSetup => 'مرحله بعد: تنظیم قوانین بازی';
 
   @override
   String themeMode(String theme_mode) {
@@ -82,4 +82,28 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get language => 'زبان';
+
+  @override
+  String get goToRoleReveal => 'مرحله بعد: نمایش نقش ها';
+
+  @override
+  String get roleReveal => 'نمایش نقش ها';
+
+  @override
+  String get gameSetup => 'Game Setup';
+
+  @override
+  String get category => 'دسته بندی';
+
+  @override
+  String get time => 'مدت زمان هر دور';
+
+  @override
+  String get roundCount => 'تعداد دورها';
+
+  @override
+  String get spyCount => 'تعداد جاسوس ها';
+
+  @override
+  String get minute => 'دقیقه';
 }

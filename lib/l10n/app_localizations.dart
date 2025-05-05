@@ -149,11 +149,11 @@ abstract class AppLocalizations {
   /// **'You need at least 3 players to start the game.'**
   String get playerCountError;
 
-  /// No description provided for @goToGameConfig.
+  /// No description provided for @goToGameSetup.
   ///
   /// In en, this message translates to:
   /// **'Next: Set Game Rules'**
-  String get goToGameConfig;
+  String get goToGameSetup;
 
   /// No description provided for @themeMode.
   ///
@@ -190,6 +190,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
+
+  /// No description provided for @goToRoleReveal.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: Reveal Roles'**
+  String get goToRoleReveal;
+
+  /// No description provided for @roleReveal.
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal Roles'**
+  String get roleReveal;
+
+  /// No description provided for @gameSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Setup'**
+  String get gameSetup;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Round Time'**
+  String get time;
+
+  /// No description provided for @roundCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of Rounds'**
+  String get roundCount;
+
+  /// No description provided for @spyCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Number of Spies'**
+  String get spyCount;
+
+  /// No description provided for @minute.
+  ///
+  /// In en, this message translates to:
+  /// **'Minute'**
+  String get minute;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
