@@ -8,7 +8,7 @@ import 'package:spot_the_spy/presentation/screens/home_screen.dart';
 import 'package:spot_the_spy/presentation/screens/how_to_play_screen.dart';
 import 'package:spot_the_spy/presentation/screens/score_board_screen.dart';
 import 'package:spot_the_spy/presentation/screens/settings_screen.dart';
-import 'package:spot_the_spy/presentation/screens/show_roles_screen.dart';
+import 'package:spot_the_spy/presentation/screens/role_reveal_screen.dart';
 import 'package:spot_the_spy/presentation/screens/slide_to_start_screen.dart';
 
 class AppRouter {
@@ -52,10 +52,10 @@ class AppRouter {
         },
       ),
       GoRoute(
-        name: Routes.showRoles,
-        path: Routes.showRolesPath,
+        name: Routes.roleReveal,
+        path: Routes.roleRevealPath,
         builder: (BuildContext context, GoRouterState state) {
-          return const ShowRolesScreen();
+          return const RoleRevealScreen();
         },
       ),
       GoRoute(
