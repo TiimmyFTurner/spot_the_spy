@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
@@ -65,7 +66,17 @@ class Players extends _$Players {
     state = players;
   }
 
-
+  void setScores({required int spyScore, required int nonSpyScore}){
+    List<Player> players = state;
+    for (var i = 0; i < players.length; i++) {
+      if (players[i].isSpy) {
+        players[i] = players[i].copyWith(score: players[i].score + spyScore);
+      } else {
+        players[i] = players[i].copyWith(score: players[i].score + nonSpyScore);
+      }
+    }
+    state = players;
+  }
 }
 
 
