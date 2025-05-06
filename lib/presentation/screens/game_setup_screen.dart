@@ -56,9 +56,11 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                           ) {
                             return DropdownMenuItem<String>(
                               value: category,
-                              child: Text(
-                                category,
-                                overflow: TextOverflow.ellipsis,
+                              child: Center(
+                                child: Text(
+                                  category,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             );
                           }).toList(),
@@ -83,7 +85,11 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                           ).map<DropdownMenuItem<int>>((int spyCount) {
                             return DropdownMenuItem<int>(
                               value: spyCount,
-                              child: Text(spyCount.toString()),
+                              child: Center(
+                                child: Text(
+                                  AppLocalizations.of(context)!.number(spyCount),
+                                ),
+                              ),
                             );
                           }).toList(),
                       onChanged: (int? newValue) {
@@ -111,8 +117,10 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                           ).map<DropdownMenuItem<int>>((int time) {
                             return DropdownMenuItem<int>(
                               value: time,
-                              child: Text(
-                                "$time (${AppLocalizations.of(context)!.minute})",
+                              child: Center(
+                                child: Text(
+                                  "${AppLocalizations.of(context)!.number(time)} ${AppLocalizations.of(context)!.minute}",
+                                ),
                               ),
                             );
                           }).toList(),
@@ -137,7 +145,13 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                           ).map<DropdownMenuItem<int>>((int roundCount) {
                             return DropdownMenuItem<int>(
                               value: roundCount,
-                              child: Text(roundCount.toString()),
+                              child: Center(
+                                child: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.number(roundCount),
+                                ),
+                              ),
                             );
                           }).toList(),
                       onChanged: (int? newValue) {
