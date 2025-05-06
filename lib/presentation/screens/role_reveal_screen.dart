@@ -37,6 +37,35 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.roleReveal),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.fiber_new),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(AppLocalizations.of(context)!.newGameQuestion),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: context.pop,
+                        child: Text(AppLocalizations.of(context)!.cancel),
+                      ),
+                      TextButton(
+                        child: Text(AppLocalizations.of(context)!.newGame),
+                        onPressed: () {
+                          context.pop();
+                          ref.invalidate(currentRoundProvider);
+                          context.goNamed(Routes.home);
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
       body:
           players.isEmpty
@@ -51,8 +80,7 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                       controller.success();
                       await Future.delayed(const Duration(seconds: 1));
                       if (!context.mounted) return;
-                      context.goNamed(Routes.gamePlay,);
-
+                      context.goNamed(Routes.gamePlay);
                     },
                     child: Text(AppLocalizations.of(context)!.slideToPlay),
                   ),

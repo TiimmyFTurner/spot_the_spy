@@ -78,6 +78,37 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.round),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.fiber_new),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(
+                        AppLocalizations.of(context)!.newGameQuestion,
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: context.pop,
+                          child: Text(AppLocalizations.of(context)!.cancel),
+                        ),
+                        TextButton(
+                          child: Text(AppLocalizations.of(context)!.newGame),
+                          onPressed: () {
+                            context.pop();
+                            ref.invalidate(currentRoundProvider);
+                            context.goNamed(Routes.home);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          ],
         ),
         body: SafeArea(
           child: Column(
