@@ -14,6 +14,18 @@
       }
     }
   },
+  "number": "{value}",
+  "@number": {
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "decimalPattern",
+        "optionalParameters": {
+          "decimalDigits": 3
+        }
+      }
+    }
+  },
   "help": "راهنما",
   "addPlayersHelpMessage": "در این صفحه میتوانید هر تعداد بازیکن که میخواهید اضافه کنید.",
   "back": "برگشت",
@@ -37,6 +49,9 @@
   "isSpy": "تو یک جاسوسی",
   "gotIt": "فهمیدم",
   "theSecretWordIs": "کلمهٔ مخفی اینه: ",
-  "slideToPlay": "برای شروع بازی بکش"
-
+  "slideToPlay": "برای شروع بازی بکش",
+  "round": "دور",
+  "wordGuessed": "کلمه حدس زده شد",
+  "spyCaught": "جاسوس پیدا شد",
+  "remainingTime": "زمان باقی مانده"
 }

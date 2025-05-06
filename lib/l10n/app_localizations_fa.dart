@@ -26,6 +26,14 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
+  String number(int value) {
+    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString';
+  }
+
+  @override
   String get help => 'راهنما';
 
   @override
@@ -118,4 +126,16 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get slideToPlay => 'برای شروع بازی بکش';
+
+  @override
+  String get round => 'دور';
+
+  @override
+  String get wordGuessed => 'کلمه حدس زده شد';
+
+  @override
+  String get spyCaught => 'جاسوس پیدا شد';
+
+  @override
+  String get remainingTime => 'زمان باقی مانده';
 }

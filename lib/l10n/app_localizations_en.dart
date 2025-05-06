@@ -26,6 +26,14 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String number(int value) {
+    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final String valueString = valueNumberFormat.format(value);
+
+    return '$valueString';
+  }
+
+  @override
   String get help => 'Help';
 
   @override
@@ -118,4 +126,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get slideToPlay => 'Slide to Play';
+
+  @override
+  String get round => 'Round';
+
+  @override
+  String get wordGuessed => 'Word Guessed';
+
+  @override
+  String get spyCaught => 'Spy Caught';
+
+  @override
+  String get remainingTime => 'Remaining Time';
 }

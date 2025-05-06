@@ -14,6 +14,19 @@
       }
     }
   },
+
+  "number": "{value}",
+  "@number": {
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format": "decimalPattern",
+        "optionalParameters": {
+          "decimalDigits": 3
+        }
+      }
+    }
+  },
   "help": "Help",
   "addPlayersHelpMessage": "On this page, you can add as many players as you like.",
   "back": "Back",
@@ -37,5 +50,9 @@
   "isSpy": "You''re a Spy",
   "gotIt": "Got It",
   "theSecretWordIs": "The secret word is: ",
-  "slideToPlay": "Slide to Play"
+  "slideToPlay": "Slide to Play",
+  "round": "Round",
+  "wordGuessed": "Word Guessed",
+  "spyCaught": "Spy Caught",
+  "remainingTime": "Remaining Time"
 }

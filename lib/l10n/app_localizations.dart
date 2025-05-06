@@ -119,6 +119,12 @@ abstract class AppLocalizations {
   /// **'Add Players ({value})'**
   String addPlayers(int value);
 
+  /// No description provided for @number.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}'**
+  String number(int value);
+
   /// No description provided for @help.
   ///
   /// In en, this message translates to:
@@ -262,6 +268,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Slide to Play'**
   String get slideToPlay;
+
+  /// No description provided for @round.
+  ///
+  /// In en, this message translates to:
+  /// **'Round'**
+  String get round;
+
+  /// No description provided for @wordGuessed.
+  ///
+  /// In en, this message translates to:
+  /// **'Word Guessed'**
+  String get wordGuessed;
+
+  /// No description provided for @spyCaught.
+  ///
+  /// In en, this message translates to:
+  /// **'Spy Caught'**
+  String get spyCaught;
+
+  /// No description provided for @remainingTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Time'**
+  String get remainingTime;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
