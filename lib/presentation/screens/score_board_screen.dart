@@ -25,134 +25,137 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
     bool lastRound =
         ref.read(currentRoundProvider) == ref.read(roundCountProvider);
     List<Player> players = ref.watch(playersProvider);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.scoreboard),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.fiber_new),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text(AppLocalizations.of(context)!.newGameQuestion),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: context.pop,
-                        child: Text(AppLocalizations.of(context)!.cancel),
-                      ),
-                      TextButton(
-                        child: Text(AppLocalizations.of(context)!.newGame),
-                        onPressed: () {
-                          context.pop();
-                          ref.invalidate(currentRoundProvider);
-                          context.goNamed(Routes.home);
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Chip(
-                  avatar: Icon(Icons.autorenew_rounded, size: 20),
-                  label: Text(
-                    '${AppLocalizations.of(context)!.round}: ${AppLocalizations.of(context)!.number(ref.read(currentRoundProvider))}/${AppLocalizations.of(context)!.number(ref.read(roundCountProvider))}',
-                  ),
-                ),
-                SizedBox(width: 8),
-                Chip(
-                  avatar: Icon(Icons.security, size: 20),
-                  label: Text(
-                    AppLocalizations.of(context)!.theSecretWordIs +
-                        ref.read(theWordProvider),
-                  ),
-                ),
-              ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.scoreboard),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.fiber_new),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(AppLocalizations.of(context)!.newGameQuestion),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: context.pop,
+                          child: Text(AppLocalizations.of(context)!.cancel),
+                        ),
+                        TextButton(
+                          child: Text(AppLocalizations.of(context)!.newGame),
+                          onPressed: () {
+                            context.pop();
+                            ref.invalidate(currentRoundProvider);
+                            context.goNamed(Routes.home);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Card(
-                color: Theme.of(context).colorScheme.surfaceContainer,
-                elevation: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(
-                    children: [
-                      SizedBox(width: 40),
-                      Text(
-                        AppLocalizations.of(context)!.player,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Expanded(flex: 4, child: Container()),
-                      Text(
-                        AppLocalizations.of(context)!.score,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+          ],
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Chip(
+                    avatar: Icon(Icons.autorenew_rounded, size: 20),
+                    label: Text(
+                      '${AppLocalizations.of(context)!.round}: ${AppLocalizations.of(context)!.number(ref.read(currentRoundProvider))}/${AppLocalizations.of(context)!.number(ref.read(roundCountProvider))}',
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Chip(
+                    avatar: Icon(Icons.security, size: 20),
+                    label: Text(
+                      AppLocalizations.of(context)!.theSecretWordIs +
+                          ref.read(theWordProvider),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Card(
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                  elevation: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 40),
+                        Text(
+                          AppLocalizations.of(context)!.player,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Expanded(flex: 4, child: Container()),
+                        Text(
+                          AppLocalizations.of(context)!.score,
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                shrinkWrap: true,
-                itemCount: players.length + 1,
-                itemBuilder: (BuildContext context, int index) {
-                  return index < players.length
-                      ? listItemPlayer(players[index])
-                      : const SizedBox(height: 8);
-                },
-              ),
-            ),
-            SizedBox(
-              height: 70,
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 16,
-                ),
-                child: FilledButton(
-                  child: Text(
-                    lastRound
-                        ? AppLocalizations.of(context)!.newGame
-                        : AppLocalizations.of(context)!.startNextRound,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    HapticFeedback.lightImpact();
-                    if (lastRound) {
-                      ref.invalidate(currentRoundProvider);
-                      context.goNamed(Routes.home);
-                    } else {
-                      List<String>? wordsList =
-                          locale == L10n.en
-                              ? categoriesEN[ref.read(categoryProvider)]
-                                  ?.toList()
-                              : categoriesFA[ref.read(categoryProvider)]
-                                  ?.toList();
-                      ref.read(playersProvider.notifier).setRoles(wordsList);
-                      ref.read(currentRoundProvider.notifier).next();
-                      context.goNamed(Routes.roleReveal);
-                    }
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  shrinkWrap: true,
+                  itemCount: players.length + 1,
+                  itemBuilder: (BuildContext context, int index) {
+                    return index < players.length
+                        ? listItemPlayer(players[index])
+                        : const SizedBox(height: 8);
                   },
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 70,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 16,
+                  ),
+                  child: FilledButton(
+                    child: Text(
+                      lastRound
+                          ? AppLocalizations.of(context)!.newGame
+                          : AppLocalizations.of(context)!.startNextRound,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () {
+                      HapticFeedback.lightImpact();
+                      if (lastRound) {
+                        ref.invalidate(currentRoundProvider);
+                        context.goNamed(Routes.home);
+                      } else {
+                        List<String>? wordsList =
+                            locale == L10n.en
+                                ? categoriesEN[ref.read(categoryProvider)]
+                                    ?.toList()
+                                : categoriesFA[ref.read(categoryProvider)]
+                                    ?.toList();
+                        ref.read(playersProvider.notifier).setRoles(wordsList);
+                        ref.read(currentRoundProvider.notifier).next();
+                        context.goNamed(Routes.roleReveal);
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

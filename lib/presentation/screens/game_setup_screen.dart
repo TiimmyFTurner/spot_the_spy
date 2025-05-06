@@ -168,7 +168,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                                   ?.toList();
                       ref.read(playersProvider.notifier).set();
                       ref.read(playersProvider.notifier).setRoles(wordsList);
-                      context.pushNamed(Routes.roleReveal);
+                      context.goNamed(Routes.roleReveal);
                     },
                   ),
                 ),
