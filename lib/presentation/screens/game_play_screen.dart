@@ -141,7 +141,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 style: TextStyle(
                   fontSize: 62,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
               SizedBox(height: 20),
