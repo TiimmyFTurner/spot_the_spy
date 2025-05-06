@@ -50,6 +50,9 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                       HapticFeedback.lightImpact();
                       controller.success();
                       await Future.delayed(const Duration(seconds: 1));
+                      if (!context.mounted) return;
+                      context.goNamed(Routes.gamePlay,);
+
                     },
                     child: Text(AppLocalizations.of(context)!.slideToPlay),
                   ),

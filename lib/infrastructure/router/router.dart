@@ -18,58 +18,58 @@ class AppRouter {
       GoRoute(
         name: Routes.home,
         path: Routes.homePath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const HomeScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: HomeScreen()),
       ),
       GoRoute(
         name: Routes.addPlayers,
         path: Routes.addPlayersPath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const AddPlayersScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: AddPlayersScreen()),
       ),
       GoRoute(
         name: Routes.settings,
         path: Routes.settingsPath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const SettingsScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: SettingsScreen()),
       ),
       GoRoute(
         name: Routes.howToPlay,
         path: Routes.howToPlayPath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const HowToPlayScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: HowToPlayScreen()),
       ),
       GoRoute(
         name: Routes.gameSetup,
         path: Routes.gameSetupPath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const GameSetupScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: GameSetupScreen()),
       ),
       GoRoute(
         name: Routes.roleReveal,
         path: Routes.roleRevealPath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const RoleRevealScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: RoleRevealScreen()),
       ),
       GoRoute(
         name: Routes.gamePlay,
         path: Routes.gamePlayPath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const GamePlayScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: GamePlayScreen()),
       ),
       GoRoute(
         name: Routes.scoreBoard,
         path: Routes.scoreBoardPath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const ScoreBoardScreen();
-        },
+        pageBuilder:
+            (context, state) =>
+                MaterialPage(key: state.pageKey, child: ScoreBoardScreen()),
       ),
     ],
   );
