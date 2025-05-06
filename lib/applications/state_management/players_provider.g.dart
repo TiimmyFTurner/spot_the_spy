@@ -23,5 +23,19 @@ final playerNamesProvider =
     );
 
 typedef _$PlayerNames = Notifier<List<String>>;
+String _$playersHash() => r'5e5ce4eedeccdf6294efb8dd0e5921ddd86b5367';
+
+/// See also [Players].
+@ProviderFor(Players)
+final playersProvider = NotifierProvider<Players, List<Player>>.internal(
+  Players.new,
+  name: r'playersProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$playersHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Players = Notifier<List<Player>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

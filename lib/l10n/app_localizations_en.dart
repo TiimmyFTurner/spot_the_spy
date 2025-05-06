@@ -106,4 +106,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get minute => 'Minute';
+
+  @override
+  String get isSpy => 'You\'re a Spy';
+
+  @override
+  String get gotIt => 'Got It';
+
+  @override
+  String get theSecretWordIs => 'The secret word is: ';
+
+  @override
+  String get slideToPlay => 'Slide to Play';
 }

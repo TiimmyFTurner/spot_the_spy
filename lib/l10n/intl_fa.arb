@@ -28,10 +28,15 @@
   "language": "زبان",
   "goToRoleReveal": "مرحله بعد: نمایش نقش ها",
   "roleReveal": "نمایش نقش ها",
-  "category" : "دسته بندی",
-  "time" : "مدت زمان هر دور",
+  "gameSetup": "پیکربندی بازی",
+  "category": "دسته بندی",
+  "time": "مدت زمان هر دور",
   "roundCount": "تعداد دورها",
   "spyCount": "تعداد جاسوس ها",
-  "minute": "دقیقه"
+  "minute": "دقیقه",
+  "isSpy": "تو یک جاسوسی",
+  "gotIt": "فهمیدم",
+  "theSecretWordIs": "کلمهٔ مخفی اینه: ",
+  "slideToPlay": "برای شروع بازی بکش"
 
 }

@@ -25,24 +25,11 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
         locale == L10n.en
             ? categoriesEN.keys.toList()
             : categoriesFA.keys.toList();
-    Future.delayed(Duration.zero, () {
-      ref
-          .read(categoryProvider.notifier)
-          .set(locale == L10n.en ? 'animals' : 'حیوانات');
-    });
 
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.gameSetup),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              context.pushNamed(Routes.settings);
-            },
-          ),
-        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -173,6 +160,13 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                     ),
                     onPressed: () {
                       HapticFeedback.lightImpact();
+                      ref.read(playersProvider.notifier).set();
+                      ref
+                          .read(playersProvider.notifier)
+                          .setRoles(
+                            categoriesEN[ref.read(categoryProvider)]?.toList(),
+                          );
+                      context.pushNamed(Routes.roleReveal);
                     },
                   ),
                 ),

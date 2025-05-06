@@ -45,6 +45,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  action_slider: ^0.7.0
 
 dev_dependencies:
   flutter_test:

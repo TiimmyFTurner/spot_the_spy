@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
+import 'package:spot_the_spy/l10n/l10n.dart';
 
 class AddPlayersScreen extends ConsumerStatefulWidget {
   const AddPlayersScreen({super.key});
@@ -116,6 +118,10 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                   onPressed: () {
                     HapticFeedback.lightImpact();
                     if (players.length > 2) {
+                      Locale locale = Localizations.localeOf(context);
+                      ref
+                          .read(categoryProvider.notifier)
+                          .set(locale == L10n.en ? 'animals' : 'حیوانات');
                       context.pushNamed(Routes.gameSetup);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(

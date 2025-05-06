@@ -90,7 +90,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get roleReveal => 'نمایش نقش ها';
 
   @override
-  String get gameSetup => 'Game Setup';
+  String get gameSetup => 'پیکربندی بازی';
 
   @override
   String get category => 'دسته بندی';
@@ -106,4 +106,16 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get minute => 'دقیقه';
+
+  @override
+  String get isSpy => 'تو یک جاسوسی';
+
+  @override
+  String get gotIt => 'فهمیدم';
+
+  @override
+  String get theSecretWordIs => 'کلمهٔ مخفی اینه: ';
+
+  @override
+  String get slideToPlay => 'برای شروع بازی بکش';
 }

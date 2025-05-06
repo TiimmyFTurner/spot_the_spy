@@ -238,6 +238,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Minute'**
   String get minute;
+
+  /// No description provided for @isSpy.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'\'re a Spy'**
+  String get isSpy;
+
+  /// No description provided for @gotIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Got It'**
+  String get gotIt;
+
+  /// No description provided for @theSecretWordIs.
+  ///
+  /// In en, this message translates to:
+  /// **'The secret word is: '**
+  String get theSecretWordIs;
+
+  /// No description provided for @slideToPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Slide to Play'**
+  String get slideToPlay;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

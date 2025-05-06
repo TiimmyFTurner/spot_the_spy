@@ -48,11 +48,11 @@ final roundCountProvider = NotifierProvider<RoundCount, int>.internal(
 );
 
 typedef _$RoundCount = Notifier<int>;
-String _$spyCountHash() => r'50ba534ae6e25763e2e0f51e44bd8032e583e831';
+String _$spyCountHash() => r'0c40c7072c10cca2fdd706bc31396a86b2259afd';
 
 /// See also [SpyCount].
 @ProviderFor(SpyCount)
-final spyCountProvider = AutoDisposeNotifierProvider<SpyCount, int>.internal(
+final spyCountProvider = NotifierProvider<SpyCount, int>.internal(
   SpyCount.new,
   name: r'spyCountProvider',
   debugGetCreateSourceHash:
@@ -61,6 +61,20 @@ final spyCountProvider = AutoDisposeNotifierProvider<SpyCount, int>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef _$SpyCount = AutoDisposeNotifier<int>;
+typedef _$SpyCount = Notifier<int>;
+String _$theWordHash() => r'0b3e50a330fb442a6ae39d3f09ac62f0423df421';
+
+/// See also [TheWord].
+@ProviderFor(TheWord)
+final theWordProvider = NotifierProvider<TheWord, String>.internal(
+  TheWord.new,
+  name: r'theWordProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$theWordHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TheWord = Notifier<String>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

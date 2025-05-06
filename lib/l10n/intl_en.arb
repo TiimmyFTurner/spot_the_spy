@@ -33,5 +33,9 @@
   "time" : "Round Time",
   "roundCount": "Number of Rounds",
   "spyCount": "Number of Spies",
-  "minute": "Minute"
+  "minute": "Minute",
+  "isSpy": "You''re a Spy",
+  "gotIt": "Got It",
+  "theSecretWordIs": "The secret word is: ",
+  "slideToPlay": "Slide to Play"
 }

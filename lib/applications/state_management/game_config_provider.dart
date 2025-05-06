@@ -30,10 +30,19 @@ class RoundCount extends _$RoundCount {
 }
 
 // --- SpyCount Provider ---
-@riverpod
+@Riverpod(keepAlive: true)
 class SpyCount extends _$SpyCount {
   @override
   int build() => 1;
 
   void set(int value) => state = value;
+}
+
+// --- TheWord Provider ---
+@Riverpod(keepAlive: true)
+class TheWord extends _$TheWord {
+  @override
+  String build() => '';
+
+  void set(String value) => state = value;
 }
