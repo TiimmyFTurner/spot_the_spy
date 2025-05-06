@@ -14,7 +14,6 @@
       }
     }
   },
-
   "number": "{value}",
   "@number": {
     "placeholders": {
@@ -42,8 +41,8 @@
   "goToRoleReveal": "Next: Reveal Roles",
   "roleReveal": "Reveal Roles",
   "gameSetup": "Game Setup",
-  "category" : "Category",
-  "time" : "Round Time",
+  "category": "Category",
+  "time": "Round Time",
   "roundCount": "Number of Rounds",
   "spyCount": "Number of Spies",
   "minute": "Minute",
@@ -54,5 +53,12 @@
   "round": "Round",
   "wordGuessed": "Word Guessed",
   "spyCaught": "Spy Caught",
-  "remainingTime": "Remaining Time"
+  "remainingTime": "Remaining Time",
+  "scoreboard": "Scoreboard",
+  "spy": "Spy",
+  "player": "Player",
+  "score": "Score",
+  "startNextRound": "Start Next Round",
+  "newGameQuestion": "New Game?"
+
 }

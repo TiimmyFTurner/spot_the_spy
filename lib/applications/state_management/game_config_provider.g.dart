@@ -76,5 +76,19 @@ final theWordProvider = NotifierProvider<TheWord, String>.internal(
 );
 
 typedef _$TheWord = Notifier<String>;
+String _$currentRoundHash() => r'd9b6406ff6df1dc9d72d21919f46d5136829f94f';
+
+/// See also [CurrentRound].
+@ProviderFor(CurrentRound)
+final currentRoundProvider = NotifierProvider<CurrentRound, int>.internal(
+  CurrentRound.new,
+  name: r'currentRoundProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$currentRoundHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$CurrentRound = Notifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

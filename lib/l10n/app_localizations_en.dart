@@ -138,4 +138,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get remainingTime => 'Remaining Time';
+
+  @override
+  String get scoreboard => 'Scoreboard';
+
+  @override
+  String get spy => 'Spy';
+
+  @override
+  String get player => 'Player';
+
+  @override
+  String get score => 'Score';
+
+  @override
+  String get startNextRound => 'Start Next Round';
+
+  @override
+  String get newGameQuestion => 'New Game?';
 }

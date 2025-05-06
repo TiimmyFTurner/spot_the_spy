@@ -292,6 +292,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remaining Time'**
   String get remainingTime;
+
+  /// No description provided for @scoreboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Scoreboard'**
+  String get scoreboard;
+
+  /// No description provided for @spy.
+  ///
+  /// In en, this message translates to:
+  /// **'Spy'**
+  String get spy;
+
+  /// No description provided for @player.
+  ///
+  /// In en, this message translates to:
+  /// **'Player'**
+  String get player;
+
+  /// No description provided for @score.
+  ///
+  /// In en, this message translates to:
+  /// **'Score'**
+  String get score;
+
+  /// No description provided for @startNextRound.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Next Round'**
+  String get startNextRound;
+
+  /// No description provided for @newGameQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'New Game?'**
+  String get newGameQuestion;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

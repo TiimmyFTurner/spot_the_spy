@@ -138,4 +138,22 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get remainingTime => 'زمان باقی مانده';
+
+  @override
+  String get scoreboard => 'جدول امتیازات';
+
+  @override
+  String get spy => 'جاسوس';
+
+  @override
+  String get player => 'بازیکن';
+
+  @override
+  String get score => 'امتیاز';
+
+  @override
+  String get startNextRound => 'شروع دور بعدی';
+
+  @override
+  String get newGameQuestion => 'بازی جدید ؟';
 }

@@ -160,12 +160,14 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                     ),
                     onPressed: () {
                       HapticFeedback.lightImpact();
+                      List<String>? wordsList =
+                          locale == L10n.en
+                              ? categoriesEN[ref.read(categoryProvider)]
+                                  ?.toList()
+                              : categoriesFA[ref.read(categoryProvider)]
+                                  ?.toList();
                       ref.read(playersProvider.notifier).set();
-                      ref
-                          .read(playersProvider.notifier)
-                          .setRoles(
-                            categoriesEN[ref.read(categoryProvider)]?.toList(),
-                          );
+                      ref.read(playersProvider.notifier).setRoles(wordsList);
                       context.pushNamed(Routes.roleReveal);
                     },
                   ),

@@ -53,5 +53,11 @@
   "round": "دور",
   "wordGuessed": "کلمه حدس زده شد",
   "spyCaught": "جاسوس پیدا شد",
-  "remainingTime": "زمان باقی مانده"
+  "remainingTime": "زمان باقی مانده",
+  "scoreboard": "جدول امتیازات",
+  "spy": "جاسوس",
+  "player": "بازیکن",
+  "score": "امتیاز",
+  "startNextRound": "شروع دور بعدی",
+  "newGameQuestion": "بازی جدید ؟"
 }
