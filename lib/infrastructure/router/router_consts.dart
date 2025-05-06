@@ -6,7 +6,6 @@ class Routes {
   static const String settings = 'settings';
   static const String gameSetup = 'gameConfig';
   static const String roleReveal = 'roleReveal';
-  static const String slideToStart = 'slideToStart';
   static const String gamePlay = 'gamePlay';
   static const String scoreBoard = 'scoreBoard';
 
@@ -17,7 +16,6 @@ class Routes {
   static const String settingsPath = '/settings';
   static const String gameSetupPath = '/gameConfig';
   static const String roleRevealPath = '/roleReveal';
-  static const String slideToStartPath = '/slideToStart';
   static const String gamePlayPath = '/gamePlay';
   static const String scoreBoardPath = '/scoreBoard';
 }

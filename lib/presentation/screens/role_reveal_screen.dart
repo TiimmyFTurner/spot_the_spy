@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/domain/data_models/player_model.dart';
+import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
 
 class RoleRevealScreen extends ConsumerStatefulWidget {
