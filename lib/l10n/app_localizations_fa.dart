@@ -156,4 +156,16 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get newGameQuestion => 'بازی جدید ؟';
+
+  @override
+  String get wordGuessedQuestion => 'کلمه حدس زده شد؟';
+
+  @override
+  String get spyCaughtQuestion => 'جاسوس پیدا شد؟';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
 }

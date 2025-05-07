@@ -59,5 +59,9 @@
   "player": "بازیکن",
   "score": "امتیاز",
   "startNextRound": "شروع دور بعدی",
-  "newGameQuestion": "بازی جدید ؟"
+  "newGameQuestion": "بازی جدید ؟",
+  "wordGuessedQuestion": "کلمه حدس زده شد؟",
+  "spyCaughtQuestion": "جاسوس پیدا شد؟",
+  "yes": "Yes",
+  "no": "No"
 }

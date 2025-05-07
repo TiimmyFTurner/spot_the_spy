@@ -328,6 +328,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New Game?'**
   String get newGameQuestion;
+
+  /// No description provided for @wordGuessedQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Spy Guessed the Word?'**
+  String get wordGuessedQuestion;
+
+  /// No description provided for @spyCaughtQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Spy Got Caught?'**
+  String get spyCaughtQuestion;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

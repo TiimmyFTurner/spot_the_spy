@@ -59,6 +59,9 @@
   "player": "Player",
   "score": "Score",
   "startNextRound": "Start Next Round",
-  "newGameQuestion": "New Game?"
-
+  "newGameQuestion": "New Game?",
+  "wordGuessedQuestion": "Spy Guessed the Word?",
+  "spyCaughtQuestion": "Spy Got Caught?",
+  "yes": "Yes",
+  "no": "No"
 }

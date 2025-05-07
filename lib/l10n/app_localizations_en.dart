@@ -156,4 +156,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get newGameQuestion => 'New Game?';
+
+  @override
+  String get wordGuessedQuestion => 'Spy Guessed the Word?';
+
+  @override
+  String get spyCaughtQuestion => 'Spy Got Caught?';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
 }

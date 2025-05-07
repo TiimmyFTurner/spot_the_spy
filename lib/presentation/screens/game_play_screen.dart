@@ -152,7 +152,28 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 height: 54,
                 width: MediaQuery.of(context).size.width / 1.4,
                 child: FilledButton.tonal(
-                  onPressed: onWordGuessed,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            AppLocalizations.of(context)!.wordGuessedQuestion,
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: context.pop,
+                              child: Text(AppLocalizations.of(context)!.no),
+                            ),
+                            TextButton(
+                              onPressed: onWordGuessed,
+                              child: Text(AppLocalizations.of(context)!.yes),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   child: Text(
                     AppLocalizations.of(context)!.wordGuessed,
                     style: TextStyle(fontSize: 20),
@@ -164,7 +185,28 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 height: 54,
                 width: MediaQuery.of(context).size.width / 1.4,
                 child: FilledButton.tonal(
-                  onPressed: onSpyCaught,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            AppLocalizations.of(context)!.spyCaughtQuestion,
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: context.pop,
+                              child: Text(AppLocalizations.of(context)!.no),
+                            ),
+                            TextButton(
+                              onPressed: onSpyCaught,
+                              child: Text(AppLocalizations.of(context)!.yes),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   child: Text(
                     AppLocalizations.of(context)!.spyCaught,
                     style: TextStyle(fontSize: 20),
