@@ -63,7 +63,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
 
   void onWordGuessed() {
     int spyScore = remaining.inMinutes < 1 ? 1 : remaining.inMinutes;
-    spyScore++;
+    spyScore += 2;
     ref
         .read(playersProvider.notifier)
         .setScores(spyScore: spyScore, nonSpyScore: 0);
