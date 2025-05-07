@@ -45,7 +45,10 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   }
 
   void onTimeout() {
-    ref.read(playersProvider.notifier).setScores(spyScore: 3, nonSpyScore: 0);
+    int spyScore = ref.read(timeProvider) ~/ 2 + 1;
+    ref
+        .read(playersProvider.notifier)
+        .setScores(spyScore: spyScore, nonSpyScore: 0);
     context.goNamed(Routes.scoreBoard);
   }
 
