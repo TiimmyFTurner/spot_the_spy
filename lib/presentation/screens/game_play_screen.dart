@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
@@ -29,7 +29,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (remaining.inSeconds == 0) {
         timer?.cancel();
-        onTimeout(); // ✅ Call your timeout logic
+        onTimeout();
       } else {
         setState(() {
           remaining -= const Duration(seconds: 1);
@@ -45,6 +45,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   }
 
   void onTimeout() {
+    AudioPlayer().play(AssetSource('sounds/alarm.mp3'),volume: 1);
     int spyScore = ref.read(timeProvider) ~/ 2 + 1;
     ref
         .read(playersProvider.notifier)
