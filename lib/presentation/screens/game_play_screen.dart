@@ -80,7 +80,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
       canPop: false,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.round),
+          title: Text("${AppLocalizations.of(context)!.round} ${AppLocalizations.of(context)!.number(ref.read(currentRoundProvider))}"),
           centerTitle: true,
           actions: [
             IconButton(
