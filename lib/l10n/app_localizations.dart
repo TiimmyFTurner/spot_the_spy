@@ -358,6 +358,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You need at least 1 category to play the game.'**
   String get categoryCountError;
+
+  /// No description provided for @selectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select All'**
+  String get selectAll;
+
+  /// No description provided for @unselectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Unselect All'**
+  String get unselectAll;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

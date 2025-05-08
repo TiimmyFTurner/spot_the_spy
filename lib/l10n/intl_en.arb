@@ -64,5 +64,6 @@
   "spyCaughtQuestion": "Spy Got Caught?",
   "yes": "Yes",
   "no": "No",
-  "categoryCountError": "You need at least 1 category to play the game."
+  "categoryCountError": "You need at least 1 category to play the game.",
+  "selectAll": "Select All",
 }

@@ -171,4 +171,10 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get categoryCountError => 'برای این بازی حداقل به یک دسته بندی نیاز دارید.';
+
+  @override
+  String get selectAll => 'انتخاب همه';
+
+  @override
+  String get unselectAll => 'لغو انتخاب همه';
 }

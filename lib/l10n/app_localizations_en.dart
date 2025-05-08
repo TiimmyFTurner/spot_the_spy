@@ -171,4 +171,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get categoryCountError => 'You need at least 1 category to play the game.';
+
+  @override
+  String get selectAll => 'Select All';
+
+  @override
+  String get unselectAll => 'Unselect All';
 }

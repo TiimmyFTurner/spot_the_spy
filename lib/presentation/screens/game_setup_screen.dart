@@ -36,123 +36,153 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(child: Container()),
-              Text(
-                AppLocalizations.of(context)!.category,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              MultiCategorySelector(
-                allCategories: categories,
-                selected: selectedCategories,
-                onSelectionChanged: (selectedList) {
-                  ref.read(categoryProvider.notifier).set(selectedList);
-                },
-              ),
-              SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.timer,size: 30,color: Theme.of(context).colorScheme.primary,),
-                  SizedBox(width: 15),
-                  Expanded(
-                    child: DropdownButtonFormField<int>(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: AppLocalizations.of(context)!.time,
-                      ),
-                      value: ref.watch(timeProvider),
-                      items:
-                          List.generate(
-                            13,
-                            (index) => index + 3,
-                          ).map<DropdownMenuItem<int>>((int time) {
-                            return DropdownMenuItem<int>(
-                              value: time,
-                              child: Center(
-                                child: Text(
-                                  "${AppLocalizations.of(context)!.number(time)} ${AppLocalizations.of(context)!.minute}",
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                      onChanged: (int? newValue) {
-                        ref.read(timeProvider.notifier).set(newValue!);
-                      },
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.category,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 15),
-              Row(
-                children: [
-                  Icon(Icons.loop,size: 30,color: Theme.of(context).colorScheme.primary,),
-                  SizedBox(width: 15),
-                  Expanded(
-                    child: DropdownButtonFormField<int>(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: AppLocalizations.of(context)!.roundCount,
+                    Flexible(
+                      child: SingleChildScrollView(
+                        child: MultiCategorySelector(
+                          allCategories: categories,
+                          selected: selectedCategories,
+                          onSelectionChanged: (selectedList) {
+                            ref
+                                .read(categoryProvider.notifier)
+                                .set(selectedList);
+                          },
+                        ),
                       ),
-                      value: ref.watch(roundCountProvider),
-                      items:
-                          List.generate(
-                            20,
-                            (index) => index + 1,
-                          ).map<DropdownMenuItem<int>>((int roundCount) {
-                            return DropdownMenuItem<int>(
-                              value: roundCount,
-                              child: Center(
-                                child: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.number(roundCount),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                      onChanged: (int? newValue) {
-                        ref.read(roundCountProvider.notifier).set(newValue!);
-                      },
                     ),
-                  ),
-                  SizedBox(width: 15),
-                  Icon(Icons.person_outline,size: 30,color: Theme.of(context).colorScheme.primary,),
-                  SizedBox(width: 15),
-                  Expanded(
-                    child: DropdownButtonFormField<int>(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: AppLocalizations.of(context)!.spyCount,
-                      ),
-                      value: ref.watch(spyCountProvider),
-                      items:
-                          List.generate(
-                            (ref.read(playerNamesProvider).length ~/ 3) + 1,
-                            (index) => index + 1,
-                          ).map<DropdownMenuItem<int>>((int spyCount) {
-                            return DropdownMenuItem<int>(
-                              value: spyCount,
-                              child: Center(
-                                child: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.number(spyCount),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                      onChanged: (int? newValue) {
-                        ref.read(spyCountProvider.notifier).set(newValue!);
-                      },
+                    SizedBox(height: 20),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.timer,
+                          size: 30,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        SizedBox(width: 15),
+                        Expanded(
+                          child: DropdownButtonFormField<int>(
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: AppLocalizations.of(context)!.time,
+                            ),
+                            value: ref.watch(timeProvider),
+                            items:
+                                List.generate(
+                                  13,
+                                  (index) => index + 3,
+                                ).map<DropdownMenuItem<int>>((int time) {
+                                  return DropdownMenuItem<int>(
+                                    value: time,
+                                    child: Center(
+                                      child: Text(
+                                        "${AppLocalizations.of(context)!.number(time)} ${AppLocalizations.of(context)!.minute}",
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                            onChanged: (int? newValue) {
+                              ref.read(timeProvider.notifier).set(newValue!);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.loop,
+                          size: 30,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        SizedBox(width: 15),
+                        Expanded(
+                          child: DropdownButtonFormField<int>(
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText:
+                                  AppLocalizations.of(context)!.roundCount,
+                            ),
+                            value: ref.watch(roundCountProvider),
+                            items:
+                                List.generate(
+                                  20,
+                                  (index) => index + 1,
+                                ).map<DropdownMenuItem<int>>((int roundCount) {
+                                  return DropdownMenuItem<int>(
+                                    value: roundCount,
+                                    child: Center(
+                                      child: Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.number(roundCount),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                            onChanged: (int? newValue) {
+                              ref
+                                  .read(roundCountProvider.notifier)
+                                  .set(newValue!);
+                            },
+                          ),
+                        ),
+                        SizedBox(width: 15),
+                        Icon(
+                          Icons.person_outline,
+                          size: 30,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        SizedBox(width: 15),
+                        Expanded(
+                          child: DropdownButtonFormField<int>(
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: AppLocalizations.of(context)!.spyCount,
+                            ),
+                            value: ref.watch(spyCountProvider),
+                            items:
+                                List.generate(
+                                  (ref.read(playerNamesProvider).length ~/ 3) +
+                                      1,
+                                  (index) => index + 1,
+                                ).map<DropdownMenuItem<int>>((int spyCount) {
+                                  return DropdownMenuItem<int>(
+                                    value: spyCount,
+                                    child: Center(
+                                      child: Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.number(spyCount),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                            onChanged: (int? newValue) {
+                              ref
+                                  .read(spyCountProvider.notifier)
+                                  .set(newValue!);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              Expanded(child: Container()),
+
+              // Expanded(child: Container()),
               SizedBox(
                 height: 70,
                 width: MediaQuery.of(context).size.width,
@@ -215,25 +245,35 @@ class MultiCategorySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allSelected = selected.length == allCategories.length;
+
     return Wrap(
       spacing: 8,
-      children:
-          allCategories.map((category) {
-            final isSelected = selected.contains(category);
-            return FilterChip(
-              label: Text(category),
-              selected: isSelected,
-              onSelected: (bool selectedNow) {
-                final newSelected = [...selected];
-                if (selectedNow) {
-                  newSelected.add(category);
-                } else {
-                  newSelected.remove(category);
-                }
-                onSelectionChanged(newSelected);
-              },
-            );
-          }).toList(),
+      children: [
+        FilterChip(
+          label: Text(AppLocalizations.of(context)!.selectAll),
+          selected: allSelected,
+          onSelected: (bool value) {
+            onSelectionChanged(allSelected ? [] : [...allCategories]);
+          },
+        ),
+        ...allCategories.map((category) {
+          final isSelected = selected.contains(category);
+          return FilterChip(
+            label: Text(category),
+            selected: isSelected,
+            onSelected: (bool selectedNow) {
+              final newSelected = [...selected];
+              if (selectedNow) {
+                newSelected.add(category);
+              } else {
+                newSelected.remove(category);
+              }
+              onSelectionChanged(newSelected);
+            },
+          );
+        }).toList(),
+      ],
     );
   }
 }
