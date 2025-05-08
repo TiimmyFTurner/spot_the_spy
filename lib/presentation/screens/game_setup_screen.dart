@@ -52,12 +52,13 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
               ),
               SizedBox(height: 20),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Icon(Icons.timer,size: 30,color: Theme.of(context).colorScheme.primary,),
+                  SizedBox(width: 15),
                   Expanded(
-                    flex: 3,
                     child: DropdownButtonFormField<int>(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
@@ -88,8 +89,9 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
               SizedBox(height: 15),
               Row(
                 children: [
+                  Icon(Icons.loop,size: 30,color: Theme.of(context).colorScheme.primary,),
+                  SizedBox(width: 15),
                   Expanded(
-                    flex: 2,
                     child: DropdownButtonFormField<int>(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
@@ -118,9 +120,9 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                     ),
                   ),
                   SizedBox(width: 15),
-
+                  Icon(Icons.person_outline,size: 30,color: Theme.of(context).colorScheme.primary,),
+                  SizedBox(width: 15),
                   Expanded(
-                    flex: 2,
                     child: DropdownButtonFormField<int>(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
@@ -163,7 +165,6 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                     ),
                     onPressed: () {
                       HapticFeedback.lightImpact();
-                      //TODO: create word list with given categories
                       if (ref.read(categoryProvider).isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
