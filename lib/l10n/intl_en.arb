@@ -63,5 +63,6 @@
   "wordGuessedQuestion": "Spy Guessed the Word?",
   "spyCaughtQuestion": "Spy Got Caught?",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "categoryCountError": "You need at least 1 category to play the game."
 }

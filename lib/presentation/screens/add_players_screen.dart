@@ -118,10 +118,6 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                   onPressed: () {
                     HapticFeedback.lightImpact();
                     if (players.length > 2) {
-                      Locale locale = Localizations.localeOf(context);
-                      ref
-                          .read(categoryProvider.notifier)
-                          .set(locale == L10n.en ? 'animals' : 'حیوانات');
                       context.pushNamed(Routes.gameSetup);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(

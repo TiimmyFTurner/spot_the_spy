@@ -62,6 +62,8 @@
   "newGameQuestion": "بازی جدید ؟",
   "wordGuessedQuestion": "کلمه حدس زده شد؟",
   "spyCaughtQuestion": "جاسوس پیدا شد؟",
-  "yes": "Yes",
-  "no": "No"
+  "yes": "بله",
+  "no": "خیر",
+  "categoryCountError": "برای این بازی حداقل به یک دسته بندی نیاز دارید."
+
 }

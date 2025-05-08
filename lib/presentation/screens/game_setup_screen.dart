@@ -25,6 +25,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
         locale == L10n.en
             ? categoriesEN.keys.toList()
             : categoriesFA.keys.toList();
+    List<String> selectedCategories = ref.watch(categoryProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,72 +36,25 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(child: Container()),
+              Text(
+                AppLocalizations.of(context)!.category,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              MultiCategorySelector(
+                allCategories: categories,
+                selected: selectedCategories,
+                onSelectionChanged: (selectedList) {
+                  ref.read(categoryProvider.notifier).set(selectedList);
+                },
+              ),
+              SizedBox(height: 20),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: AppLocalizations.of(context)!.category,
-                      ),
-                      value: ref.watch(categoryProvider),
-                      items:
-                          categories.map<DropdownMenuItem<String>>((
-                            String category,
-                          ) {
-                            return DropdownMenuItem<String>(
-                              value: category,
-                              child: Center(
-                                child: Text(
-                                  category,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                      onChanged: (String? newValue) {
-                        ref.read(categoryProvider.notifier).set(newValue!);
-                      },
-                    ),
-                  ),
-                  SizedBox(width: 15),
-                  Expanded(
-                    flex: 2,
-                    child: DropdownButtonFormField<int>(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: AppLocalizations.of(context)!.spyCount,
-                      ),
-                      value: ref.watch(spyCountProvider),
-                      items:
-                          List.generate(
-                            (ref.read(playerNamesProvider).length ~/ 3) + 1,
-                            (index) => index + 1,
-                          ).map<DropdownMenuItem<int>>((int spyCount) {
-                            return DropdownMenuItem<int>(
-                              value: spyCount,
-                              child: Center(
-                                child: Text(
-                                  AppLocalizations.of(context)!.number(spyCount),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                      onChanged: (int? newValue) {
-                        ref.read(spyCountProvider.notifier).set(newValue!);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 15),
-              Row(
                 children: [
                   Expanded(
                     flex: 3,
@@ -129,7 +83,11 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                       },
                     ),
                   ),
-                  SizedBox(width: 15),
+                ],
+              ),
+              SizedBox(height: 15),
+              Row(
+                children: [
                   Expanded(
                     flex: 2,
                     child: DropdownButtonFormField<int>(
@@ -159,6 +117,37 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                       },
                     ),
                   ),
+                  SizedBox(width: 15),
+
+                  Expanded(
+                    flex: 2,
+                    child: DropdownButtonFormField<int>(
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        labelText: AppLocalizations.of(context)!.spyCount,
+                      ),
+                      value: ref.watch(spyCountProvider),
+                      items:
+                          List.generate(
+                            (ref.read(playerNamesProvider).length ~/ 3) + 1,
+                            (index) => index + 1,
+                          ).map<DropdownMenuItem<int>>((int spyCount) {
+                            return DropdownMenuItem<int>(
+                              value: spyCount,
+                              child: Center(
+                                child: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.number(spyCount),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                      onChanged: (int? newValue) {
+                        ref.read(spyCountProvider.notifier).set(newValue!);
+                      },
+                    ),
+                  ),
                 ],
               ),
               Expanded(child: Container()),
@@ -174,15 +163,32 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                     ),
                     onPressed: () {
                       HapticFeedback.lightImpact();
-                      List<String>? wordsList =
-                          locale == L10n.en
-                              ? categoriesEN[ref.read(categoryProvider)]
-                                  ?.toList()
-                              : categoriesFA[ref.read(categoryProvider)]
-                                  ?.toList();
-                      ref.read(playersProvider.notifier).set();
-                      ref.read(playersProvider.notifier).setRoles(wordsList);
-                      context.goNamed(Routes.roleReveal);
+                      //TODO: create word list with given categories
+                      if (ref.read(categoryProvider).isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              AppLocalizations.of(context)!.categoryCountError,
+                            ),
+                          ),
+                        );
+                      } else {
+                        print(selectedCategories);
+                        List<String> wordsList = [];
+                        for (var i = 0; i < selectedCategories.length; i++) {
+                          wordsList.addAll(
+                            (locale == L10n.en
+                                    ? categoriesEN[selectedCategories[i]]
+                                        ?.toList()
+                                    : categoriesFA[selectedCategories[i]]
+                                        ?.toList()) ??
+                                [],
+                          );
+                        }
+                        ref.read(playersProvider.notifier).set();
+                        ref.read(playersProvider.notifier).setRoles(wordsList);
+                        context.goNamed(Routes.roleReveal);
+                      }
                     },
                   ),
                 ),
@@ -191,6 +197,43 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class MultiCategorySelector extends StatelessWidget {
+  final List<String> allCategories;
+  final List<String> selected;
+  final Function(List<String>) onSelectionChanged;
+
+  const MultiCategorySelector({
+    super.key,
+    required this.allCategories,
+    required this.selected,
+    required this.onSelectionChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 8,
+      children:
+          allCategories.map((category) {
+            final isSelected = selected.contains(category);
+            return FilterChip(
+              label: Text(category),
+              selected: isSelected,
+              onSelected: (bool selectedNow) {
+                final newSelected = [...selected];
+                if (selectedNow) {
+                  newSelected.add(category);
+                } else {
+                  newSelected.remove(category);
+                }
+                onSelectionChanged(newSelected);
+              },
+            );
+          }).toList(),
     );
   }
 }

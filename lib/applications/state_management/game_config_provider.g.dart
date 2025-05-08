@@ -6,11 +6,11 @@ part of 'game_config_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$categoryHash() => r'66ca96b2535b02e1ad89a6db3a432c719652994a';
+String _$categoryHash() => r'ac44d6dfcc3f42f46710208c89bf977708ae8087';
 
 /// See also [Category].
 @ProviderFor(Category)
-final categoryProvider = NotifierProvider<Category, String>.internal(
+final categoryProvider = NotifierProvider<Category, List<String>>.internal(
   Category.new,
   name: r'categoryProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final categoryProvider = NotifierProvider<Category, String>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef _$Category = Notifier<String>;
+typedef _$Category = Notifier<List<String>>;
 String _$timeHash() => r'84428187314c070d637612c62cf7d484a38feb1e';
 
 /// See also [Time].

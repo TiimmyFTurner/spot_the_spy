@@ -6,9 +6,9 @@ part 'game_config_provider.g.dart';
 @Riverpod(keepAlive: true)
 class Category extends _$Category {
   @override
-  String build() => '';
+  List<String> build() => [];
 
-  void set(String value) => state = value;
+  void set(List<String> value) => state = value;
 }
 
 // --- Time Provider ---

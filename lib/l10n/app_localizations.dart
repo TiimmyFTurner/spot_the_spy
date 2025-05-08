@@ -352,6 +352,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No'**
   String get no;
+
+  /// No description provided for @categoryCountError.
+  ///
+  /// In en, this message translates to:
+  /// **'You need at least 1 category to play the game.'**
+  String get categoryCountError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

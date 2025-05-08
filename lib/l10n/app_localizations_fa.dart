@@ -164,8 +164,11 @@ class AppLocalizationsFa extends AppLocalizations {
   String get spyCaughtQuestion => 'جاسوس پیدا شد؟';
 
   @override
-  String get yes => 'Yes';
+  String get yes => 'بله';
 
   @override
-  String get no => 'No';
+  String get no => 'خیر';
+
+  @override
+  String get categoryCountError => 'برای این بازی حداقل به یک دسته بندی نیاز دارید.';
 }

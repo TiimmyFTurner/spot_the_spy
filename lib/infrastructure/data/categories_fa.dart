@@ -1,6 +1,7 @@
 import 'words_fa.dart';
 
 Map<String, List<String>> categoriesFA = {
+  'مکان ها': places,
   'حیوانات': animals,
   'شهرها': cities,
   'غذاها و نوشیدنی‌ها': foodAndDrinks,
