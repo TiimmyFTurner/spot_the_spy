@@ -174,7 +174,6 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                           ),
                         );
                       } else {
-                        print(selectedCategories);
                         List<String> wordsList = [];
                         for (var i = 0; i < selectedCategories.length; i++) {
                           wordsList.addAll(

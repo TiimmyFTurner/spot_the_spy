@@ -39,7 +39,9 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text(AppLocalizations.of(context)!.newGameQuestion),
+                      title: Text(
+                        AppLocalizations.of(context)!.newGameQuestion,
+                      ),
                       actions: <Widget>[
                         TextButton(
                           onPressed: context.pop,
@@ -140,12 +142,20 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
                         ref.invalidate(currentRoundProvider);
                         context.goNamed(Routes.home);
                       } else {
-                        List<String>? wordsList =
-                            locale == L10n.en
-                                ? categoriesEN[ref.read(categoryProvider)]
-                                    ?.toList()
-                                : categoriesFA[ref.read(categoryProvider)]
-                                    ?.toList();
+                        List<String> selectedCategories = ref.watch(
+                          categoryProvider,
+                        );
+                        List<String> wordsList = [];
+                        for (var i = 0; i < selectedCategories.length; i++) {
+                          wordsList.addAll(
+                            (locale == L10n.en
+                                    ? categoriesEN[selectedCategories[i]]
+                                        ?.toList()
+                                    : categoriesFA[selectedCategories[i]]
+                                        ?.toList()) ??
+                                [],
+                          );
+                        }
                         ref.read(playersProvider.notifier).setRoles(wordsList);
                         ref.read(currentRoundProvider.notifier).next();
                         context.goNamed(Routes.roleReveal);
