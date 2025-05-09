@@ -273,8 +273,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 ),
               ),
               Expanded(child: Container()),
-              SizedBox(height: godMode ? 100 : 48),
-
+              SizedBox(height: godMode ? 88 : 40),
             ],
           ),
         ),
