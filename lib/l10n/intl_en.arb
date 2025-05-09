@@ -65,5 +65,11 @@
   "yes": "Yes",
   "no": "No",
   "categoryCountError": "You need at least 1 category to play the game.",
-  "selectAll": "Select All"
+  "selectAll": "Select All",
+  "secretWord": "Secret Word",
+  "spies": "Spies",
+  "godMode" : "God Mode",
+  "activateGodMode": "Activate God Mode?",
+  "deactivateGodMode": "Deactivate God Mode?",
+  "godModeDescription": "God Mode lets you view secret words and spy identities. Useful for moderators."
 }

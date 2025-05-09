@@ -19,6 +19,7 @@ class GamePlayScreen extends ConsumerStatefulWidget {
 class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   late Duration remaining;
   Timer? timer;
+  bool godMode = false;
 
   @override
   void initState() {
@@ -45,7 +46,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   }
 
   void onTimeout() {
-    AudioPlayer().play(AssetSource('sounds/alarm.mp3'),volume: 1);
+    AudioPlayer().play(AssetSource('sounds/alarm.mp3'), volume: 1);
     int spyScore = ref.read(timeProvider) ~/ 2 + 1;
     ref
         .read(playersProvider.notifier)
@@ -76,13 +77,53 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     final timeText =
         '${remaining.inMinutes.toString().padLeft(2, '0')}:${(remaining.inSeconds % 60).toString().padLeft(2, '0')}';
 
+    List<String> spyNamesList =
+        ref
+            .read(playersProvider)
+            .where((player) => player.isSpy)
+            .map((player) => player.name)
+            .toList();
     return PopScope(
       canPop: false,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("${AppLocalizations.of(context)!.round} ${AppLocalizations.of(context)!.number(ref.read(currentRoundProvider))}"),
+          title: Text(
+            "${AppLocalizations.of(context)!.round} ${AppLocalizations.of(context)!.number(ref.read(currentRoundProvider))}",
+          ),
           centerTitle: true,
           actions: [
+            IconButton(
+              icon: Icon(godMode ? Icons.visibility : Icons.visibility_off),
+              tooltip:   AppLocalizations.of(context)!.godMode,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(
+                        godMode ? AppLocalizations.of(context)!.deactivateGodMode : AppLocalizations.of(context)!.activateGodMode ,
+                      ),
+                      content: Text(AppLocalizations.of(context)!.godModeDescription),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: context.pop,
+                          child: Text(AppLocalizations.of(context)!.no),
+                        ),
+                        TextButton(
+                          child: Text(AppLocalizations.of(context)!.yes),
+                          onPressed: () {
+                            setState(() {
+                              godMode = !godMode;
+                            });
+                            context.pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
             IconButton(
               icon: const Icon(Icons.fiber_new),
               onPressed: () {
@@ -117,8 +158,8 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
         body: SafeArea(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                spacing: 8,
                 children: [
                   Chip(
                     avatar: Icon(Icons.person_pin, size: 20),
@@ -126,15 +167,58 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                       '${AppLocalizations.of(context)!.spyCount}: ${AppLocalizations.of(context)!.number(ref.watch(spyCountProvider))}',
                     ),
                   ),
-                  SizedBox(width: 8),
+                  // SizedBox(width: 8),
                   Chip(
                     avatar: Icon(Icons.timer, size: 20),
                     label: Text(
                       '${AppLocalizations.of(context)!.time}: ${AppLocalizations.of(context)!.number(ref.watch(timeProvider))}"',
                     ),
                   ),
+                  if (godMode)
+                    Chip(
+                      avatar: Icon(Icons.security, size: 20),
+                      label: Text(
+                        "${AppLocalizations.of(context)!.secretWord}: ${ref.read(theWordProvider)}",
+                      ),
+                    ),
                 ],
               ),
+              if (godMode)
+                Text(
+                  AppLocalizations.of(context)!.spies,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              if (godMode)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Wrap(
+                    spacing: 8,
+                    children: [
+                      ...spyNamesList.map((name) {
+                        return Chip(label: Text(name));
+                      }),
+                    ],
+                  ),
+                ),
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Chip(
+              //       avatar: Icon(Icons.person_pin, size: 20),
+              //       label: Text(
+              //         '${AppLocalizations.of(context)!.spyCount}: ${AppLocalizations.of(context)!.number(ref.watch(spyCountProvider))}',
+              //       ),
+              //     ),
+              //     SizedBox(width: 8),
+              //     Chip(
+              //       avatar: Icon(Icons.timer, size: 20),
+              //       label: Text(
+              //         '${AppLocalizations.of(context)!.time}: ${AppLocalizations.of(context)!.number(ref.watch(timeProvider))}"',
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Expanded(child: Container()),
               Text(
                 AppLocalizations.of(context)!.remainingTime,
@@ -222,4 +306,3 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     );
   }
 }
-

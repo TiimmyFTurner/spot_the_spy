@@ -174,4 +174,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectAll => 'Select All';
+
+  @override
+  String get secretWord => 'Secret Word';
+
+  @override
+  String get spies => 'Spies';
+
+  @override
+  String get godMode => 'God Mode';
+
+  @override
+  String get activateGodMode => 'Activate God Mode?';
+
+  @override
+  String get deactivateGodMode => 'Deactivate God Mode?';
+
+  @override
+  String get godModeDescription => 'God Mode lets you view secret words and spy identities. Useful for moderators.';
 }

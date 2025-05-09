@@ -364,6 +364,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select All'**
   String get selectAll;
+
+  /// No description provided for @secretWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Secret Word'**
+  String get secretWord;
+
+  /// No description provided for @spies.
+  ///
+  /// In en, this message translates to:
+  /// **'Spies'**
+  String get spies;
+
+  /// No description provided for @godMode.
+  ///
+  /// In en, this message translates to:
+  /// **'God Mode'**
+  String get godMode;
+
+  /// No description provided for @activateGodMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate God Mode?'**
+  String get activateGodMode;
+
+  /// No description provided for @deactivateGodMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate God Mode?'**
+  String get deactivateGodMode;
+
+  /// No description provided for @godModeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'God Mode lets you view secret words and spy identities. Useful for moderators.'**
+  String get godModeDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

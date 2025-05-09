@@ -174,4 +174,22 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get selectAll => 'انتخاب همه';
+
+  @override
+  String get secretWord => 'کلمهٔ مخفی';
+
+  @override
+  String get spies => 'جاسوس ها';
+
+  @override
+  String get godMode => 'God Mode';
+
+  @override
+  String get activateGodMode => 'فعال‌سازی حالت خدا؟';
+
+  @override
+  String get deactivateGodMode => 'غیرفعال‌سازی حالت خدا؟';
+
+  @override
+  String get godModeDescription => 'در حالت خدا می‌توانید کلمات مخفی و جاسوس‌ها را ببینید. مناسب برای ناظران.';
 }
