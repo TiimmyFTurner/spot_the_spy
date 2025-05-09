@@ -400,6 +400,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'God Mode lets you view secret words and spy identities. Useful for moderators.'**
   String get godModeDescription;
+
+  /// No description provided for @duplicatePlayerNameError.
+  ///
+  /// In en, this message translates to:
+  /// **'This player already exists.'**
+  String get duplicatePlayerNameError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

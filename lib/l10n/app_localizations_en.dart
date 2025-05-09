@@ -192,4 +192,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get godModeDescription => 'God Mode lets you view secret words and spy identities. Useful for moderators.';
+
+  @override
+  String get duplicatePlayerNameError => 'This player already exists.';
 }

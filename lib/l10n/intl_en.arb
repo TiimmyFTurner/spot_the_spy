@@ -71,5 +71,6 @@
   "godMode" : "God Mode",
   "activateGodMode": "Activate God Mode?",
   "deactivateGodMode": "Deactivate God Mode?",
-  "godModeDescription": "God Mode lets you view secret words and spy identities. Useful for moderators."
+  "godModeDescription": "God Mode lets you view secret words and spy identities. Useful for moderators.",
+  "duplicatePlayerNameError": "This player already exists."
 }

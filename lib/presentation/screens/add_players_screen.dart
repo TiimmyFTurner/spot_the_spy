@@ -3,12 +3,10 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
-import 'package:spot_the_spy/l10n/l10n.dart';
 
 class AddPlayersScreen extends ConsumerStatefulWidget {
   const AddPlayersScreen({super.key});
@@ -22,10 +20,21 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
   String _name = '';
 
   void _addPlayer([_]) {
-    if (_name != '' && !ref.read(playerNamesProvider).contains(_name)) {
-      ref.read(playerNamesProvider.notifier).addPlayer(_name);
-      _name = '';
-      _controller.clear();
+    if (_name != '') {
+      String name = _name[0].toUpperCase() + _name.substring(1);
+      if (!ref.read(playerNamesProvider).contains(name)) {
+        ref.read(playerNamesProvider.notifier).addPlayer(name);
+        _name = '';
+        _controller.clear();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.duplicatePlayerNameError,
+            ),
+          ),
+        );
+      }
     }
   }
 

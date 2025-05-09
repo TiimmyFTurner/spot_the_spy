@@ -192,4 +192,7 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get godModeDescription => 'در حالت خدا می‌توانید کلمات مخفی و جاسوس‌ها را ببینید. مناسب برای ناظران.';
+
+  @override
+  String get duplicatePlayerNameError => 'این بازیکن قبلاً اضافه شده است.';
 }
