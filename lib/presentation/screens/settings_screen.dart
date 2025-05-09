@@ -201,7 +201,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           const SizedBox(height: 36),
           const Text(
-            "Spot the Spy 0.0.0",
+            "Spot the Spy 1.1.1",
             style: TextStyle(color: Colors.grey),
           ),
           const Text(
