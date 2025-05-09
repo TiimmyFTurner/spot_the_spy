@@ -174,7 +174,4 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get selectAll => 'انتخاب همه';
-
-  @override
-  String get unselectAll => 'لغو انتخاب همه';
 }

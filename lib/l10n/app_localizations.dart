@@ -364,12 +364,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select All'**
   String get selectAll;
-
-  /// No description provided for @unselectAll.
-  ///
-  /// In en, this message translates to:
-  /// **'Unselect All'**
-  String get unselectAll;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
