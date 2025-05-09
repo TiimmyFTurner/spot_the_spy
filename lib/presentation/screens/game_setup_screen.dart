@@ -51,6 +51,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                           allCategories: categories,
                           selected: selectedCategories,
                           onSelectionChanged: (selectedList) {
+                            HapticFeedback.lightImpact();
                             ref
                                 .read(categoryProvider.notifier)
                                 .set(selectedList);
@@ -272,7 +273,7 @@ class MultiCategorySelector extends StatelessWidget {
               onSelectionChanged(newSelected);
             },
           );
-        }).toList(),
+        }),
       ],
     );
   }
