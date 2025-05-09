@@ -19,6 +19,7 @@ class ScoreBoardScreen extends ConsumerStatefulWidget {
 }
 
 class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
+
   @override
   Widget build(BuildContext context) {
     Locale locale = Localizations.localeOf(context);
@@ -79,8 +80,7 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
                   Chip(
                     avatar: Icon(Icons.security, size: 20),
                     label: Text(
-                      AppLocalizations.of(context)!.theSecretWordIs +
-                          ref.read(theWordProvider),
+                      "${AppLocalizations.of(context)!.secretWord}: ${ref.read(theWordProvider)}",
                     ),
                   ),
                 ],
