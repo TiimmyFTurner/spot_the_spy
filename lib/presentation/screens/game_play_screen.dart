@@ -94,16 +94,20 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
           actions: [
             IconButton(
               icon: Icon(godMode ? Icons.visibility : Icons.visibility_off),
-              tooltip:   AppLocalizations.of(context)!.godMode,
+              tooltip: AppLocalizations.of(context)!.godMode,
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text(
-                        godMode ? AppLocalizations.of(context)!.deactivateGodMode : AppLocalizations.of(context)!.activateGodMode ,
+                        godMode
+                            ? AppLocalizations.of(context)!.deactivateGodMode
+                            : AppLocalizations.of(context)!.activateGodMode,
                       ),
-                      content: Text(AppLocalizations.of(context)!.godModeDescription),
+                      content: Text(
+                        AppLocalizations.of(context)!.godModeDescription,
+                      ),
                       actions: <Widget>[
                         TextButton(
                           onPressed: context.pop,
@@ -162,13 +166,6 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 spacing: 8,
                 children: [
                   Chip(
-                    avatar: Icon(Icons.person_pin, size: 20),
-                    label: Text(
-                      '${AppLocalizations.of(context)!.spyCount}: ${AppLocalizations.of(context)!.number(ref.watch(spyCountProvider))}',
-                    ),
-                  ),
-                  // SizedBox(width: 8),
-                  Chip(
                     avatar: Icon(Icons.timer, size: 20),
                     label: Text(
                       '${AppLocalizations.of(context)!.time}: ${AppLocalizations.of(context)!.number(ref.watch(timeProvider))}"',
@@ -181,44 +178,21 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                         "${AppLocalizations.of(context)!.secretWord}: ${ref.read(theWordProvider)}",
                       ),
                     ),
+                  Chip(
+                    avatar: Icon(Icons.person_pin, size: 20),
+                    label: Text(
+                      '${AppLocalizations.of(context)!.spyCount}: ${AppLocalizations.of(context)!.number(ref.watch(spyCountProvider))}',
+                    ),
+                  ),
+                  if (godMode)
+                    ...spyNamesList.map((name) {
+                      return Chip(
+                        avatar: Icon(Icons.person, size: 20),
+                        label: Text(name),
+                      );
+                    }),
                 ],
               ),
-              if (godMode)
-                Text(
-                  AppLocalizations.of(context)!.spies,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              if (godMode)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                  child: Wrap(
-                    spacing: 8,
-                    children: [
-                      ...spyNamesList.map((name) {
-                        return Chip(label: Text(name));
-                      }),
-                    ],
-                  ),
-                ),
-
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Chip(
-              //       avatar: Icon(Icons.person_pin, size: 20),
-              //       label: Text(
-              //         '${AppLocalizations.of(context)!.spyCount}: ${AppLocalizations.of(context)!.number(ref.watch(spyCountProvider))}',
-              //       ),
-              //     ),
-              //     SizedBox(width: 8),
-              //     Chip(
-              //       avatar: Icon(Icons.timer, size: 20),
-              //       label: Text(
-              //         '${AppLocalizations.of(context)!.time}: ${AppLocalizations.of(context)!.number(ref.watch(timeProvider))}"',
-              //       ),
-              //     ),
-              //   ],
-              // ),
               Expanded(child: Container()),
               Text(
                 AppLocalizations.of(context)!.remainingTime,
@@ -299,6 +273,8 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 ),
               ),
               Expanded(child: Container()),
+              SizedBox(height: godMode ? 100 : 48),
+
             ],
           ),
         ),
