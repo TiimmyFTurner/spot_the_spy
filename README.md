@@ -40,7 +40,7 @@ A thrilling **word-based party game** where players must find the spy before tim
 ### Installation
 
 ```bash  
-git clone https://github.com/your-username/spot-the-spy.git
+git clone https://github.com/TiimmyFTurner/spot_the_spy.git
 cd spot-the-spy
 flutter pub get
 flutter run
