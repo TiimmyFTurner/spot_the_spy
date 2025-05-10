@@ -195,4 +195,13 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get duplicatePlayerNameError => 'این بازیکن قبلاً اضافه شده است.';
+
+  @override
+  String get spyWrongGuessPenalty => 'اگر جاسوس کلمه را اشتباه حدس بزند، ۲ امتیاز از دست می‌دهد و از پاداش تیم جاسوس‌ها محروم می‌شود.';
+
+  @override
+  String get wrongGuess => 'حدس اشتباه';
+
+  @override
+  String get punishSpyQuestion => 'این جاسوس را جریمه میکنید؟';
 }

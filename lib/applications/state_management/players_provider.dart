@@ -66,11 +66,18 @@ class Players extends _$Players {
     state = players;
   }
 
-  void setScores({required int spyScore, required int nonSpyScore}){
+  void setScores({
+    required int spyScore,
+    required int nonSpyScore,
+    List<Player> excludePlayers = const [],
+  }) {
     List<Player> players = state;
     for (var i = 0; i < players.length; i++) {
       if (players[i].isSpy) {
-        players[i] = players[i].copyWith(score: players[i].score + spyScore);
+        players[i] =
+            excludePlayers.contains(players[i])
+                ? players[i].copyWith(score: players[i].score - 2)
+                : players[i].copyWith(score: players[i].score + spyScore);
       } else {
         players[i] = players[i].copyWith(score: players[i].score + nonSpyScore);
       }
@@ -78,5 +85,3 @@ class Players extends _$Players {
     state = players;
   }
 }
-
-

@@ -2,10 +2,13 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
+import 'package:spot_the_spy/domain/data_models/player_model.dart';
+import 'package:spot_the_spy/infrastructure/data/words_en.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
 
@@ -20,6 +23,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   late Duration remaining;
   Timer? timer;
   bool godMode = false;
+  List<Player> punishPlayers = [];
 
   @override
   void initState() {
@@ -50,7 +54,11 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     int spyScore = ref.read(timeProvider) ~/ 2 + 1;
     ref
         .read(playersProvider.notifier)
-        .setScores(spyScore: spyScore, nonSpyScore: 0);
+        .setScores(
+          spyScore: spyScore,
+          nonSpyScore: 0,
+          excludePlayers: punishPlayers,
+        );
     context.goNamed(Routes.scoreBoard);
   }
 
@@ -59,7 +67,11 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     nonSpyScore++;
     ref
         .read(playersProvider.notifier)
-        .setScores(spyScore: 0, nonSpyScore: nonSpyScore);
+        .setScores(
+          spyScore: 0,
+          nonSpyScore: nonSpyScore,
+          excludePlayers: punishPlayers,
+        );
     context.goNamed(Routes.scoreBoard);
   }
 
@@ -68,7 +80,11 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     spyScore += 2;
     ref
         .read(playersProvider.notifier)
-        .setScores(spyScore: spyScore, nonSpyScore: 0);
+        .setScores(
+          spyScore: spyScore,
+          nonSpyScore: 0,
+          excludePlayers: punishPlayers,
+        );
     context.goNamed(Routes.scoreBoard);
   }
 
@@ -83,6 +99,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
             .where((player) => player.isSpy)
             .map((player) => player.name)
             .toList();
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -187,6 +204,12 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                   if (godMode)
                     ...spyNamesList.map((name) {
                       return Chip(
+                        // backgroundColor:
+                        // punishPlayers.contains(name)
+                        //     ? Theme.of(
+                        //   context,
+                        // ).colorScheme.errorContainer
+                        //     : null,
                         avatar: Icon(Icons.person, size: 20),
                         label: Text(name),
                       );
@@ -207,39 +230,6 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 ),
               ),
               SizedBox(height: 20),
-              SizedBox(
-                height: 54,
-                width: MediaQuery.of(context).size.width / 1.4,
-                child: FilledButton.tonal(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(
-                            AppLocalizations.of(context)!.wordGuessedQuestion,
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: context.pop,
-                              child: Text(AppLocalizations.of(context)!.no),
-                            ),
-                            TextButton(
-                              onPressed: onWordGuessed,
-                              child: Text(AppLocalizations.of(context)!.yes),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.wordGuessed,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-              SizedBox(height: 12),
               SizedBox(
                 height: 54,
                 width: MediaQuery.of(context).size.width / 1.4,
@@ -272,12 +262,168 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 12),
+              SizedBox(
+                height: 54,
+                width: MediaQuery.of(context).size.width / 1.4,
+                child: FilledButton.tonal(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            AppLocalizations.of(context)!.wordGuessedQuestion,
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: context.pop,
+                              child: Text(AppLocalizations.of(context)!.no),
+                            ),
+                            TextButton(
+                              onPressed: onWordGuessed,
+                              child: Text(AppLocalizations.of(context)!.yes),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Text(
+                    AppLocalizations.of(context)!.wordGuessed,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+              if (godMode) SizedBox(height: 12),
+              if (godMode)
+                SizedBox(
+                  height: 54,
+                  width: MediaQuery.of(context).size.width / 1.4,
+                  child: FilledButton.tonal(
+                    onPressed: spyPunishmentBottomSheet,
+                    child: Text(
+                      AppLocalizations.of(context)!.wrongGuess,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+
               Expanded(child: Container()),
-              SizedBox(height: godMode ? 88 : 40),
+              SizedBox(height: godMode ? 80 : 40),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void spyPunishmentBottomSheet() {
+    List<Player> spies =
+        ref
+            .read(playersProvider)
+            .where((player) => player.isSpy)
+            .map((player) => player)
+            .toList();
+    showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      builder:
+          (builder) => SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        subtitle: Text(
+                          AppLocalizations.of(context)!.spyWrongGuessPenalty,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Expanded(
+                        child: GridView.count(
+                          crossAxisCount: 2,
+                          childAspectRatio: (3 / 1),
+                          children: List.generate(spies.length, (index) {
+                            return InkWell(
+                              borderRadius: BorderRadius.circular(16),
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.punishSpyQuestion,
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: context.pop,
+                                          child: Text(
+                                            AppLocalizations.of(context)!.no,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            if (!punishPlayers.contains(
+                                              spies[index],
+                                            )) {
+                                              punishPlayers.add(spies[index]);
+                                            }
+                                            context.pop();
+                                            context.pop();
+                                          },
+                                          child: Text(
+                                            AppLocalizations.of(context)!.yes,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              child: Card(
+                                color:
+                                    punishPlayers.contains(spies[index])
+                                        ? Theme.of(
+                                          context,
+                                        ).colorScheme.errorContainer
+                                        : null,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                  ),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.person,
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.primary,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        spies[index].name,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
     );
   }
 }

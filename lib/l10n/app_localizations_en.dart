@@ -195,4 +195,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get duplicatePlayerNameError => 'This player already exists.';
+
+  @override
+  String get spyWrongGuessPenalty => 'If a spy guesses the word and gets it wrong, they lose 2 points and are excluded from the spy team\'s reward.';
+
+  @override
+  String get wrongGuess => 'Wrong Guess';
+
+  @override
+  String get punishSpyQuestion => 'Punish this spy?';
 }

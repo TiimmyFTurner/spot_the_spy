@@ -72,5 +72,8 @@
   "activateGodMode": "Activate God Mode?",
   "deactivateGodMode": "Deactivate God Mode?",
   "godModeDescription": "God Mode lets you view secret words and spy identities. Useful for moderators.",
-  "duplicatePlayerNameError": "This player already exists."
+  "duplicatePlayerNameError": "This player already exists.",
+  "spyWrongGuessPenalty": "If a spy guesses the word and gets it wrong, they lose 2 points and are excluded from the spy team''s reward.",
+  "wrongGuess": "Wrong Guess",
+  "punishSpyQuestion": "Punish this spy?"
 }

@@ -406,6 +406,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This player already exists.'**
   String get duplicatePlayerNameError;
+
+  /// No description provided for @spyWrongGuessPenalty.
+  ///
+  /// In en, this message translates to:
+  /// **'If a spy guesses the word and gets it wrong, they lose 2 points and are excluded from the spy team\'\'s reward.'**
+  String get spyWrongGuessPenalty;
+
+  /// No description provided for @wrongGuess.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong Guess'**
+  String get wrongGuess;
+
+  /// No description provided for @punishSpyQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Punish this spy?'**
+  String get punishSpyQuestion;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

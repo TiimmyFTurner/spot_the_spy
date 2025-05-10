@@ -71,5 +71,8 @@
   "activateGodMode": "فعال‌سازی حالت خدا؟",
   "deactivateGodMode": "غیرفعال‌سازی حالت خدا؟",
   "godModeDescription": "در حالت خدا می‌توانید کلمات مخفی و جاسوس‌ها را ببینید. مناسب برای ناظران.",
-  "duplicatePlayerNameError": "این بازیکن قبلاً اضافه شده است."
+  "duplicatePlayerNameError": "این بازیکن قبلاً اضافه شده است.",
+  "spyWrongGuessPenalty": "اگر جاسوس کلمه را اشتباه حدس بزند، ۲ امتیاز از دست می‌دهد و از پاداش تیم جاسوس‌ها محروم می‌شود.",
+  "wrongGuess": "حدس اشتباه",
+  "punishSpyQuestion": "این جاسوس را جریمه میکنید؟"
 }
