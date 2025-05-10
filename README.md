@@ -4,17 +4,17 @@
 
 A thrilling **word-based party game** where players must find the spy before time runs out! Built with Flutter, this game blends strategy, bluffing, and deduction — perfect for parties, classrooms, and friend groups.
   
----  
+
 
 ## 🎮 Gameplay
 
-- Players are given the same secret word — except one.
+- Players are given the same secret word — except spies.
 - The spy must blend in and guess the word.
 - Players take turns asking and answering questions to find the odd one out.
 - At the end of the round, vote on who you think the spy is!
 - Scoring adjusts based on outcome and time taken.
 
----  
+
 
 ## ✨ Features
 
@@ -27,7 +27,7 @@ A thrilling **word-based party game** where players must find the spy before tim
 - ❌ **Spy Penalty**: Penalize wrong guesses (-2 points and no win bonus).
 - 🌐 **Multilingual**: Supports English and Persian (فارسی).
 
----  
+
 
 
 ## 🚀 Getting Started
