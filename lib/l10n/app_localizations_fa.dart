@@ -204,4 +204,13 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get punishSpyQuestion => 'این جاسوس را جریمه میکنید؟';
+
+  @override
+  String get alreadyPunishedMessage => 'این جاسوس قبلاً تنبیه شده است.';
+
+  @override
+  String get alreadyPunished => 'تنبیه شده است';
+
+  @override
+  String get spyPunished => 'جاسوس تنبیه شد.';
 }

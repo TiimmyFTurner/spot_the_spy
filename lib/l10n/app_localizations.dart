@@ -424,6 +424,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Punish this spy?'**
   String get punishSpyQuestion;
+
+  /// No description provided for @alreadyPunishedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This spy has already been punished.'**
+  String get alreadyPunishedMessage;
+
+  /// No description provided for @alreadyPunished.
+  ///
+  /// In en, this message translates to:
+  /// **'Already punished'**
+  String get alreadyPunished;
+
+  /// No description provided for @spyPunished.
+  ///
+  /// In en, this message translates to:
+  /// **'Spy was punished.'**
+  String get spyPunished;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

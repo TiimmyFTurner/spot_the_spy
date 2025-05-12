@@ -74,5 +74,8 @@
   "duplicatePlayerNameError": "این بازیکن قبلاً اضافه شده است.",
   "spyWrongGuessPenalty": "اگر جاسوس کلمه را اشتباه حدس بزند، ۲ امتیاز از دست می‌دهد و از پاداش تیم جاسوس‌ها محروم می‌شود.",
   "wrongGuess": "حدس اشتباه",
-  "punishSpyQuestion": "این جاسوس را جریمه میکنید؟"
+  "punishSpyQuestion": "این جاسوس را جریمه میکنید؟",
+  "alreadyPunishedMessage": "این جاسوس قبلاً تنبیه شده است.",
+  "alreadyPunished": "تنبیه شده است",
+  "spyPunished": "جاسوس تنبیه شد."
 }

@@ -75,5 +75,8 @@
   "duplicatePlayerNameError": "This player already exists.",
   "spyWrongGuessPenalty": "If a spy guesses the word and gets it wrong, they lose 2 points and are excluded from the spy team''s reward.",
   "wrongGuess": "Wrong Guess",
-  "punishSpyQuestion": "Punish this spy?"
+  "punishSpyQuestion": "Punish this spy?",
+  "alreadyPunishedMessage": "This spy has already been punished.",
+  "alreadyPunished": "Already punished",
+  "spyPunished": "Spy was punished."
 }

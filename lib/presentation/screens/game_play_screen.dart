@@ -2,13 +2,11 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/domain/data_models/player_model.dart';
-import 'package:spot_the_spy/infrastructure/data/words_en.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
 
@@ -28,9 +26,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   @override
   void initState() {
     super.initState();
-    // Fetch duration from Riverpod provider
     remaining = Duration(minutes: ref.read(timeProvider));
-
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (remaining.inSeconds == 0) {
         timer?.cancel();
@@ -349,6 +345,37 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                             return InkWell(
                               borderRadius: BorderRadius.circular(16),
                               onTap: () {
+                                if (punishPlayers.contains(spies[index])) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.alreadyPunished,
+                                        ),
+                                        content: Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.alreadyPunishedMessage,
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: context.pop,
+                                            child: Text(
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.confirm,
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  return;
+                                }
+
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -367,13 +394,26 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                                         ),
                                         TextButton(
                                           onPressed: () {
-                                            if (!punishPlayers.contains(
-                                              spies[index],
-                                            )) {
-                                              punishPlayers.add(spies[index]);
+                                            punishPlayers.add(spies[index]);
+                                            context.pop();
+                                            context.pop();
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                content: Text(
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.spyPunished,
+                                                ),
+                                              ),
+                                            );
+                                            if (punishPlayers.length ==
+                                                spies.length) {
+                                              onSpyCaught();
                                             }
-                                            context.pop();
-                                            context.pop();
                                           },
                                           child: Text(
                                             AppLocalizations.of(context)!.yes,
