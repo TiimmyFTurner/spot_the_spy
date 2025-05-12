@@ -199,6 +199,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                       if (ref.read(categoryProvider).isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
+                            behavior: SnackBarBehavior.floating,
                             content: Text(
                               AppLocalizations.of(context)!.categoryCountError,
                             ),

@@ -29,6 +29,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
+            behavior: SnackBarBehavior.floating,
             content: Text(
               AppLocalizations.of(context)!.duplicatePlayerNameError,
             ),
@@ -131,6 +132,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
+                          behavior: SnackBarBehavior.floating,
                           content: Text(
                             AppLocalizations.of(context)!.playerCountError,
                           ),
