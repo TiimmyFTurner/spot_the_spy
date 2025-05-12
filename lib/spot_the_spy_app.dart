@@ -11,7 +11,6 @@ class SpotTheSpyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Locale locale = ref.watch(localeSettingProvider);
-    String? font = locale == L10n.fa ? 'Koodak' : null;
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

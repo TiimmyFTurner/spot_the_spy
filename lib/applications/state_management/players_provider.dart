@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
