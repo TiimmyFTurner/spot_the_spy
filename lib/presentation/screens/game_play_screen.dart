@@ -106,7 +106,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
           centerTitle: true,
           actions: [
             IconButton(
-              icon: Icon(godMode ? Icons.visibility : Icons.visibility_off),
+              icon: Icon(godMode ? Icons.visibility_off : Icons.visibility),
               tooltip: AppLocalizations.of(context)!.godMode,
               onPressed: () {
                 showDialog(
