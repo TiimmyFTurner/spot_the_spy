@@ -123,6 +123,15 @@ class _HowToPlayScreenState extends ConsumerState<HowToPlayScreen> {
             ),
           ),
         ),
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.info_outlined),
+            title: Text("Wrong guess"),
+            subtitle: Text(
+              "Spies who guess the secret word incorrectly will lose 2 points and won't receive any winning reward.",
+            ),
+          ),
+        ),
 
         SizedBox(height: 24),
 
@@ -237,6 +246,15 @@ class _HowToPlayScreenState extends ConsumerState<HowToPlayScreen> {
             title: Text("شناسایی جاسوس"),
             subtitle: Text(
               "سایر بازیکنان ۱ امتیاز دریافت می‌کنند به‌علاوه ۱ امتیاز اضافه برای هر دقیقه باقی‌مانده.",
+            ),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.info_outlined),
+            title: Text("حدس اشتباه"),
+            subtitle: Text(
+              "جاسوس‌هایی که کلمه مخفی را اشتباه حدس بزنند، ۲ امتیاز از دست می‌دهند و جایزه‌ی برد را دریافت نخواهند کرد.",
             ),
           ),
         ),
