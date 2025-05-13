@@ -21,6 +21,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
 
   void _addPlayer([_]) {
     if (_name != '') {
+      _name = _name.trim();
       String name = _name[0].toUpperCase() + _name.substring(1);
       if (!ref.read(playerNamesProvider).contains(name)) {
         ref.read(playerNamesProvider.notifier).addPlayer(name);
