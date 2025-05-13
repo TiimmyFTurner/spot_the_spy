@@ -77,5 +77,14 @@
   "punishSpyQuestion": "این جاسوس را جریمه میکنید؟",
   "alreadyPunishedMessage": "این جاسوس قبلاً تنبیه شده است.",
   "alreadyPunished": "تنبیه شده است",
-  "spyPunished": "جاسوس تنبیه شد."
+  "spyPunished": "جاسوس تنبیه شد.",
+  "customWords": "کلمات سفارشی",
+  "switchToCategories": "تغییر به دسته‌بندی‌ها",
+  "switchToCustomWords": "تغییر به کلمات سفارشی",
+  "addWord": "افزودن کلمه",
+  "enterWord": "کلمه را وارد کنید",
+  "add": "افزودن",
+  "emptyCustomWordsError": "برای شروع بازی باید حداقل یک کلمه وارد کنید.",
+  "emptyCustomWordsHint": "حداقل یک کلمه وارد کنید تا بتوانید بازی را شروع کنید.\nهرچه کلمات بیشتری وارد کنید، احتمال تکرار در دورهای بعدی کمتر می‌شود.",
+  "duplicateWordError": "این کلمه قبلاً اضافه شده است."
 }

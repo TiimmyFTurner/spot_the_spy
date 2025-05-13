@@ -213,4 +213,31 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get spyPunished => 'جاسوس تنبیه شد.';
+
+  @override
+  String get customWords => 'کلمات سفارشی';
+
+  @override
+  String get switchToCategories => 'تغییر به دسته‌بندی‌ها';
+
+  @override
+  String get switchToCustomWords => 'تغییر به کلمات سفارشی';
+
+  @override
+  String get addWord => 'افزودن کلمه';
+
+  @override
+  String get enterWord => 'کلمه را وارد کنید';
+
+  @override
+  String get add => 'افزودن';
+
+  @override
+  String get emptyCustomWordsError => 'برای شروع بازی باید حداقل یک کلمه وارد کنید.';
+
+  @override
+  String get emptyCustomWordsHint => 'حداقل یک کلمه وارد کنید تا بتوانید بازی را شروع کنید.\nهرچه کلمات بیشتری وارد کنید، احتمال تکرار در دورهای بعدی کمتر می‌شود.';
+
+  @override
+  String get duplicateWordError => 'این کلمه قبلاً اضافه شده است.';
 }

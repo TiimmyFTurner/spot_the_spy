@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spot_the_spy/applications/state_management/custom_words_provider.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/infrastructure/data/categories_en.dart';
@@ -27,6 +28,8 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
             : categoriesFA.keys.toList();
     List<String> selectedCategories = ref.watch(categoryProvider);
 
+    bool customWordActive = ref.watch(customWordsActiveProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.gameSetup),
@@ -41,24 +44,12 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      AppLocalizations.of(context)!.category,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Flexible(
-                      child: SingleChildScrollView(
-                        child: MultiCategorySelector(
-                          allCategories: categories,
-                          selected: selectedCategories,
-                          onSelectionChanged: (selectedList) {
-                            HapticFeedback.lightImpact();
-                            ref
-                                .read(categoryProvider.notifier)
-                                .set(selectedList);
-                          },
-                        ),
-                      ),
-                    ),
+                    customWordActive
+                        ? _customWordsWidget()[0]
+                        : _categoriesWidget(categories, selectedCategories)[0],
+                    customWordActive
+                        ? _customWordsWidget()[1]
+                        : _categoriesWidget(categories, selectedCategories)[1],
                     SizedBox(height: 20),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -183,7 +174,6 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                 ),
               ),
 
-              // Expanded(child: Container()),
               SizedBox(
                 height: 70,
                 width: MediaQuery.of(context).size.width,
@@ -196,30 +186,55 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                     ),
                     onPressed: () {
                       HapticFeedback.lightImpact();
-                      if (ref.read(categoryProvider).isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            content: Text(
-                              AppLocalizations.of(context)!.categoryCountError,
+                      if (customWordActive) {
+                        if (ref.read(customWordsProvider).isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(
+                                AppLocalizations.of(
+                                  context,
+                                )!.emptyCustomWordsError,
+                              ),
                             ),
-                          ),
-                        );
-                      } else {
-                        List<String> wordsList = [];
-                        for (var i = 0; i < selectedCategories.length; i++) {
-                          wordsList.addAll(
-                            (locale == L10n.en
-                                    ? categoriesEN[selectedCategories[i]]
-                                        ?.toList()
-                                    : categoriesFA[selectedCategories[i]]
-                                        ?.toList()) ??
-                                [],
                           );
+                        } else {
+                          ref.read(playersProvider.notifier).set();
+                          ref
+                              .read(playersProvider.notifier)
+                              .setRoles(ref.read(customWordsProvider));
+                          context.goNamed(Routes.roleReveal);
                         }
-                        ref.read(playersProvider.notifier).set();
-                        ref.read(playersProvider.notifier).setRoles(wordsList);
-                        context.goNamed(Routes.roleReveal);
+                      } else {
+                        if (ref.read(categoryProvider).isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(
+                                AppLocalizations.of(
+                                  context,
+                                )!.categoryCountError,
+                              ),
+                            ),
+                          );
+                        } else {
+                          List<String> wordsList = [];
+                          for (var i = 0; i < selectedCategories.length; i++) {
+                            wordsList.addAll(
+                              (locale == L10n.en
+                                      ? categoriesEN[selectedCategories[i]]
+                                          ?.toList()
+                                      : categoriesFA[selectedCategories[i]]
+                                          ?.toList()) ??
+                                  [],
+                            );
+                          }
+                          ref.read(playersProvider.notifier).set();
+                          ref
+                              .read(playersProvider.notifier)
+                              .setRoles(wordsList);
+                          context.goNamed(Routes.roleReveal);
+                        }
                       }
                     },
                   ),
@@ -229,6 +244,157 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  List<Widget> _customWordsWidget() {
+    return [
+      Row(
+        children: [
+          Text(
+            AppLocalizations.of(context)!.customWords,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          IconButton(
+            onPressed: _showAddWordDialog,
+            icon: Icon(Icons.add),
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          Expanded(child: Container()),
+          TextButton(
+            onPressed: () {
+              ref.read(customWordsActiveProvider.notifier).toggle();
+            },
+            child: Text(AppLocalizations.of(context)!.switchToCategories),
+          ),
+        ],
+      ),
+
+      Flexible(
+        child: SingleChildScrollView(
+          child:
+              ref.watch(customWordsProvider).isEmpty
+                  ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.emptyCustomWordsHint,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  )
+                  : Wrap(
+                    spacing: 8.0,
+                    children:
+                        ref.watch(customWordsProvider).map((word) {
+                          return Chip(
+                            label: Text(word),
+                            onDeleted: () {
+                              setState(
+                                () => ref
+                                    .read(customWordsProvider.notifier)
+                                    .removeWord(word),
+                              );
+                            },
+                          );
+                        }).toList(),
+                  ),
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> _categoriesWidget(categories, selectedCategories) {
+    return [
+      Row(
+        children: [
+          Text(
+            AppLocalizations.of(context)!.category,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+
+          Expanded(child: Container()),
+          TextButton(
+            onPressed: () {
+              ref.read(customWordsActiveProvider.notifier).toggle();
+            },
+            child: Text(AppLocalizations.of(context)!.switchToCustomWords),
+          ),
+        ],
+      ),
+
+      Flexible(
+        child: SingleChildScrollView(
+          child: MultiCategorySelector(
+            allCategories: categories,
+            selected: selectedCategories,
+            onSelectionChanged: (selectedList) {
+              HapticFeedback.lightImpact();
+              ref.read(categoryProvider.notifier).set(selectedList);
+            },
+          ),
+        ),
+      ),
+    ];
+  }
+
+  void _showAddWordDialog() {
+    final controller = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        String? error;
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text(AppLocalizations.of(context)!.addWord),
+              content: TextField(
+                controller: controller,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.enterWord,
+                  border: const OutlineInputBorder(),
+                  errorText: error,
+                ),
+                onChanged: (_) {
+                  setState(() {
+                    error = null;
+                  });
+                },
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(AppLocalizations.of(context)!.cancel),
+                ),
+                TextButton(
+                  onPressed: () {
+                    final input = controller.text.trim();
+                    if (input.isEmpty) return;
+
+                    final word = input[0].toUpperCase() + input.substring(1);
+
+                    if (ref.read(customWordsProvider).contains(word)) {
+                      setState(() {
+                        error =
+                            AppLocalizations.of(context)!.duplicateWordError;
+                      });
+                    } else {
+                      ref.read(customWordsProvider.notifier).addWord(word);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Text(AppLocalizations.of(context)!.add),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }

@@ -64,7 +64,7 @@
   "spyCaughtQuestion": "Spy Got Caught?",
   "yes": "Yes",
   "no": "No",
-  "categoryCountError": "You need at least 1 category to play the game.",
+  "categoryCountError": "You need at least one category to start the game.",
   "selectAll": "Select All",
   "secretWord": "Secret Word",
   "spies": "Spies",
@@ -78,5 +78,14 @@
   "punishSpyQuestion": "Punish this spy?",
   "alreadyPunishedMessage": "This spy has already been punished.",
   "alreadyPunished": "Already punished",
-  "spyPunished": "Spy was punished."
+  "spyPunished": "Spy was punished.",
+  "customWords": "Custom Words",
+  "switchToCategories": "Switch to categories",
+  "switchToCustomWords": "Switch to custom words",
+  "addWord": "Add Word",
+  "enterWord": "Enter word",
+  "add": "Add",
+  "emptyCustomWordsError": "You need at least one word to start the game.",
+  "emptyCustomWordsHint": "Add at least one word to begin.\nMore words help prevent duplicates in future rounds.",
+  "duplicateWordError": "This word has already been added."
 }

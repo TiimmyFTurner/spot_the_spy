@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spot_the_spy/applications/state_management/custom_words_provider.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/domain/data_models/player_model.dart';
@@ -19,7 +20,6 @@ class ScoreBoardScreen extends ConsumerStatefulWidget {
 }
 
 class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
-
   @override
   Widget build(BuildContext context) {
     Locale locale = Localizations.localeOf(context);
@@ -142,23 +142,33 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
                         ref.invalidate(currentRoundProvider);
                         context.goNamed(Routes.home);
                       } else {
-                        List<String> selectedCategories = ref.watch(
-                          categoryProvider,
-                        );
-                        List<String> wordsList = [];
-                        for (var i = 0; i < selectedCategories.length; i++) {
-                          wordsList.addAll(
-                            (locale == L10n.en
-                                    ? categoriesEN[selectedCategories[i]]
-                                        ?.toList()
-                                    : categoriesFA[selectedCategories[i]]
-                                        ?.toList()) ??
-                                [],
+                        if (ref.read(customWordsActiveProvider)) {
+                          ref.read(playersProvider.notifier).set();
+                          ref
+                              .read(playersProvider.notifier)
+                              .setRoles(ref.read(customWordsProvider));
+                          context.goNamed(Routes.roleReveal);
+                        } else {
+                          List<String> selectedCategories = ref.watch(
+                            categoryProvider,
                           );
+                          List<String> wordsList = [];
+                          for (var i = 0; i < selectedCategories.length; i++) {
+                            wordsList.addAll(
+                              (locale == L10n.en
+                                      ? categoriesEN[selectedCategories[i]]
+                                          ?.toList()
+                                      : categoriesFA[selectedCategories[i]]
+                                          ?.toList()) ??
+                                  [],
+                            );
+                          }
+                          ref
+                              .read(playersProvider.notifier)
+                              .setRoles(wordsList);
+                          ref.read(currentRoundProvider.notifier).next();
+                          context.goNamed(Routes.roleReveal);
                         }
-                        ref.read(playersProvider.notifier).setRoles(wordsList);
-                        ref.read(currentRoundProvider.notifier).next();
-                        context.goNamed(Routes.roleReveal);
                       }
                     },
                   ),

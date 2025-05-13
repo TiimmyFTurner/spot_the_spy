@@ -170,7 +170,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get no => 'No';
 
   @override
-  String get categoryCountError => 'You need at least 1 category to play the game.';
+  String get categoryCountError => 'You need at least one category to start the game.';
 
   @override
   String get selectAll => 'Select All';
@@ -213,4 +213,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get spyPunished => 'Spy was punished.';
+
+  @override
+  String get customWords => 'Custom Words';
+
+  @override
+  String get switchToCategories => 'Switch to categories';
+
+  @override
+  String get switchToCustomWords => 'Switch to custom words';
+
+  @override
+  String get addWord => 'Add Word';
+
+  @override
+  String get enterWord => 'Enter word';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get emptyCustomWordsError => 'You need at least one word to start the game.';
+
+  @override
+  String get emptyCustomWordsHint => 'Add at least one word to begin.\nMore words help prevent duplicates in future rounds.';
+
+  @override
+  String get duplicateWordError => 'This word has already been added.';
 }

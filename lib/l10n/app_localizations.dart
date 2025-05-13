@@ -356,7 +356,7 @@ abstract class AppLocalizations {
   /// No description provided for @categoryCountError.
   ///
   /// In en, this message translates to:
-  /// **'You need at least 1 category to play the game.'**
+  /// **'You need at least one category to start the game.'**
   String get categoryCountError;
 
   /// No description provided for @selectAll.
@@ -442,6 +442,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Spy was punished.'**
   String get spyPunished;
+
+  /// No description provided for @customWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Words'**
+  String get customWords;
+
+  /// No description provided for @switchToCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to categories'**
+  String get switchToCategories;
+
+  /// No description provided for @switchToCustomWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to custom words'**
+  String get switchToCustomWords;
+
+  /// No description provided for @addWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Word'**
+  String get addWord;
+
+  /// No description provided for @enterWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter word'**
+  String get enterWord;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @emptyCustomWordsError.
+  ///
+  /// In en, this message translates to:
+  /// **'You need at least one word to start the game.'**
+  String get emptyCustomWordsError;
+
+  /// No description provided for @emptyCustomWordsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least one word to begin.\nMore words help prevent duplicates in future rounds.'**
+  String get emptyCustomWordsHint;
+
+  /// No description provided for @duplicateWordError.
+  ///
+  /// In en, this message translates to:
+  /// **'This word has already been added.'**
+  String get duplicateWordError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
