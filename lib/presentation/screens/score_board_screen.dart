@@ -143,10 +143,11 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
                         context.goNamed(Routes.home);
                       } else {
                         if (ref.read(customWordsActiveProvider)) {
-                          ref.read(playersProvider.notifier).set();
                           ref
                               .read(playersProvider.notifier)
                               .setRoles(ref.read(customWordsProvider));
+                          ref.read(currentRoundProvider.notifier).next();
+
                           context.goNamed(Routes.roleReveal);
                         } else {
                           List<String> selectedCategories = ref.watch(
