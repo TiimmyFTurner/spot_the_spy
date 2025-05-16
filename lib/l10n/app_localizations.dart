@@ -496,6 +496,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This word has already been added.'**
   String get duplicateWordError;
+
+  /// No description provided for @howToPlay_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Rules'**
+  String get howToPlay_title;
+
+  /// No description provided for @rolesAssigned_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Roles Are Assigned'**
+  String get rolesAssigned_title;
+
+  /// No description provided for @rolesAssigned_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'At the start of each game, some players are randomly chosen as the Spy. All other players receive the same secret word (e.g., \'\'Airport\'\', \'\'Restaurant\'\').'**
+  String get rolesAssigned_desc;
+
+  /// No description provided for @askQuestions_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask Each Other Questions'**
+  String get askQuestions_title;
+
+  /// No description provided for @askQuestions_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Players take turns asking subtle questions (e.g., \'\'Is it usually crowded there?\'\'). The goal is to show you know the word without making it too obvious.'**
+  String get askQuestions_desc;
+
+  /// No description provided for @beCareful_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Be Careful!'**
+  String get beCareful_title;
+
+  /// No description provided for @beCareful_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'If you\'\'re not the spy: spot who doesn\'\'t know the word without revealing it.\nIf you\'\'re the spy: blend in and try to guess the word before you\'\'re caught.'**
+  String get beCareful_desc;
+
+  /// No description provided for @accuseOrGuess_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Accuse or Guess'**
+  String get accuseOrGuess_title;
+
+  /// No description provided for @accuseOrGuess_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Any player can accuse someone of being the spy. If everyone agrees, the accused reveals their role.\n\n• If the spy is caught: other players win.\n• If the spy guesses the word correctly: the spy wins.'**
+  String get accuseOrGuess_desc;
+
+  /// No description provided for @timerEnds_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Timer Ends the Round'**
+  String get timerEnds_title;
+
+  /// No description provided for @timerEnds_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'When the timer runs out, everyone must vote who they think the spy is. After that, the spy has one chance to guess the word.'**
+  String get timerEnds_desc;
+
+  /// No description provided for @scoringSystem_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Scoring System'**
+  String get scoringSystem_title;
+
+  /// No description provided for @timeout_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeout'**
+  String get timeout_title;
+
+  /// No description provided for @timeout_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'The spy earns +1 point plus half of the round time limit if time runs out without being discovered.'**
+  String get timeout_desc;
+
+  /// No description provided for @spyGuesses_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Spy guesses the word'**
+  String get spyGuesses_title;
+
+  /// No description provided for @spyGuesses_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'The spy gets +2 points plus 1 bonus point per full minute remaining.'**
+  String get spyGuesses_desc;
+
+  /// No description provided for @spyCaught_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Spy is caught'**
+  String get spyCaught_title;
+
+  /// No description provided for @spyCaught_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'All other players get +1 point plus 1 bonus point per full minute left.'**
+  String get spyCaught_desc;
+
+  /// No description provided for @wrongGuess_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong guess'**
+  String get wrongGuess_title;
+
+  /// No description provided for @wrongGuess_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Spies who guess the secret word incorrectly will lose 2 points and won\'\'t receive any winning reward.'**
+  String get wrongGuess_desc;
+
+  /// No description provided for @tips_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Tips'**
+  String get tips_title;
+
+  /// No description provided for @tips_bullet_1.
+  ///
+  /// In en, this message translates to:
+  /// **'• Don’t ask questions that are too obvious.'**
+  String get tips_bullet_1;
+
+  /// No description provided for @tips_bullet_2.
+  ///
+  /// In en, this message translates to:
+  /// **'• The spy wins by either guessing the word or surviving the round.'**
+  String get tips_bullet_2;
+
+  /// No description provided for @tips_bullet_3.
+  ///
+  /// In en, this message translates to:
+  /// **'• Pay attention to vague or strange answers.'**
+  String get tips_bullet_3;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

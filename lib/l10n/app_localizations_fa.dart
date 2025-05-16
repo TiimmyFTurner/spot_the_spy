@@ -240,4 +240,76 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get duplicateWordError => 'این کلمه قبلاً اضافه شده است.';
+
+  @override
+  String get howToPlay_title => 'قوانین بازی';
+
+  @override
+  String get rolesAssigned_title => 'نقش‌ها تعیین می‌شوند';
+
+  @override
+  String get rolesAssigned_desc => 'در ابتدای هر بازی، به‌صورت تصادفی چند نفر از بازیکنان به عنوان جاسوس انتخاب می‌شوند. سایر بازیکنان یک کلمه‌ی مخفی یکسان دریافت می‌کنند (مثلاً «فرودگاه»، «رستوران»).';
+
+  @override
+  String get askQuestions_title => 'از همدیگر سؤال بپرسید';
+
+  @override
+  String get askQuestions_desc => 'بازیکنان به نوبت سؤال‌های کوتاه و غیرمستقیم می‌پرسند (مثلاً «معمولاً شلوغه؟»). هدف این است که نشان دهید کلمه را می‌دانید بدون اینکه آن را لو بدهید.';
+
+  @override
+  String get beCareful_title => 'مراقب باشید!';
+
+  @override
+  String get beCareful_desc => 'اگر جاسوس نیستید: سعی کنید کسی را که کلمه را نمی‌داند پیدا کنید، ولی کلمه را لو ندهید.\nاگر شما جاسوس هستید: سعی کنید خودتان را لو ندهید و کلمه را حدس بزنید.';
+
+  @override
+  String get accuseOrGuess_title => 'اتهام یا حدس';
+
+  @override
+  String get accuseOrGuess_desc => 'هر بازیکنی می‌تواند در هر زمان به دیگری اتهام بزند که او جاسوس است. اگر همه موافق باشند، آن فرد باید نقش خود را فاش کند.\n\n• اگر جاسوس شناسایی شود: سایر بازیکنان برنده‌اند.\n• اگر جاسوس کلمه را درست حدس بزند: جاسوس برنده است.';
+
+  @override
+  String get timerEnds_title => 'پایان با تایمر';
+
+  @override
+  String get timerEnds_desc => 'وقتی تایمر تمام شود، بازیکنان رأی می‌دهند که چه کسی جاسوس است. سپس جاسوس یک فرصت برای حدس زدن کلمه خواهد داشت.';
+
+  @override
+  String get scoringSystem_title => 'سیستم امتیازدهی';
+
+  @override
+  String get timeout_title => 'پایان زمان';
+
+  @override
+  String get timeout_desc => 'جاسوس ۱ امتیاز می‌گیرد به‌علاوه نصف مدت کل زمان راند اگر تا پایان شناسایی نشده باشد.';
+
+  @override
+  String get spyGuesses_title => 'حدس درست توسط جاسوس';
+
+  @override
+  String get spyGuesses_desc => 'جاسوس ۲ امتیاز می‌گیرد و برای هر دقیقه کامل باقی‌مانده، ۱ امتیاز اضافه دریافت می‌کند.';
+
+  @override
+  String get spyCaught_title => 'شناسایی جاسوس';
+
+  @override
+  String get spyCaught_desc => 'سایر بازیکنان ۱ امتیاز دریافت می‌کنند به‌علاوه ۱ امتیاز اضافه برای هر دقیقه باقی‌مانده.';
+
+  @override
+  String get wrongGuess_title => 'حدس اشتباه';
+
+  @override
+  String get wrongGuess_desc => 'جاسوس‌هایی که کلمه مخفی را اشتباه حدس بزنند، ۲ امتیاز از دست می‌دهند و جایزه‌ی برد را دریافت نخواهند کرد.';
+
+  @override
+  String get tips_title => 'نکات';
+
+  @override
+  String get tips_bullet_1 => '• سؤال‌های خیلی واضح نپرسید.';
+
+  @override
+  String get tips_bullet_2 => '• جاسوس با حدس زدن کلمه یا زنده ماندن تا پایان برنده می‌شود.';
+
+  @override
+  String get tips_bullet_3 => '• به پاسخ‌های مبهم یا مشکوک توجه کنید!';
 }

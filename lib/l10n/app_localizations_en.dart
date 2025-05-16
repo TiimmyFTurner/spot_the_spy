@@ -240,4 +240,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get duplicateWordError => 'This word has already been added.';
+
+  @override
+  String get howToPlay_title => 'Game Rules';
+
+  @override
+  String get rolesAssigned_title => 'Roles Are Assigned';
+
+  @override
+  String get rolesAssigned_desc => 'At the start of each game, some players are randomly chosen as the Spy. All other players receive the same secret word (e.g., \'Airport\', \'Restaurant\').';
+
+  @override
+  String get askQuestions_title => 'Ask Each Other Questions';
+
+  @override
+  String get askQuestions_desc => 'Players take turns asking subtle questions (e.g., \'Is it usually crowded there?\'). The goal is to show you know the word without making it too obvious.';
+
+  @override
+  String get beCareful_title => 'Be Careful!';
+
+  @override
+  String get beCareful_desc => 'If you\'re not the spy: spot who doesn\'t know the word without revealing it.\nIf you\'re the spy: blend in and try to guess the word before you\'re caught.';
+
+  @override
+  String get accuseOrGuess_title => 'Accuse or Guess';
+
+  @override
+  String get accuseOrGuess_desc => 'Any player can accuse someone of being the spy. If everyone agrees, the accused reveals their role.\n\n• If the spy is caught: other players win.\n• If the spy guesses the word correctly: the spy wins.';
+
+  @override
+  String get timerEnds_title => 'Timer Ends the Round';
+
+  @override
+  String get timerEnds_desc => 'When the timer runs out, everyone must vote who they think the spy is. After that, the spy has one chance to guess the word.';
+
+  @override
+  String get scoringSystem_title => 'Scoring System';
+
+  @override
+  String get timeout_title => 'Timeout';
+
+  @override
+  String get timeout_desc => 'The spy earns +1 point plus half of the round time limit if time runs out without being discovered.';
+
+  @override
+  String get spyGuesses_title => 'Spy guesses the word';
+
+  @override
+  String get spyGuesses_desc => 'The spy gets +2 points plus 1 bonus point per full minute remaining.';
+
+  @override
+  String get spyCaught_title => 'Spy is caught';
+
+  @override
+  String get spyCaught_desc => 'All other players get +1 point plus 1 bonus point per full minute left.';
+
+  @override
+  String get wrongGuess_title => 'Wrong guess';
+
+  @override
+  String get wrongGuess_desc => 'Spies who guess the secret word incorrectly will lose 2 points and won\'t receive any winning reward.';
+
+  @override
+  String get tips_title => 'Tips';
+
+  @override
+  String get tips_bullet_1 => '• Don’t ask questions that are too obvious.';
+
+  @override
+  String get tips_bullet_2 => '• The spy wins by either guessing the word or surviving the round.';
+
+  @override
+  String get tips_bullet_3 => '• Pay attention to vague or strange answers.';
 }
