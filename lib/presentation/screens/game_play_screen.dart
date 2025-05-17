@@ -23,10 +23,18 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   bool godMode = false;
   List<Player> punishPlayers = [];
 
+  late Duration total;
+
+  // late Duration remaining;
+
   @override
   void initState() {
     super.initState();
-    remaining = Duration(minutes: ref.read(timeProvider));
+    final minutes = ref.read(timeProvider);
+    total = Duration(minutes: minutes);
+    remaining = total;
+
+    // remaining = Duration(minutes: ref.read(timeProvider));
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (remaining.inSeconds == 0) {
         timer?.cancel();
@@ -44,6 +52,8 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     timer?.cancel();
     super.dispose();
   }
+
+  double get progress => remaining.inSeconds / total.inSeconds;
 
   void onTimeout() {
     AudioPlayer().play(AssetSource('sounds/alarm.mp3'), volume: 1);
@@ -213,23 +223,42 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 ],
               ),
               Expanded(child: Container()),
-              Text(
-                AppLocalizations.of(context)!.remainingTime,
-                style: TextStyle(fontSize: 20),
+              SizedBox(height: 12),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: 220,
+                    height: 220,
+                    child: CircularProgressIndicator(
+                      value: progress,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onInverseSurface,
+                    ),
+                  ),
+                  Text(
+                    timeText,
+                    style: TextStyle(
+                      fontSize: 62,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                timeText,
-                style: TextStyle(
-                  fontSize: 62,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              SizedBox(height: 20),
+              SizedBox(height: 24),
               SizedBox(
                 height: 54,
                 width: MediaQuery.of(context).size.width / 1.4,
                 child: FilledButton.tonal(
+                  style: ElevatedButton.styleFrom(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(32),
+                        bottom: Radius.circular(8),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -258,11 +287,19 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 12),
+              SizedBox(height: 8),
               SizedBox(
                 height: 54,
                 width: MediaQuery.of(context).size.width / 1.4,
                 child: FilledButton.tonal(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(8),
+                        bottom: Radius.circular(godMode ? 8 : 32),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -291,12 +328,20 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                   ),
                 ),
               ),
-              if (godMode) SizedBox(height: 12),
+              if (godMode) SizedBox(height: 8),
               if (godMode)
                 SizedBox(
                   height: 54,
                   width: MediaQuery.of(context).size.width / 1.4,
                   child: FilledButton.tonal(
+                    style: ElevatedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(8),
+                          bottom: Radius.circular(32),
+                        ),
+                      ),
+                    ),
                     onPressed: spyPunishmentBottomSheet,
                     child: Text(
                       AppLocalizations.of(context)!.wrongGuess,
@@ -306,7 +351,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 ),
 
               Expanded(child: Container()),
-              SizedBox(height: godMode ? 80 : 40),
+              SizedBox(height: godMode ? 70 : 40),
             ],
           ),
         ),
