@@ -32,8 +32,8 @@ class HomeScreen extends ConsumerWidget {
                     style: FilledButton.styleFrom(
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(24),
-                          bottom: Radius.circular(4),
+                          top: Radius.circular(32),
+                          bottom: Radius.circular(8),
                         ),
                       ),
                     ),
@@ -53,8 +53,8 @@ class HomeScreen extends ConsumerWidget {
                     style: FilledButton.styleFrom(
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(4),
-                          bottom: Radius.circular(4),
+                          top: Radius.circular(8),
+                          bottom: Radius.circular(8),
                         ),
                       ),
                     ),
@@ -69,12 +69,12 @@ class HomeScreen extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   height: 60,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
+                  child: FilledButton.tonal(
+                    style: FilledButton.styleFrom(
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(4),
-                          bottom: Radius.circular(24),
+                          top: Radius.circular(8),
+                          bottom: Radius.circular(32),
                         ),
                       ),
                     ),
