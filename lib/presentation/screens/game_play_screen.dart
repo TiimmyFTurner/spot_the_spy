@@ -223,7 +223,6 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                 ],
               ),
               Expanded(child: Container()),
-              SizedBox(height: 12),
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -383,14 +382,46 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                       ),
                       const SizedBox(height: 12),
                       Expanded(
-                        child: GridView.count(
-                          crossAxisCount: 2,
-                          childAspectRatio: (3 / 1),
-                          children: List.generate(spies.length, (index) {
-                            return InkWell(
-                              borderRadius: BorderRadius.circular(16),
-                              onTap: () {
-                                if (punishPlayers.contains(spies[index])) {
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: GridView.count(
+                            crossAxisCount: 2,
+                            childAspectRatio: (3 / 1),
+                            children: List.generate(spies.length, (index) {
+                              return InkWell(
+                                borderRadius: BorderRadius.circular(16),
+                                onTap: () {
+                                  if (punishPlayers.contains(spies[index])) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.alreadyPunished,
+                                          ),
+                                          content: Text(
+                                            AppLocalizations.of(
+                                              context,
+                                            )!.alreadyPunishedMessage,
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: context.pop,
+                                              child: Text(
+                                                AppLocalizations.of(
+                                                  context,
+                                                )!.confirm,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    return;
+                                  }
+
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -398,109 +429,82 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                                         title: Text(
                                           AppLocalizations.of(
                                             context,
-                                          )!.alreadyPunished,
+                                          )!.punishSpyQuestion,
                                         ),
-                                        content: Text(
-                                          AppLocalizations.of(
-                                            context,
-                                          )!.alreadyPunishedMessage,
-                                        ),
-                                        actions: [
+                                        actions: <Widget>[
                                           TextButton(
                                             onPressed: context.pop,
                                             child: Text(
-                                              AppLocalizations.of(
+                                              AppLocalizations.of(context)!.no,
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              punishPlayers.add(spies[index]);
+                                              context.pop();
+                                              context.pop();
+                                              ScaffoldMessenger.of(
                                                 context,
-                                              )!.confirm,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                  content: Text(
+                                                    AppLocalizations.of(
+                                                      context,
+                                                    )!.spyPunished,
+                                                  ),
+                                                ),
+                                              );
+                                              if (punishPlayers.length ==
+                                                  spies.length) {
+                                                onSpyCaught();
+                                              }
+                                            },
+                                            child: Text(
+                                              AppLocalizations.of(context)!.yes,
                                             ),
                                           ),
                                         ],
                                       );
                                     },
                                   );
-                                  return;
-                                }
-
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text(
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.punishSpyQuestion,
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: context.pop,
-                                          child: Text(
-                                            AppLocalizations.of(context)!.no,
-                                          ),
+                                },
+                                child: Card(
+                                  color:
+                                      punishPlayers.contains(spies[index])
+                                          ? Theme.of(
+                                            context,
+                                          ).colorScheme.errorContainer
+                                          : Theme.of(
+                                            context,
+                                          ).colorScheme.surface,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                    ),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.person,
+                                          color:
+                                              Theme.of(
+                                                context,
+                                              ).colorScheme.primary,
                                         ),
-                                        TextButton(
-                                          onPressed: () {
-                                            punishPlayers.add(spies[index]);
-                                            context.pop();
-                                            context.pop();
-                                            ScaffoldMessenger.of(
-                                              context,
-                                            ).showSnackBar(
-                                              SnackBar(
-                                                behavior:
-                                                    SnackBarBehavior.floating,
-                                                content: Text(
-                                                  AppLocalizations.of(
-                                                    context,
-                                                  )!.spyPunished,
-                                                ),
-                                              ),
-                                            );
-                                            if (punishPlayers.length ==
-                                                spies.length) {
-                                              onSpyCaught();
-                                            }
-                                          },
-                                          child: Text(
-                                            AppLocalizations.of(context)!.yes,
-                                          ),
+                                        SizedBox(width: 10),
+                                        Text(
+                                          spies[index].name,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ],
-                                    );
-                                  },
-                                );
-                              },
-                              child: Card(
-                                color:
-                                    punishPlayers.contains(spies[index])
-                                        ? Theme.of(
-                                          context,
-                                        ).colorScheme.errorContainer
-                                        : null,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                  ),
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.person,
-                                        color:
-                                            Theme.of(
-                                              context,
-                                            ).colorScheme.primary,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        spies[index].name,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                          ),
                         ),
                       ),
                     ],
