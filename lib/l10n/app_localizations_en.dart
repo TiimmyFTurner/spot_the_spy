@@ -19,7 +19,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String addPlayers(int value) {
-    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat valueNumberFormat = intl
+        .NumberFormat.decimalPattern(localeName);
     final String valueString = valueNumberFormat.format(value);
 
     return 'Add Players ($valueString)';
@@ -27,7 +28,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String number(int value) {
-    final intl.NumberFormat valueNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat valueNumberFormat = intl
+        .NumberFormat.decimalPattern(localeName);
     final String valueString = valueNumberFormat.format(value);
 
     return '$valueString';
@@ -37,7 +39,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get help => 'Help';
 
   @override
-  String get addPlayersHelpMessage => 'On this page, you can add as many players as you like.';
+  String get addPlayersHelpMessage =>
+      'On this page, you can add as many players as you like.';
 
   @override
   String get back => 'Back';
@@ -46,22 +49,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playerName => 'Player Name';
 
   @override
-  String get playerCountError => 'You need at least 3 players to start the game.';
+  String get playerCountError =>
+      'You need at least 3 players to start the game.';
 
   @override
   String get goToGameSetup => 'Next: Set Game Rules';
 
   @override
   String themeMode(String theme_mode) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme_mode,
-      {
-        'dark': 'Dark',
-        'light': 'Light',
-        'system': 'System Default',
-        'other': 'Theme Mode',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(theme_mode, {
+      'dark': 'Dark',
+      'light': 'Light',
+      'system': 'System Default',
+      'other': 'Theme Mode',
+    });
     return '$_temp0';
   }
 
@@ -73,15 +74,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String languageMode(String language) {
-    String _temp0 = intl.Intl.selectLogic(
-      language,
-      {
-        'en': 'English',
-        'fa': 'فارسی',
-        'system': 'System Default',
-        'other': 'Language',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(language, {
+      'en': 'English',
+      'fa': 'فارسی',
+      'system': 'System Default',
+      'other': 'Language',
+    });
     return '$_temp0';
   }
 
@@ -170,7 +168,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get no => 'No';
 
   @override
-  String get categoryCountError => 'You need at least one category to start the game.';
+  String get categoryCountError =>
+      'You need at least one category to start the game.';
 
   @override
   String get selectAll => 'Select All';
@@ -191,13 +190,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deactivateGodMode => 'Deactivate God Mode?';
 
   @override
-  String get godModeDescription => 'God Mode lets you view secret words and spy identities. Useful for moderators.';
+  String get godModeDescription =>
+      'God Mode lets you view secret words and spy identities. Useful for moderators.';
 
   @override
   String get duplicatePlayerNameError => 'This player already exists.';
 
   @override
-  String get spyWrongGuessPenalty => 'If a spy guesses the word and gets it wrong, they lose 2 points and are excluded from the spy team\'s reward.';
+  String get spyWrongGuessPenalty =>
+      'If a spy guesses the word and gets it wrong, they lose 2 points and are excluded from the spy team\'s reward.';
 
   @override
   String get wrongGuess => 'Wrong Guess';
@@ -233,10 +234,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get add => 'Add';
 
   @override
-  String get emptyCustomWordsError => 'You need at least one word to start the game.';
+  String get emptyCustomWordsError =>
+      'You need at least one word to start the game.';
 
   @override
-  String get emptyCustomWordsHint => 'Add at least one word to begin.\nMore words help prevent duplicates in future rounds.';
+  String get emptyCustomWordsHint =>
+      'Add at least one word to begin.\nMore words help prevent duplicates in future rounds.';
 
   @override
   String get duplicateWordError => 'This word has already been added.';
@@ -248,31 +251,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rolesAssigned_title => 'Roles Are Assigned';
 
   @override
-  String get rolesAssigned_desc => 'At the start of each game, some players are randomly chosen as the Spy. All other players receive the same secret word (e.g., \'Airport\', \'Restaurant\').';
+  String get rolesAssigned_desc =>
+      'At the start of each game, some players are randomly chosen as the Spy. All other players receive the same secret word (e.g., \'Airport\', \'Restaurant\').';
 
   @override
   String get askQuestions_title => 'Ask Each Other Questions';
 
   @override
-  String get askQuestions_desc => 'Players take turns asking subtle questions (e.g., \'Is it usually crowded there?\'). The goal is to show you know the word without making it too obvious.';
+  String get askQuestions_desc =>
+      'Players take turns asking subtle questions (e.g., \'Is it usually crowded there?\'). The goal is to show you know the word without making it too obvious.';
 
   @override
   String get beCareful_title => 'Be Careful!';
 
   @override
-  String get beCareful_desc => 'If you\'re not the spy: spot who doesn\'t know the word without revealing it.\nIf you\'re the spy: blend in and try to guess the word before you\'re caught.';
+  String get beCareful_desc =>
+      'If you\'re not the spy: spot who doesn\'t know the word without revealing it.\nIf you\'re the spy: blend in and try to guess the word before you\'re caught.';
 
   @override
   String get accuseOrGuess_title => 'Accuse or Guess';
 
   @override
-  String get accuseOrGuess_desc => 'Any player can accuse someone of being the spy. If everyone agrees, the accused reveals their role.\n\n• If the spy is caught: other players win.\n• If the spy guesses the word correctly: the spy wins.';
+  String get accuseOrGuess_desc =>
+      'Any player can accuse someone of being the spy. If everyone agrees, the accused reveals their role.\n\n• If the spy is caught: other players win.\n• If the spy guesses the word correctly: the spy wins.';
 
   @override
   String get timerEnds_title => 'Timer Ends the Round';
 
   @override
-  String get timerEnds_desc => 'When the timer runs out, everyone must vote who they think the spy is. After that, the spy has one chance to guess the word.';
+  String get timerEnds_desc =>
+      'When the timer runs out, everyone must vote who they think the spy is. After that, the spy has one chance to guess the word.';
 
   @override
   String get scoringSystem_title => 'Scoring System';
@@ -281,25 +289,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get timeout_title => 'Timeout';
 
   @override
-  String get timeout_desc => 'The spy earns +1 point plus half of the round time limit if time runs out without being discovered.';
+  String get timeout_desc =>
+      'The spy earns +1 point plus half of the round time limit if time runs out without being discovered.';
 
   @override
   String get spyGuesses_title => 'Spy guesses the word';
 
   @override
-  String get spyGuesses_desc => 'The spy gets +2 points plus 1 bonus point per full minute remaining.';
+  String get spyGuesses_desc =>
+      'The spy gets +2 points plus 1 bonus point per full minute remaining.';
 
   @override
   String get spyCaught_title => 'Spy is caught';
 
   @override
-  String get spyCaught_desc => 'All other players get +1 point plus 1 bonus point per full minute left.';
+  String get spyCaught_desc =>
+      'All other players get +1 point plus 1 bonus point per full minute left.';
 
   @override
   String get wrongGuess_title => 'Wrong guess';
 
   @override
-  String get wrongGuess_desc => 'Spies who guess the secret word incorrectly will lose 2 points and won\'t receive any winning reward.';
+  String get wrongGuess_desc =>
+      'Spies who guess the secret word incorrectly will lose 2 points and won\'t receive any winning reward.';
 
   @override
   String get tips_title => 'Tips';
@@ -308,7 +320,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tips_bullet_1 => '• Don’t ask questions that are too obvious.';
 
   @override
-  String get tips_bullet_2 => '• The spy wins by either guessing the word or surviving the round.';
+  String get tips_bullet_2 =>
+      '• The spy wins by either guessing the word or surviving the round.';
 
   @override
   String get tips_bullet_3 => '• Pay attention to vague or strange answers.';

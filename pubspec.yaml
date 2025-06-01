@@ -112,6 +112,9 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: true
   image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#FFFFFF" # Or a color/image file like "assets/icon/background.png"
+  adaptive_icon_foreground: "assets/icon/icon.png"
+  adaptive_icon_monochrome: "assets/icon/icon_mono.png"
   min_sdk_android: 21
