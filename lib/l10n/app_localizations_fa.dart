@@ -180,7 +180,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get spies => 'جاسوس ها';
 
   @override
-  String get godMode => 'God Mode';
+  String get godMode => 'حالت خدا';
 
   @override
   String get activateGodMode => 'فعال‌سازی حالت خدا؟';

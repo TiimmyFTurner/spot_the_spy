@@ -21,14 +21,12 @@ class GameSetupScreen extends ConsumerStatefulWidget {
 class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
   @override
   Widget build(BuildContext context) {
-    Locale locale = Localizations.localeOf(context);
-    List<String> categories =
-        locale == L10n.en
-            ? categoriesEN.keys.toList()
-            : categoriesFA.keys.toList();
-    List<String> selectedCategories = ref.watch(categoryProvider);
-
-    bool customWordActive = ref.watch(customWordsActiveProvider);
+    final locale = Localizations.localeOf(context);
+    final categories = locale == L10n.en
+        ? categoriesEN.keys.toList()
+        : categoriesFA.keys.toList();
+    final selectedCategories = ref.watch(categoryProvider);
+    final customWordActive = ref.watch(customWordsActiveProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -44,128 +42,48 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    customWordActive
-                        ? _customWordsWidget()[0]
-                        : _categoriesWidget(categories, selectedCategories)[0],
-                    customWordActive
-                        ? _customWordsWidget()[1]
-                        : _categoriesWidget(categories, selectedCategories)[1],
-                    SizedBox(height: 20),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.timer,
-                          size: 30,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: DropdownButtonFormField<int>(
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: AppLocalizations.of(context)!.time,
-                            ),
-                            value: ref.watch(timeProvider),
-                            items:
-                                List.generate(
-                                  13,
-                                  (index) => index + 3,
-                                ).map<DropdownMenuItem<int>>((int time) {
-                                  return DropdownMenuItem<int>(
-                                    value: time,
-                                    child: Center(
-                                      child: Text(
-                                        "${AppLocalizations.of(context)!.number(time)} ${AppLocalizations.of(context)!.minute}",
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                            onChanged: (int? newValue) {
-                              ref.read(timeProvider.notifier).set(newValue!);
-                            },
-                          ),
-                        ),
-                      ],
+                    ...(customWordActive
+                        ? _customWordsWidget()
+                        : _categoriesWidget(categories, selectedCategories)),
+                    const SizedBox(height: 20),
+                    _buildDropdownRow(
+                      icon: Icons.timer,
+                      label: AppLocalizations.of(context)!.time,
+                      value: ref.watch(timeProvider),
+                      items: List.generate(13, (i) => i + 3),
+                      onChanged: (val) =>
+                          ref.read(timeProvider.notifier).set(val!),
+                      labelBuilder: (val) =>
+                      "${AppLocalizations.of(context)!.number(val)} ${AppLocalizations.of(context)!.minute}",
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Row(
                       children: [
-                        Icon(
-                          Icons.loop,
-                          size: 30,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(width: 15),
+                        _buildIcon(Icons.loop),
                         Expanded(
-                          child: DropdownButtonFormField<int>(
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText:
-                                  AppLocalizations.of(context)!.roundCount,
-                            ),
+                          child: _buildDropdown(
+                            label: AppLocalizations.of(context)!.roundCount,
                             value: ref.watch(roundCountProvider),
-                            items:
-                                List.generate(
-                                  20,
-                                  (index) => index + 1,
-                                ).map<DropdownMenuItem<int>>((int roundCount) {
-                                  return DropdownMenuItem<int>(
-                                    value: roundCount,
-                                    child: Center(
-                                      child: Text(
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.number(roundCount),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                            onChanged: (int? newValue) {
-                              ref
-                                  .read(roundCountProvider.notifier)
-                                  .set(newValue!);
-                            },
+                            items: List.generate(20, (i) => i + 1),
+                            onChanged: (val) =>
+                                ref.read(roundCountProvider.notifier).set(val!),
+                            labelBuilder: (val) =>
+                                AppLocalizations.of(context)!.number(val),
                           ),
                         ),
-                        SizedBox(width: 15),
-                        Icon(
-                          Icons.person_outline,
-                          size: 30,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        SizedBox(width: 15),
+                        const SizedBox(width: 15),
+                        _buildIcon(Icons.person_outline),
                         Expanded(
-                          child: DropdownButtonFormField<int>(
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: AppLocalizations.of(context)!.spyCount,
-                            ),
+                          child: _buildDropdown(
+                            label: AppLocalizations.of(context)!.spyCount,
                             value: ref.watch(spyCountProvider),
-                            items:
-                                List.generate(
-                                  (ref.read(playerNamesProvider).length ~/ 3) +
-                                      1,
-                                  (index) => index + 1,
-                                ).map<DropdownMenuItem<int>>((int spyCount) {
-                                  return DropdownMenuItem<int>(
-                                    value: spyCount,
-                                    child: Center(
-                                      child: Text(
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.number(spyCount),
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                            onChanged: (int? newValue) {
-                              ref
-                                  .read(spyCountProvider.notifier)
-                                  .set(newValue!);
-                            },
+                            items: List.generate(
+                                (ref.read(playerNamesProvider).length ~/ 3) + 1,
+                                    (i) => i + 1),
+                            onChanged: (val) =>
+                                ref.read(spyCountProvider.notifier).set(val!),
+                            labelBuilder: (val) =>
+                                AppLocalizations.of(context)!.number(val),
                           ),
                         ),
                       ],
@@ -173,70 +91,57 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
                   ],
                 ),
               ),
-
+              const SizedBox(height: 10),
               SizedBox(
                 height: 70,
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: FilledButton(
-                    child: Text(
-                      AppLocalizations.of(context)!.goToRoleReveal,
-                      style: TextStyle(fontSize: 20),
-                    ),
                     onPressed: () {
                       HapticFeedback.lightImpact();
+                      final messenger = ScaffoldMessenger.of(context);
+
                       if (customWordActive) {
-                        if (ref.read(customWordsProvider).isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              content: Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.emptyCustomWordsError,
-                              ),
-                            ),
-                          );
-                        } else {
-                          ref.read(playersProvider.notifier).set();
-                          ref
-                              .read(playersProvider.notifier)
-                              .setRoles(ref.read(customWordsProvider));
-                          context.goNamed(Routes.roleReveal);
+                        final words = ref.read(customWordsProvider);
+                        if (words.isEmpty) {
+                          messenger.showSnackBar(SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text(AppLocalizations.of(context)!
+                                .emptyCustomWordsError),
+                          ));
+                          return;
                         }
+                        ref.read(playersProvider.notifier).set();
+                        ref.read(playersProvider.notifier).setRoles(words);
                       } else {
-                        if (ref.read(categoryProvider).isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              content: Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.categoryCountError,
-                              ),
-                            ),
-                          );
-                        } else {
-                          List<String> wordsList = [];
-                          for (var i = 0; i < selectedCategories.length; i++) {
-                            wordsList.addAll(
-                              (locale == L10n.en
-                                      ? categoriesEN[selectedCategories[i]]
-                                          ?.toList()
-                                      : categoriesFA[selectedCategories[i]]
-                                          ?.toList()) ??
-                                  [],
-                            );
-                          }
-                          ref.read(playersProvider.notifier).set();
-                          ref
-                              .read(playersProvider.notifier)
-                              .setRoles(wordsList);
-                          context.goNamed(Routes.roleReveal);
+                        final selected = ref.read(categoryProvider);
+                        if (selected.isEmpty) {
+                          messenger.showSnackBar(SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text(AppLocalizations.of(context)!
+                                .categoryCountError),
+                          ));
+                          return;
                         }
+                        final words = <String>[];
+                        for (final cat in selected) {
+                          words.addAll((locale == L10n.en
+                              ? categoriesEN[cat]
+                              : categoriesFA[cat])
+                              ?.toList() ??
+                              []);
+                        }
+                        ref.read(playersProvider.notifier).set();
+                        ref.read(playersProvider.notifier).setRoles(words);
                       }
+
+                      context.goNamed(Routes.roleReveal);
                     },
+                    child: Text(
+                      AppLocalizations.of(context)!.goToRoleReveal,
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
                 ),
               ),
@@ -247,92 +152,136 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
     );
   }
 
+  Widget _buildIcon(IconData icon) => Icon(
+    icon,
+    size: 30,
+    color: Theme.of(context).colorScheme.primary,
+  );
+
+  Widget _buildDropdown<T>({
+    required String label,
+    required T value,
+    required List<T> items,
+    required void Function(T?) onChanged,
+    required String Function(T) labelBuilder,
+  }) {
+    return DropdownButtonFormField<T>(
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: label,
+      ),
+      value: value,
+      items: items
+          .map((item) => DropdownMenuItem<T>(
+        value: item,
+        child: Center(child: Text(labelBuilder(item))),
+      ))
+          .toList(),
+      onChanged: onChanged,
+    );
+  }
+
+  Widget _buildDropdownRow({
+    required IconData icon,
+    required String label,
+    required int value,
+    required List<int> items,
+    required void Function(int?) onChanged,
+    required String Function(int) labelBuilder,
+  }) {
+    return Row(
+      children: [
+        _buildIcon(icon),
+        const SizedBox(width: 15),
+        Expanded(
+          child: _buildDropdown<int>(
+            label: label,
+            value: value,
+            items: items,
+            onChanged: onChanged,
+            labelBuilder: labelBuilder,
+          ),
+        ),
+      ],
+    );
+  }
+
   List<Widget> _customWordsWidget() {
+    final words = ref.watch(customWordsProvider);
     return [
       Row(
         children: [
-          Text(
-            AppLocalizations.of(context)!.customWords,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          Text(AppLocalizations.of(context)!.customWords,
+              style: Theme.of(context).textTheme.titleMedium),
           IconButton(
             onPressed: _showAddWordDialog,
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             color: Theme.of(context).colorScheme.primary,
           ),
-          Expanded(child: Container()),
+          const Spacer(),
           TextButton(
-            onPressed: () {
-              ref.read(customWordsActiveProvider.notifier).toggle();
-            },
+            onPressed: () =>
+                ref.read(customWordsActiveProvider.notifier).toggle(),
             child: Text(AppLocalizations.of(context)!.switchToCategories),
           ),
         ],
       ),
-
       Flexible(
         child: SingleChildScrollView(
-          child:
-              ref.watch(customWordsProvider).isEmpty
-                  ? Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        AppLocalizations.of(context)!.emptyCustomWordsHint,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  )
-                  : Wrap(
-                    spacing: 8.0,
-                    children:
-                        ref.watch(customWordsProvider).map((word) {
-                          return Chip(
-                            label: Text(word),
-                            onDeleted: () {
-                              setState(
-                                () => ref
-                                    .read(customWordsProvider.notifier)
-                                    .removeWord(word),
-                              );
-                            },
-                          );
-                        }).toList(),
-                  ),
+          child: words.isEmpty
+              ? Padding(
+            padding: const EdgeInsets.all(16),
+            child: Center(
+              child: Text(
+                AppLocalizations.of(context)!.emptyCustomWordsHint,
+                style: TextStyle(
+                  color:
+                  Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ),
+          )
+              : Wrap(
+            spacing: 8.0,
+            children: words
+                .map((word) => Chip(
+              label: Text(word),
+              onDeleted: () => setState(() => ref
+                  .read(customWordsProvider.notifier)
+                  .removeWord(word)),
+            ))
+                .toList(),
+          ),
         ),
       ),
     ];
   }
 
-  List<Widget> _categoriesWidget(categories, selectedCategories) {
+  List<Widget> _categoriesWidget(
+      List<String> categories,
+      List<String> selected,
+      ) {
     return [
       Row(
         children: [
-          Text(
-            AppLocalizations.of(context)!.category,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-
-          Expanded(child: Container()),
+          Text(AppLocalizations.of(context)!.category,
+              style: Theme.of(context).textTheme.titleMedium),
+          const Spacer(),
           TextButton(
-            onPressed: () {
-              ref.read(customWordsActiveProvider.notifier).toggle();
-            },
+            onPressed: () =>
+                ref.read(customWordsActiveProvider.notifier).toggle(),
             child: Text(AppLocalizations.of(context)!.switchToCustomWords),
           ),
         ],
       ),
-
       Flexible(
         child: SingleChildScrollView(
           child: MultiCategorySelector(
             allCategories: categories,
-            selected: selectedCategories,
-            onSelectionChanged: (selectedList) {
+            selected: selected,
+            onSelectionChanged: (list) {
               HapticFeedback.lightImpact();
-              ref.read(categoryProvider.notifier).set(selectedList);
+              ref.read(categoryProvider.notifier).set(list);
             },
           ),
         ),
@@ -347,52 +296,46 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
       context: context,
       builder: (context) {
         String? error;
-
         return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.addWord),
-              content: TextField(
-                controller: controller,
-                autofocus: true,
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.enterWord,
-                  border: const OutlineInputBorder(),
-                  errorText: error,
-                ),
-                onChanged: (_) {
-                  setState(() {
-                    error = null;
-                  });
-                },
+          builder: (context, setState) => AlertDialog(
+            title: Text(AppLocalizations.of(context)!.addWord),
+            content: TextField(
+              controller: controller,
+              autofocus: true,
+              decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.enterWord,
+                border: const OutlineInputBorder(),
+                errorText: error,
               ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(AppLocalizations.of(context)!.cancel),
-                ),
-                TextButton(
-                  onPressed: () {
-                    final input = controller.text.trim();
-                    if (input.isEmpty) return;
+              onChanged: (_) => setState(() => error = null),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(AppLocalizations.of(context)!.cancel),
+              ),
+              TextButton(
+                onPressed: () {
+                  final input = controller.text.trim();
+                  if (input.isEmpty) return;
 
-                    final word = input[0].toUpperCase() + input.substring(1);
+                  final word =
+                      input[0].toUpperCase() + input.substring(1);
 
-                    if (ref.read(customWordsProvider).contains(word)) {
-                      setState(() {
-                        error =
-                            AppLocalizations.of(context)!.duplicateWordError;
-                      });
-                    } else {
-                      ref.read(customWordsProvider.notifier).addWord(word);
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: Text(AppLocalizations.of(context)!.add),
-                ),
-              ],
-            );
-          },
+                  if (ref.read(customWordsProvider).contains(word)) {
+                    setState(() {
+                      error =
+                          AppLocalizations.of(context)!.duplicateWordError;
+                    });
+                  } else {
+                    ref.read(customWordsProvider.notifier).addWord(word);
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(AppLocalizations.of(context)!.add),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -421,8 +364,8 @@ class MultiCategorySelector extends StatelessWidget {
         FilterChip(
           label: Text(AppLocalizations.of(context)!.selectAll),
           selected: allSelected,
-          onSelected: (bool value) {
-            onSelectionChanged(allSelected ? [] : [...allCategories]);
+          onSelected: (selected) {
+            onSelectionChanged(selected ? [...allCategories] : []);
           },
         ),
         ...allCategories.map((category) {
@@ -430,14 +373,10 @@ class MultiCategorySelector extends StatelessWidget {
           return FilterChip(
             label: Text(category),
             selected: isSelected,
-            onSelected: (bool selectedNow) {
-              final newSelected = [...selected];
-              if (selectedNow) {
-                newSelected.add(category);
-              } else {
-                newSelected.remove(category);
-              }
-              onSelectionChanged(newSelected);
+            onSelected: (selectedNow) {
+              final newList = [...selected];
+              selectedNow ? newList.add(category) : newList.remove(category);
+              onSelectionChanged(newList);
             },
           );
         }),
