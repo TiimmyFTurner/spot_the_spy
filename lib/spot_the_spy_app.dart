@@ -25,7 +25,7 @@ class SpotTheSpyApp extends ConsumerWidget {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
         ),
-        // TODO: fontFamily: font
+        fontFamily: locale == L10n.fa ? "Vazirmatn" : null,
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -39,7 +39,7 @@ class SpotTheSpyApp extends ConsumerWidget {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
         ),
-        // TODO: fontFamily: font
+        fontFamily: locale == L10n.fa ? "Vazirmatn" : null,
       ),
 
       themeMode: ref.watch(themeModeSettingProvider),

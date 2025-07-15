@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spot_the_spy/applications/state_management/custom_words_provider.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
