@@ -53,6 +53,12 @@ class WordsList extends _$WordsList {
   List build() =>[];
 
   void set(List list) => state = list;
+
+  void removeUsedWord(String word) {
+    if (state.length > 1) {
+      state = state.where((w) => w != word).toList();
+    }
+  }
 }
 
 // --- CurrentRound Provider ---

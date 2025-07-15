@@ -53,6 +53,7 @@ class Players extends _$Players {
     int spyCount = ref.read(spyCountProvider);
     String theWord = wordList[0];
     ref.read(theWordProvider.notifier).set(theWord);
+    ref.read(wordsListProvider.notifier).removeUsedWord(theWord);
     List<Player> players = state;
     players.shuffle();
     for (var i = 0; i < players.length; i++) {
