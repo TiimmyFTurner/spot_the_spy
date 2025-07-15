@@ -111,5 +111,8 @@
   "tips_title": "Tips",
   "tips_bullet_1": "• Don’t ask questions that are too obvious.",
   "tips_bullet_2": "• The spy wins by either guessing the word or surviving the round.",
-  "tips_bullet_3": "• Pay attention to vague or strange answers."
+  "tips_bullet_3": "• Pay attention to vague or strange answers.",
+  "goToCategorySelection": "Next: Category Selection",
+  "categorySelection": "Category Selection",
+  "categories": "Categories"
 }

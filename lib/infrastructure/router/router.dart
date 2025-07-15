@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/presentation/screens/add_players_screen.dart';
+import 'package:spot_the_spy/presentation/screens/category_selection_screen.dart';
 import 'package:spot_the_spy/presentation/screens/game_setup_screen.dart';
 import 'package:spot_the_spy/presentation/screens/game_play_screen.dart';
 import 'package:spot_the_spy/presentation/screens/home_screen.dart';
@@ -42,6 +43,13 @@ class AppRouter {
         pageBuilder:
             (context, state) =>
                 MaterialPage(key: state.pageKey, child: HowToPlayScreen()),
+      ),
+      GoRoute(
+        name: Routes.categorySelection,
+        path: Routes.categorySelectionPath,
+        pageBuilder:
+            (context, state) =>
+            MaterialPage(key: state.pageKey, child: CategorySelectionScreen()),
       ),
       GoRoute(
         name: Routes.gameSetup,

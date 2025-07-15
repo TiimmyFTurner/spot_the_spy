@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:spot_the_spy/applications/state_management/custom_words_provider.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
 import 'package:spot_the_spy/applications/state_management/players_provider.dart';
 import 'package:spot_the_spy/domain/data_models/player_model.dart';
-import 'package:spot_the_spy/infrastructure/data/categories_en.dart';
-import 'package:spot_the_spy/infrastructure/data/categories_fa.dart';
 import 'package:spot_the_spy/infrastructure/router/router_consts.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
-import 'package:spot_the_spy/l10n/l10n.dart';
 
 class ScoreBoardScreen extends ConsumerStatefulWidget {
   const ScoreBoardScreen({super.key});
@@ -22,7 +18,6 @@ class ScoreBoardScreen extends ConsumerStatefulWidget {
 class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
   @override
   Widget build(BuildContext context) {
-    Locale locale = Localizations.localeOf(context);
     bool lastRound =
         ref.read(currentRoundProvider) == ref.read(roundCountProvider);
     List<Player> players = ref.watch(playersProvider);
@@ -142,34 +137,11 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
                         ref.invalidate(currentRoundProvider);
                         context.goNamed(Routes.home);
                       } else {
-                        if (ref.read(customWordsActiveProvider)) {
-                          ref
-                              .read(playersProvider.notifier)
-                              .setRoles(ref.read(customWordsProvider));
-                          ref.read(currentRoundProvider.notifier).next();
-
-                          context.goNamed(Routes.roleReveal);
-                        } else {
-                          List<String> selectedCategories = ref.watch(
-                            categoryProvider,
-                          );
-                          List<String> wordsList = [];
-                          for (var i = 0; i < selectedCategories.length; i++) {
-                            wordsList.addAll(
-                              (locale == L10n.en
-                                      ? categoriesEN[selectedCategories[i]]
-                                          ?.toList()
-                                      : categoriesFA[selectedCategories[i]]
-                                          ?.toList()) ??
-                                  [],
-                            );
-                          }
-                          ref
-                              .read(playersProvider.notifier)
-                              .setRoles(wordsList);
-                          ref.read(currentRoundProvider.notifier).next();
-                          context.goNamed(Routes.roleReveal);
-                        }
+                        ref
+                            .read(playersProvider.notifier)
+                            .setRoles();
+                        ref.read(currentRoundProvider.notifier).next();
+                        context.goNamed(Routes.roleReveal);
                       }
                     },
                   ),

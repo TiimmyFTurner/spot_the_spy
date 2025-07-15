@@ -643,6 +643,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'• Pay attention to vague or strange answers.'**
   String get tips_bullet_3;
+
+  /// No description provided for @goToCategorySelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Next: Category Selection'**
+  String get goToCategorySelection;
+
+  /// No description provided for @categorySelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Selection'**
+  String get categorySelection;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
 }
 
 class _AppLocalizationsDelegate

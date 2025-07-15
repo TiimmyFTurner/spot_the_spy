@@ -47,6 +47,14 @@ class TheWord extends _$TheWord {
   void set(String value) => state = value;
 }
 
+@Riverpod(keepAlive: true)
+class WordsList extends _$WordsList {
+  @override
+  List build() =>[];
+
+  void set(List list) => state = list;
+}
+
 // --- CurrentRound Provider ---
 @Riverpod(keepAlive: true)
 class CurrentRound extends _$CurrentRound {

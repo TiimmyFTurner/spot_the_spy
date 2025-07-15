@@ -4,6 +4,7 @@ class Routes {
   static const String addPlayers = 'addPlayers';
   static const String howToPlay = 'howToPlay';
   static const String settings = 'settings';
+  static const String categorySelection ="categorySelection";
   static const String gameSetup = 'gameConfig';
   static const String roleReveal = 'roleReveal';
   static const String gamePlay = 'gamePlay';
@@ -14,6 +15,7 @@ class Routes {
   static const String addPlayersPath = '/addPlayers';
   static const String howToPlayPath = '/howToPlay';
   static const String settingsPath = '/settings';
+  static const String categorySelectionPath ="/categorySelection";
   static const String gameSetupPath = '/gameConfig';
   static const String roleRevealPath = '/roleReveal';
   static const String gamePlayPath = '/gamePlay';

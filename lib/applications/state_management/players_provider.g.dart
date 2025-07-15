@@ -23,7 +23,7 @@ final playerNamesProvider =
     );
 
 typedef _$PlayerNames = Notifier<List<String>>;
-String _$playersHash() => r'fb0f95f030d97508fcf31a1a78a23d19fc3b7200';
+String _$playersHash() => r'9471e38407b8a724e413a82b0eed7c6338e04412';
 
 /// See also [Players].
 @ProviderFor(Players)

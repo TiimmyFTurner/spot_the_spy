@@ -31,14 +31,14 @@
   "back": "برگشت",
   "playerName": "نام بازیکن",
   "playerCountError": "این بازی حداقل به ۳ بازیکن نیاز دارد.",
-  "goToGameSetup": "مرحله بعد: تنظیم قوانین بازی",
+  "goToGameSetup": "بعدی: تنظیم قوانین بازی",
   "themeMode": "{theme_mode, select, dark{تاریک} light{روشن} system{پیش فرض سیستم}  other{حالت تم}}",
   "chooseTheme": "انتخاب تم",
   "confirm": "ثبت",
   "languageMode": "{language, select, en{English} fa{فارسی} system{پیش فرض سیستم}  other{زبان}}",
   "cancel": "انصراف",
   "language": "زبان",
-  "goToRoleReveal": "مرحله بعد: نمایش نقش ها",
+  "goToRoleReveal": "بعدی: نمایش نقش ها",
   "roleReveal": "نمایش نقش ها",
   "gameSetup": "پیکربندی بازی",
   "category": "دسته بندی",
@@ -111,5 +111,8 @@
   "tips_bullet_1": "• سؤال‌های خیلی واضح نپرسید.",
   "tips_bullet_2": "• جاسوس با حدس زدن کلمه یا زنده ماندن تا پایان برنده می‌شود.",
   "tips_bullet_3": "• به پاسخ‌های مبهم یا مشکوک توجه کنید!",
-  "godMode": "حالت خدا"
+  "godMode": "حالت خدا",
+  "goToCategorySelection": "بعدی: انتخاب دسته‌بندی",
+  "categorySelection": "انتخاب دسته‌بندی",
+  "categories": "دسته‌بندی‌ها"
 }

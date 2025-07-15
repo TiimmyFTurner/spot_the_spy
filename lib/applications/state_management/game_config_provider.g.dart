@@ -76,6 +76,20 @@ final theWordProvider = NotifierProvider<TheWord, String>.internal(
 );
 
 typedef _$TheWord = Notifier<String>;
+String _$wordsListHash() => r'29ffe0aa8488ab4bee882a0676199866ed143a06';
+
+/// See also [WordsList].
+@ProviderFor(WordsList)
+final wordsListProvider = NotifierProvider<WordsList, List>.internal(
+  WordsList.new,
+  name: r'wordsListProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$wordsListHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$WordsList = Notifier<List>;
 String _$currentRoundHash() => r'd9b6406ff6df1dc9d72d21919f46d5136829f94f';
 
 /// See also [CurrentRound].

@@ -325,4 +325,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tips_bullet_3 => '• Pay attention to vague or strange answers.';
+
+  @override
+  String get goToCategorySelection => 'Next: Category Selection';
+
+  @override
+  String get categorySelection => 'Category Selection';
+
+  @override
+  String get categories => 'Categories';
 }

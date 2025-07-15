@@ -95,7 +95,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextField(
               autofocus: true,
               focusNode: _focusNode,
@@ -106,7 +106,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                 border: const OutlineInputBorder(),
                 labelText: AppLocalizations.of(context)!.playerName,
                 contentPadding: const EdgeInsets.symmetric(
-                  vertical: 15,
+                  vertical: 16,
                   horizontal: 20,
                 ),
                 suffixIcon: IconButton(
@@ -116,7 +116,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           SafeArea(
             child: SizedBox(
               height: 70,
@@ -128,13 +128,13 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
                 ),
                 child: FilledButton(
                   child: Text(
-                    AppLocalizations.of(context)!.goToGameSetup,
+                    AppLocalizations.of(context)!.goToCategorySelection,
                     style: TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
                     HapticFeedback.lightImpact();
                     if (players.length > 2) {
-                      context.pushNamed(Routes.gameSetup);
+                      context.pushNamed(Routes.categorySelection);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

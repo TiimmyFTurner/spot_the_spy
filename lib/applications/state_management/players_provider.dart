@@ -47,7 +47,8 @@ class Players extends _$Players {
     state = players;
   }
 
-  void setRoles(wordList) {
+  void setRoles() {
+    final List wordList = ref.read(wordsListProvider);
     wordList.shuffle();
     int spyCount = ref.read(spyCountProvider);
     String theWord = wordList[0];
