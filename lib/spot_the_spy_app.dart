@@ -11,7 +11,6 @@ class SpotTheSpyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Locale locale = ref.watch(localeSettingProvider);
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,

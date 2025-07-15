@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/applications/state_management/settings_provider.dart';
 import 'package:spot_the_spy/l10n/app_localizations.dart';
@@ -21,208 +22,218 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         title: Text(AppLocalizations.of(context)!.settings),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          ListTile(
-            title: Text(AppLocalizations.of(context)!.chooseTheme),
-            subtitle: Text(
-              AppLocalizations.of(
-                context,
-              )!.themeMode(ref.watch(themeModeSettingProvider).name),
-            ),
-            onTap: () {
-              ThemeMode themeMode = ref.read(themeModeSettingProvider);
-              showDialog<String>(
-                context: context,
-                builder:
-                    (BuildContext context) => StatefulBuilder(
-                      builder: (context, setState) {
-                        return AlertDialog(
-                          contentPadding: EdgeInsets.zero,
-                          title: Text(
-                            AppLocalizations.of(context)!.chooseTheme,
-                          ),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              RadioListTile<ThemeMode>(
-                                title: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.themeMode('light'),
+      body: SafeArea(
+        child: Column(
+          children: [
+            ListTile(
+              title: Text(AppLocalizations.of(context)!.chooseTheme),
+              subtitle: Text(
+                AppLocalizations.of(
+                  context,
+                )!.themeMode(ref.watch(themeModeSettingProvider).name),
+              ),
+              onTap: () {
+                ThemeMode themeMode = ref.read(themeModeSettingProvider);
+                showDialog<String>(
+                  context: context,
+                  builder:
+                      (BuildContext context) => StatefulBuilder(
+                        builder: (context, setState) {
+                          return AlertDialog(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(
+                              AppLocalizations.of(context)!.chooseTheme,
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                RadioListTile<ThemeMode>(
+                                  title: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.themeMode('light'),
+                                  ),
+                                  value: ThemeMode.light,
+                                  groupValue: themeMode,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      themeMode = value!;
+                                    });
+                                  },
                                 ),
-                                value: ThemeMode.light,
-                                groupValue: themeMode,
-                                onChanged: (value) {
-                                  setState(() {
-                                    themeMode = value!;
-                                  });
-                                },
+                                RadioListTile<ThemeMode>(
+                                  title: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.themeMode('dark'),
+                                  ),
+                                  value: ThemeMode.dark,
+                                  groupValue: themeMode,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      themeMode = value!;
+                                    });
+                                  },
+                                ),
+                                RadioListTile<ThemeMode>(
+                                  title: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.themeMode('system'),
+                                  ),
+                                  value: ThemeMode.system,
+                                  groupValue: themeMode,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      themeMode = value!;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => context.pop(),
+                                child: Text(AppLocalizations.of(context)!.cancel),
                               ),
-                              RadioListTile<ThemeMode>(
-                                title: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.themeMode('dark'),
-                                ),
-                                value: ThemeMode.dark,
-                                groupValue: themeMode,
-                                onChanged: (value) {
-                                  setState(() {
-                                    themeMode = value!;
-                                  });
+                              TextButton(
+                                onPressed: () {
+                                  context.pop();
+                                  ref
+                                      .read(themeModeSettingProvider.notifier)
+                                      .changeTheme(themeMode);
                                 },
-                              ),
-                              RadioListTile<ThemeMode>(
-                                title: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.themeMode('system'),
+                                child: Text(
+                                  AppLocalizations.of(context)!.confirm,
                                 ),
-                                value: ThemeMode.system,
-                                groupValue: themeMode,
-                                onChanged: (value) {
-                                  setState(() {
-                                    themeMode = value!;
-                                  });
-                                },
                               ),
                             ],
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => context.pop(),
-                              child: Text(AppLocalizations.of(context)!.cancel),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                context.pop();
-                                ref
-                                    .read(themeModeSettingProvider.notifier)
-                                    .changeTheme(themeMode);
-                              },
-                              child: Text(
-                                AppLocalizations.of(context)!.confirm,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-              );
-            },
-          ),
-          ListTile(
-            title: Text(AppLocalizations.of(context)!.language),
-            subtitle: Text(
-              AppLocalizations.of(
-                context,
-              )!.languageMode(ref.watch(localeSettingProvider).toString()),
+                          );
+                        },
+                      ),
+                );
+              },
             ),
-            onTap: () {
-              Locale locale = ref.read(localeSettingProvider);
-              showDialog<String>(
-                context: context,
-                builder:
-                    (BuildContext context) => StatefulBuilder(
-                      builder: (context, setState) {
-                        return AlertDialog(
-                          contentPadding: EdgeInsets.zero,
-                          title: Text(AppLocalizations.of(context)!.language),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              RadioListTile<Locale>(
-                                title: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.languageMode('en'),
+            ListTile(
+              title: Text(AppLocalizations.of(context)!.language),
+              subtitle: Text(
+                AppLocalizations.of(
+                  context,
+                )!.languageMode(ref.watch(localeSettingProvider).toString()),
+              ),
+              onTap: () {
+                Locale locale = ref.read(localeSettingProvider);
+                showDialog<String>(
+                  context: context,
+                  builder:
+                      (BuildContext context) => StatefulBuilder(
+                        builder: (context, setState) {
+                          return AlertDialog(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(AppLocalizations.of(context)!.language),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                RadioListTile<Locale>(
+                                  title: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.languageMode('en'),
+                                  ),
+                                  value: L10n.en,
+                                  groupValue: locale,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      locale = value!;
+                                    });
+                                  },
                                 ),
-                                value: L10n.en,
-                                groupValue: locale,
-                                onChanged: (value) {
-                                  setState(() {
-                                    locale = value!;
-                                  });
-                                },
+                                RadioListTile<Locale>(
+                                  title: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.languageMode('fa'),
+                                  ),
+                                  value: L10n.fa,
+                                  groupValue: locale,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      locale = value!;
+                                    });
+                                  },
+                                ),
+                                RadioListTile<Locale>(
+                                  title: Text(
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.themeMode('system'),
+                                  ),
+                                  value: L10n.system,
+                                  groupValue: locale,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      locale = value!;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => context.pop(),
+                                child: Text(AppLocalizations.of(context)!.cancel),
                               ),
-                              RadioListTile<Locale>(
-                                title: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.languageMode('fa'),
-                                ),
-                                value: L10n.fa,
-                                groupValue: locale,
-                                onChanged: (value) {
-                                  setState(() {
-                                    locale = value!;
-                                  });
+                              TextButton(
+                                onPressed: () {
+                                  context.pop();
+                                  ref
+                                      .read(localeSettingProvider.notifier)
+                                      .changeLocale(locale);
                                 },
-                              ),
-                              RadioListTile<Locale>(
-                                title: Text(
-                                  AppLocalizations.of(
-                                    context,
-                                  )!.themeMode('system'),
+                                child: Text(
+                                  AppLocalizations.of(context)!.confirm,
                                 ),
-                                value: L10n.system,
-                                groupValue: locale,
-                                onChanged: (value) {
-                                  setState(() {
-                                    locale = value!;
-                                  });
-                                },
                               ),
                             ],
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => context.pop(),
-                              child: Text(AppLocalizations.of(context)!.cancel),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                context.pop();
-                                ref
-                                    .read(localeSettingProvider.notifier)
-                                    .changeLocale(locale);
-                              },
-                              child: Text(
-                                AppLocalizations.of(context)!.confirm,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-              );
-            },
-          ),
-          const SizedBox(height: 36),
-          const Text(
-            "Spot the Spy 1.5.0",
-            style: TextStyle(color: Colors.grey),
-          ),
-          const Text(
-            "Copyright © 2025 Timothy F. Turner",
-            style: TextStyle(color: Colors.grey),
-          ),
-          InkWell(
-            onTap: _sendMail,
-            child: const Text(
-              "TiimmyFTurner@gmail.com",
-              style: TextStyle(color: Colors.grey),
+                          );
+                        },
+                      ),
+                );
+              },
             ),
-          ),
-          InkWell(
-            onTap: _openTelegram,
-            child: const Text(
-              "T.me/TiimmyFTurner",
-              style: TextStyle(color: Colors.grey),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: _openTelegram,
+                  icon: FaIcon(
+                    FontAwesomeIcons.telegram,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                SizedBox(width: 16),
+                IconButton(
+                  onPressed: _sendMail,
+                  icon: FaIcon(
+                    FontAwesomeIcons.solidEnvelope,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            SizedBox(height: 16),
+            Text(
+              "Spot the Spy 1.5.0",
+              style: TextStyle(color: Theme.of(context).colorScheme.outline),
+            ),
+            Text(
+              "Copyright © 2025 Tiimmy F. Turner. All Rights Reserved",
+              style: TextStyle(color: Theme.of(context).colorScheme.outline),
+            ),
+            SizedBox(height: 4,)
+          ],
+        ),
       ),
     );
   }
