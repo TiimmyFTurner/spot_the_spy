@@ -224,7 +224,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             SizedBox(height: 16),
             Text(
-              "Spot the Spy 1.5.0",
+              "Spot the Spy 1.6.0",
               style: TextStyle(color: Theme.of(context).colorScheme.outline),
             ),
             Text(
