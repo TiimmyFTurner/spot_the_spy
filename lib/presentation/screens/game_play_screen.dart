@@ -34,7 +34,6 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
     total = Duration(minutes: minutes);
     remaining = total;
 
-    // remaining = Duration(minutes: ref.read(timeProvider));
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (remaining.inSeconds == 0) {
         timer?.cancel();
@@ -96,8 +95,16 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final timeText =
-        '${remaining.inMinutes.toString().padLeft(2, '0')}:${(remaining.inSeconds % 60).toString().padLeft(2, '0')}';
+    final localization = AppLocalizations.of(context)!;
+
+    String localizePadded(int value) {
+      final padded = value.toString().padLeft(2, '0'); // e.g. '05'
+      return padded.split('').map((digit) => localization.number(int.parse(digit))).join();
+    }
+
+    final minutes = localizePadded(remaining.inMinutes);
+    final seconds = localizePadded(remaining.inSeconds % 60);
+    final timeText = '$minutes:$seconds';
 
     List<String> spyNamesList =
         ref
@@ -210,12 +217,6 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                   if (godMode)
                     ...spyNamesList.map((name) {
                       return Chip(
-                        // backgroundColor:
-                        // punishPlayers.contains(name)
-                        //     ? Theme.of(
-                        //   context,
-                        // ).colorScheme.errorContainer
-                        //     : null,
                         avatar: Icon(Icons.person, size: 20),
                         label: Text(name),
                       );
