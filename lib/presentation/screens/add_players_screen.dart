@@ -18,6 +18,8 @@ class AddPlayersScreen extends ConsumerStatefulWidget {
 class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
   final TextEditingController _controller = TextEditingController();
   String _name = '';
+  final FocusNode _focusNode = FocusNode();
+
 
   void _addPlayer([_]) {
     if (_name != '') {
@@ -38,6 +40,7 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
         );
       }
     }
+    _focusNode.requestFocus();
   }
 
   @override
@@ -94,6 +97,8 @@ class _SetPlayersScreenState extends ConsumerState<AddPlayersScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TextField(
+              autofocus: true,
+              focusNode: _focusNode,
               controller: _controller,
               onChanged: (String value) => _name = value,
               onSubmitted: _addPlayer,
