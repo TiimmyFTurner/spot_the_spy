@@ -108,7 +108,7 @@ class _GameSetupScreenState extends ConsumerState<GameSetupScreen> {
         border: const OutlineInputBorder(),
         labelText: label,
       ),
-      value: value,
+      initialValue: value,
       items: items
           .map((item) => DropdownMenuItem<T>(
         value: item,
