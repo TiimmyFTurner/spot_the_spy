@@ -76,7 +76,7 @@ final theWordProvider = NotifierProvider<TheWord, String>.internal(
 );
 
 typedef _$TheWord = Notifier<String>;
-String _$wordsListHash() => r'29ffe0aa8488ab4bee882a0676199866ed143a06';
+String _$wordsListHash() => r'32059928d355ee07b6a291b27c3534b82f8eb36c';
 
 /// See also [WordsList].
 @ProviderFor(WordsList)
