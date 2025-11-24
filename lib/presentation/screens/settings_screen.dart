@@ -271,7 +271,7 @@ final theme = Theme.of(context);
               ),
               SizedBox(height: 16),
               Text(
-                "Spot the Spy 1.6.0",
+                "Spot the Spy 1.7.0",
                 style: TextStyle(color: Theme.of(context).colorScheme.outline),
               ),
               Text(
