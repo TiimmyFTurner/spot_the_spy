@@ -333,4 +333,10 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get categories => 'دسته‌بندی‌ها';
+
+  @override
+  String get general => 'عمومی';
+
+  @override
+  String get about => 'درباره';
 }

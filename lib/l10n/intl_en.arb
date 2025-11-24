@@ -114,5 +114,7 @@
   "tips_bullet_3": "• Pay attention to vague or strange answers.",
   "goToCategorySelection": "Next: Category Selection",
   "categorySelection": "Category Selection",
-  "categories": "Categories"
+  "categories": "Categories",
+  "general": "General",
+  "about": "About"
 }

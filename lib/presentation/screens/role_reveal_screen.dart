@@ -1,4 +1,5 @@
 import 'package:action_slider/action_slider.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,11 +44,14 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
             IconButton(
               icon: const Icon(Icons.fiber_new),
               onPressed: () {
+                HapticFeedback.selectionClick();
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text(AppLocalizations.of(context)!.newGameQuestion),
+                      title: Text(
+                        AppLocalizations.of(context)!.newGameQuestion,
+                      ),
                       actions: <Widget>[
                         TextButton(
                           onPressed: context.pop,
@@ -78,7 +82,11 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                       sliderBehavior: SliderBehavior.stretch,
                       backgroundColor: Theme.of(context).colorScheme.onPrimary,
                       action: (controller) async {
-                        HapticFeedback.lightImpact();
+                        HapticFeedback.heavyImpact();
+                        AudioPlayer().play(
+                          AssetSource('sounds/click.mp3'),
+                          volume: 1,
+                        );
                         controller.success();
                         await Future.delayed(const Duration(seconds: 1));
                         if (!context.mounted) return;
@@ -137,7 +145,11 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                           ),
                         ),
                         onTap: () {
-                          HapticFeedback.lightImpact();
+                          HapticFeedback.mediumImpact();
+                          AudioPlayer().play(
+                            AssetSource('sounds/click.mp3'),
+                            volume: 1,
+                          );
                           showModalBottomSheet(
                             context: context,
                             showDragHandle: true,
@@ -183,7 +195,8 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                                                     style: const TextStyle(
                                                       fontSize: 18,
                                                     ),
-                                                    textAlign: TextAlign.justify,
+                                                    textAlign:
+                                                        TextAlign.justify,
                                                   ),
                                                 ),
                                               ),
@@ -200,10 +213,13 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                                           height: 55,
                                           child: FilledButton.tonal(
                                             onPressed: () {
+                                              HapticFeedback.lightImpact();
                                               context.pop();
                                             },
                                             child: Text(
-                                              AppLocalizations.of(context)!.gotIt,
+                                              AppLocalizations.of(
+                                                context,
+                                              )!.gotIt,
                                               style: TextStyle(fontSize: 20),
                                             ),
                                           ),

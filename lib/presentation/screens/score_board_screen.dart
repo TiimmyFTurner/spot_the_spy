@@ -21,6 +21,11 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
     bool lastRound =
         ref.read(currentRoundProvider) == ref.read(roundCountProvider);
     List<Player> players = ref.watch(playersProvider);
+
+    // Sort players by score descending
+    final sortedPlayers = [...players]
+      ..sort((a, b) => b.score.compareTo(a.score));
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -62,140 +67,216 @@ class _ScoreBoardScreenState extends ConsumerState<ScoreBoardScreen> {
         body: SafeArea(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Chip(
-                    avatar: Icon(Icons.autorenew_rounded, size: 20),
-                    label: Text(
-                      '${AppLocalizations.of(context)!.round}: ${AppLocalizations.of(context)!.number(ref.read(currentRoundProvider))}/${AppLocalizations.of(context)!.number(ref.read(roundCountProvider))}',
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.autorenew_rounded,
+                            size: 20,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${AppLocalizations.of(context)!.round}: ${AppLocalizations.of(context)!.number(ref.read(currentRoundProvider))}/${AppLocalizations.of(context)!.number(ref.read(roundCountProvider))}',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimaryContainer,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 8),
-                  Chip(
-                    avatar: Icon(Icons.security, size: 20),
-                    label: Text(
-                      "${AppLocalizations.of(context)!.secretWord}: ${ref.read(theWordProvider)}",
+                    const SizedBox(width: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.tertiaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.security,
+                            size: 20,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.onTertiaryContainer,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            "${AppLocalizations.of(context)!.secretWord}: ${ref.read(theWordProvider)}",
+                            style: TextStyle(
+                              color:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.onTertiaryContainer,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Card(
-                  color: Theme.of(context).colorScheme.surfaceContainer,
-                  elevation: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Row(
-                      children: [
-                        SizedBox(width: 40),
-                        Text(
-                          AppLocalizations.of(context)!.player,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Expanded(flex: 4, child: Container()),
-                        Text(
-                          AppLocalizations.of(context)!.score,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 56), // Space for rank/icon
+                    Text(
+                      AppLocalizations.of(context)!.player,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                     ),
-                  ),
+                    const Spacer(),
+                    Text(
+                      AppLocalizations.of(context)!.score,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                  ],
                 ),
               ),
               Expanded(
                 child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  shrinkWrap: true,
-                  itemCount: players.length + 1,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: sortedPlayers.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return index < players.length
-                        ? listItemPlayer(players[index])
-                        : const SizedBox(height: 8);
+                    final player = sortedPlayers[index];
+                    final isTop = index == 0;
+                    return Card(
+                      elevation: isTop ? 4 : 0,
+                      color:
+                          isTop
+                              ? Theme.of(context).colorScheme.primaryContainer
+                              : Theme.of(context).colorScheme.surfaceContainer,
+                      margin: const EdgeInsets.only(bottom: 8),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor:
+                              isTop
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(
+                                    context,
+                                  ).colorScheme.surfaceTint.withOpacity(0.1),
+                          foregroundColor:
+                              isTop
+                                  ? Theme.of(context).colorScheme.onPrimary
+                                  : Theme.of(context).colorScheme.primary,
+                          child: Text('${index + 1}'),
+                        ),
+                        title: Text(
+                          player.name,
+                          style: TextStyle(
+                            fontWeight:
+                                isTop ? FontWeight.bold : FontWeight.normal,
+                            fontSize: 18,
+                          ),
+                        ),
+                        subtitle:
+                            player.isSpy
+                                ? Text(
+                                  AppLocalizations.of(context)!.spy,
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.error,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                                : null,
+                        trailing: Text(
+                          player.score.toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                isTop
+                                    ? Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimaryContainer
+                                    : Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),
-              SizedBox(
-                height: 70,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
-                  ),
-                  child: FilledButton(
-                    child: Text(
-                      lastRound
-                          ? AppLocalizations.of(context)!.newGame
-                          : AppLocalizations.of(context)!.startNextRound,
-                      style: TextStyle(fontSize: 20),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, -5),
                     ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 56,
+                  width: double.infinity,
+                  child: FilledButton(
                     onPressed: () {
-                      HapticFeedback.lightImpact();
+                      HapticFeedback.mediumImpact();
                       if (lastRound) {
                         ref.invalidate(currentRoundProvider);
                         context.goNamed(Routes.home);
                       } else {
-                        ref
-                            .read(playersProvider.notifier)
-                            .setRoles();
+                        ref.read(playersProvider.notifier).setRoles();
                         ref.read(currentRoundProvider.notifier).next();
                         context.goNamed(Routes.roleReveal);
                       }
                     },
+                    child: Text(
+                      lastRound
+                          ? AppLocalizations.of(context)!.newGame
+                          : AppLocalizations.of(context)!.startNextRound,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget listItemPlayer(player) {
-    return Card(
-      color: Theme.of(context).colorScheme.surfaceContainer,
-      elevation: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(15),
-            child: Icon(
-              Icons.person,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-          Expanded(
-            flex: 4,
-            child: Text(
-              player.name,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              player.isSpy ? AppLocalizations.of(context)!.spy : '',
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 16),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Text(
-                player.score.toString(),
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -334,4 +334,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get categories => 'Categories';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get about => 'About';
 }

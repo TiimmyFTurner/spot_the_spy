@@ -1,5 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spot_the_spy/applications/state_management/game_config_provider.dart';
@@ -45,6 +47,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
 
   void onTimeout() {
     AudioPlayer().play(AssetSource('sounds/alarm.mp3'), volume: 1);
+    HapticFeedback.heavyImpact();
     int spyScore = ref.read(timeProvider) ~/ 2 + 1;
     final punishPlayers = ref.read(gameSessionProvider).punishPlayers;
     ref
@@ -58,6 +61,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   }
 
   void onSpyCaught() {
+    HapticFeedback.mediumImpact();
     final sessionState = ref.read(gameSessionProvider);
     int nonSpyScore =
         sessionState.remaining.inMinutes < 1
@@ -75,6 +79,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   }
 
   void onWordGuessed() {
+    HapticFeedback.mediumImpact();
     final sessionState = ref.read(gameSessionProvider);
     int spyScore =
         sessionState.remaining.inMinutes < 1
@@ -141,6 +146,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
               ),
               tooltip: AppLocalizations.of(context)!.godMode,
               onPressed: () {
+                HapticFeedback.selectionClick();
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -174,6 +180,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
             IconButton(
               icon: const Icon(Icons.fiber_new),
               onPressed: () {
+                HapticFeedback.selectionClick();
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -277,6 +284,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                     ),
                   ),
                   onPressed: () {
+                    HapticFeedback.lightImpact();
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -318,6 +326,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                     ),
                   ),
                   onPressed: () {
+                    HapticFeedback.lightImpact();
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -377,6 +386,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
   }
 
   void spyPunishmentBottomSheet() {
+    HapticFeedback.selectionClick();
     List<Player> spies =
         ref
             .read(playersProvider)
@@ -412,6 +422,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                               return InkWell(
                                 borderRadius: BorderRadius.circular(16),
                                 onTap: () {
+                                  HapticFeedback.selectionClick();
                                   if (sessionState.punishPlayers.contains(
                                     spies[index],
                                   )) {
@@ -463,6 +474,7 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
                                           ),
                                           TextButton(
                                             onPressed: () {
+                                              HapticFeedback.mediumImpact();
                                               notifier.punishPlayer(
                                                 spies[index],
                                               );

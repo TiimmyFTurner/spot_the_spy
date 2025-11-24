@@ -114,5 +114,7 @@
   "godMode": "حالت خدا",
   "goToCategorySelection": "بعدی: انتخاب دسته‌بندی",
   "categorySelection": "انتخاب دسته‌بندی",
-  "categories": "دسته‌بندی‌ها"
+  "categories": "دسته‌بندی‌ها",
+  "general": "عمومی",
+  "about": "درباره"
 }
