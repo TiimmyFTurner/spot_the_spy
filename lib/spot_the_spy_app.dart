@@ -18,12 +18,6 @@ class SpotTheSpyApp extends ConsumerWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pinkAccent),
         useMaterial3: true,
-        pageTransitionsTheme: const PageTransitionsTheme(
-          builders: {
-            TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
-            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-          },
-        ),
         fontFamily: locale == L10n.fa ? "Vazirmatn" : null,
       ),
       darkTheme: ThemeData(
@@ -32,12 +26,6 @@ class SpotTheSpyApp extends ConsumerWidget {
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
-        pageTransitionsTheme: const PageTransitionsTheme(
-          builders: {
-            TargetPlatform.android: PredictiveBackPageTransitionsBuilder(),
-            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-          },
-        ),
         fontFamily: locale == L10n.fa ? "Vazirmatn" : null,
       ),
 

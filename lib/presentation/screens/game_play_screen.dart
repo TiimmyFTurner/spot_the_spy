@@ -213,168 +213,353 @@ class _GamePlayScreenState extends ConsumerState<GamePlayScreen> {
         body: SafeArea(
           child: Column(
             children: [
-              Wrap(
-                spacing: 8,
-                children: [
-                  Chip(
-                    avatar: Icon(Icons.timer, size: 20),
-                    label: Text(
-                      '${AppLocalizations.of(context)!.time}: ${AppLocalizations.of(context)!.number(ref.watch(timeProvider))}"',
-                    ),
-                  ),
-                  if (sessionState.godMode)
-                    Chip(
-                      avatar: Icon(Icons.security, size: 20),
-                      label: Text(
-                        "${AppLocalizations.of(context)!.secretWord}: ${ref.read(theWordProvider)}",
-                      ),
-                    ),
-                  Chip(
-                    avatar: Icon(Icons.person_pin, size: 20),
-                    label: Text(
-                      '${AppLocalizations.of(context)!.spyCount}: ${AppLocalizations.of(context)!.number(ref.watch(spyCountProvider))}',
-                    ),
-                  ),
-                  if (sessionState.godMode)
-                    ...spyNamesList.map((name) {
-                      return Chip(
-                        avatar: Icon(Icons.person, size: 20),
-                        label: Text(name),
-                      );
-                    }),
-                ],
-              ),
-              Expanded(child: Container()),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: 220,
-                    height: 220,
-                    child: CircularProgressIndicator(
-                      value: getProgress(
-                        sessionState.remaining,
-                        sessionState.total,
-                      ),
-                      backgroundColor:
-                          Theme.of(context).colorScheme.onInverseSurface,
-                    ),
-                  ),
-                  Text(
-                    timeText,
-                    style: TextStyle(
-                      fontSize: 62,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 24),
-              SizedBox(
-                height: 54,
-                width: MediaQuery.of(context).size.width / 1.4,
-                child: FilledButton.tonal(
-                  style: ElevatedButton.styleFrom(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(32),
-                        bottom: Radius.circular(8),
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    HapticFeedback.lightImpact();
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(
-                            AppLocalizations.of(context)!.spyCaughtQuestion,
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.timer,
+                                size: 20,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                '${AppLocalizations.of(context)!.number(ref.watch(timeProvider))}"',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: context.pop,
-                              child: Text(AppLocalizations.of(context)!.no),
-                            ),
-                            TextButton(
-                              onPressed: onSpyCaught,
-                              child: Text(AppLocalizations.of(context)!.yes),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.spyCaught,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-              SizedBox(height: 8),
-              SizedBox(
-                height: 54,
-                width: MediaQuery.of(context).size.width / 1.4,
-                child: FilledButton.tonal(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(8),
-                        bottom: Radius.circular(sessionState.godMode ? 8 : 32),
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    HapticFeedback.lightImpact();
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text(
-                            AppLocalizations.of(context)!.wordGuessedQuestion,
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: context.pop,
-                              child: Text(AppLocalizations.of(context)!.no),
-                            ),
-                            TextButton(
-                              onPressed: onWordGuessed,
-                              child: Text(AppLocalizations.of(context)!.yes),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Text(
-                    AppLocalizations.of(context)!.wordGuessed,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-              if (sessionState.godMode) SizedBox(height: 8),
-              if (sessionState.godMode)
-                SizedBox(
-                  height: 54,
-                  width: MediaQuery.of(context).size.width / 1.4,
-                  child: FilledButton.tonal(
-                    style: ElevatedButton.styleFrom(
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(8),
-                          bottom: Radius.circular(32),
                         ),
                       ),
                     ),
-                    onPressed: spyPunishmentBottomSheet,
-                    child: Text(
-                      AppLocalizations.of(context)!.wrongGuess,
-                      style: TextStyle(fontSize: 20),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Card(
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.person_pin,
+                                size: 20,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                '${AppLocalizations.of(context)!.number(ref.watch(spyCountProvider))}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (sessionState.godMode)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Card(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    elevation: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.security,
+                                size: 24,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                "${AppLocalizations.of(context)!.secretWord}:",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                ref.read(theWordProvider),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 12),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            alignment: WrapAlignment.center,
+                            children:
+                                spyNamesList.map((name) {
+                                  return Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.red.shade100,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Colors.red.shade300,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.psychology,
+                                          size: 16,
+                                          color: Colors.red.shade700,
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          name,
+                                          style: TextStyle(
+                                            color: Colors.red.shade900,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
+              Expanded(child: Container()),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: 240,
+                      height: 240,
+                      child: CircularProgressIndicator(
+                        value: getProgress(
+                          sessionState.remaining,
+                          sessionState.total,
+                        ),
+                        strokeWidth: 12,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onInverseSurface,
+                        color:
+                            sessionState.remaining.inSeconds < 60
+                                ? Colors.red
+                                : sessionState.remaining.inSeconds < 180
+                                ? Colors.orange
+                                : Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          timeText,
+                          style: TextStyle(
+                            fontSize: 68,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                sessionState.remaining.inSeconds < 60
+                                    ? Colors.red
+                                    : sessionState.remaining.inSeconds < 180
+                                    ? Colors.orange
+                                    : Theme.of(context).colorScheme.primary,
+                            letterSpacing: 2,
+                          ),
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.remainingTime,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: FilledButton.icon(
+                        style: FilledButton.styleFrom(
+                          elevation: 3,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(32),
+                              bottom: Radius.circular(8),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          HapticFeedback.lightImpact();
+                          AudioPlayer().play(
+                            AssetSource('sounds/click.mp3'),
+                            volume: 1,
+                          );
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.spyCaughtQuestion,
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: context.pop,
+                                    child: Text(
+                                      AppLocalizations.of(context)!.no,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: onSpyCaught,
+                                    child: Text(
+                                      AppLocalizations.of(context)!.yes,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.search, size: 24),
+                        label: Text(
+                          AppLocalizations.of(context)!.spyCaught,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: FilledButton.icon(
+                        style: FilledButton.styleFrom(
+                          elevation: 3,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(8),
+                              bottom: Radius.circular(
+                                sessionState.godMode ? 8 : 32,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          HapticFeedback.lightImpact();
+                          AudioPlayer().play(
+                            AssetSource('sounds/click.mp3'),
+                            volume: 1,
+                          );
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.wordGuessedQuestion,
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: context.pop,
+                                    child: Text(
+                                      AppLocalizations.of(context)!.no,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: onWordGuessed,
+                                    child: Text(
+                                      AppLocalizations.of(context)!.yes,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.lightbulb, size: 24),
+                        label: Text(
+                          AppLocalizations.of(context)!.wordGuessed,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    if (sessionState.godMode) SizedBox(height: 8),
+                    if (sessionState.godMode)
+                      SizedBox(
+                        height: 60,
+                        width: double.infinity,
+                        child: FilledButton.icon(
+                          style: FilledButton.styleFrom(
+                            elevation: 3,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(8),
+                                bottom: Radius.circular(32),
+                              ),
+                            ),
+                          ),
+                          onPressed: spyPunishmentBottomSheet,
+                          icon: Icon(Icons.warning_amber, size: 24),
+                          label: Text(
+                            AppLocalizations.of(context)!.wrongGuess,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
 
               Expanded(child: Container()),
               SizedBox(height: sessionState.godMode ? 70 : 40),

@@ -97,13 +97,15 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                   ),
                 )
                 : Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(12),
                   child: GridView.count(
                     crossAxisCount: 2,
                     childAspectRatio: (3 / 1),
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
                     children: List.generate(players.length, (index) {
                       return InkWell(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(20),
                         child: AnimatedOpacity(
                           duration: const Duration(milliseconds: 400),
                           opacity: _lock ? 1 : 0,
@@ -118,24 +120,50 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                                       top: MediaQuery.of(context).size.height,
                                     ),
                             child: Card(
+                              elevation: 3,
+                              shadowColor: Theme.of(
+                                context,
+                              ).colorScheme.primary.withValues(alpha: 0.3),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 12,
+                                  vertical: 8,
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Icon(
-                                      Icons.person,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.primaryContainer,
+                                      ),
+                                      child: Icon(
+                                        Icons.person,
+                                        color:
+                                            Theme.of(
+                                              context,
+                                            ).colorScheme.primary,
+                                        size: 24,
+                                      ),
                                     ),
-                                    SizedBox(width: 10),
+                                    SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
                                         players[index].name,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -153,69 +181,119 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                           showModalBottomSheet(
                             context: context,
                             showDragHandle: true,
+                            isScrollControlled: true,
                             builder:
                                 (builder) => SafeArea(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      Expanded(
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: <Widget>[
-                                              Text(
-                                                players[index].name,
-                                                style: const TextStyle(
-                                                  fontSize: 25,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              const SizedBox(height: 12),
-                                              Padding(
-                                                padding: const EdgeInsets.all(
-                                                  8.0,
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    players[index].isSpy
-                                                        ? AppLocalizations.of(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Container(
+                                          width: 80,
+                                          height: 80,
+                                          margin: const EdgeInsets.only(
+                                            bottom: 16,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: LinearGradient(
+                                              colors:
+                                                  players[index].isSpy
+                                                      ? [
+                                                        Colors.red.shade400,
+                                                        Colors.red.shade700,
+                                                      ]
+                                                      : [
+                                                        Theme.of(
                                                           context,
-                                                        )!.isSpy
-                                                        : AppLocalizations.of(
-                                                              context,
-                                                            )!.theSecretWordIs +
-                                                            ref.read(
-                                                              theWordProvider,
-                                                            ),
-                                                    style: const TextStyle(
-                                                      fontSize: 18,
-                                                    ),
-                                                    textAlign:
-                                                        TextAlign.justify,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                                        ).colorScheme.primary,
+                                                        Theme.of(
+                                                          context,
+                                                        ).colorScheme.tertiary,
+                                                      ],
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                            ),
+                                          ),
+                                          child: Icon(
+                                            players[index].isSpy
+                                                ? Icons.psychology
+                                                : Icons.verified_user,
+                                            color: Colors.white,
+                                            size: 40,
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 10,
+                                        Text(
+                                          players[index].name,
+                                          style: TextStyle(
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
                                         ),
-                                        child: SizedBox(
+                                        const SizedBox(height: 24),
+                                        Container(
+                                          padding: const EdgeInsets.all(20),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                players[index].isSpy
+                                                    ? Colors.red.shade50
+                                                    : Theme.of(context)
+                                                        .colorScheme
+                                                        .primaryContainer,
+                                            borderRadius: BorderRadius.circular(
+                                              16,
+                                            ),
+                                            border: Border.all(
+                                              color:
+                                                  players[index].isSpy
+                                                      ? Colors.red.shade200
+                                                      : Theme.of(context)
+                                                          .colorScheme
+                                                          .primary
+                                                          .withValues(alpha: 0.3),
+                                              width: 2,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            players[index].isSpy
+                                                ? AppLocalizations.of(
+                                                  context,
+                                                )!.isSpy
+                                                : AppLocalizations.of(
+                                                      context,
+                                                    )!.theSecretWordIs +
+                                                    ref.read(theWordProvider),
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                              color:
+                                                  players[index].isSpy
+                                                      ? Colors.red.shade900
+                                                      : Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimaryContainer,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 24),
+                                        SizedBox(
                                           height: 55,
-                                          child: FilledButton.tonal(
+                                          child: FilledButton(
                                             onPressed: () {
                                               HapticFeedback.lightImpact();
                                               context.pop();
                                             },
+                                            style: FilledButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                            ),
                                             child: Text(
                                               AppLocalizations.of(
                                                 context,
@@ -224,8 +302,9 @@ class _RoleRevealScreenState extends ConsumerState<RoleRevealScreen> {
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        const SizedBox(height: 16),
+                                      ],
+                                    ),
                                   ),
                                 ),
                           ).then(
