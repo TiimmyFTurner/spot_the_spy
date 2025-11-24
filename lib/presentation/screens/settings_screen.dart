@@ -240,7 +240,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   Future<void> _sendMail() async {
     final Uri url = Uri.parse(
-      'mailto:TiimmyFTurner@gmail.com?subject=MafiaApp',
+      'mailto:TiimmyFTurner@gmail.com?subject=Spot The Spy',
     );
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
